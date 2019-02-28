@@ -1,0 +1,24 @@
+{
+  "name": "algorithms-data-structs-notebook",
+  "version": "1.0.0",
+  "description": "yep",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build-docs": "jsdoc src -r -d _src/docs -R ./docs-index.md",
+    "build": "markdown-folder-to-html src && yarn build-docs",
+    "serve": "http-server _src",
+    "start": "yarn build && yarn serve"
+  },
+  "author": "RJ Salvador",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "babel-jest": "^24.1.0",
+    "http-server": "^0.11.1",
+    "jest": "^24.1.0",
+    "jsdoc": "^3.5.5",
+    "markdown-folder-to-html": "^2.1.1"
+  }
+}
