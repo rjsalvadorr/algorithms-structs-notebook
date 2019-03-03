@@ -1,5 +1,5 @@
-import LinkedListNode from './linked-list-node';
-import { simpleComparator } from '../utils/comparators';
+import LinkedListNode from "./linked-list-node";
+import { simpleComparator } from "../utils/comparators";
 
 /**
  * Implementation of a linked list
@@ -24,7 +24,7 @@ class LinkedList {
   prepend(value) {
     const newNode = new LinkedListNode(value, this.head);
     this.head = newNode;
-    if(!this.tail) {
+    if (!this.tail) {
       this.tail = newNode;
     }
 
@@ -38,7 +38,7 @@ class LinkedList {
    */
   append(value) {
     const newNode = new LinkedListNode(value);
-    if(!this.head) {
+    if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
     }
@@ -57,7 +57,7 @@ class LinkedList {
    * @return {LinkedListNode} node deleted from list
    */
   delete(value) {
-    if(!this.head) {
+    if (!this.head) {
       return null;
     }
 
@@ -65,18 +65,18 @@ class LinkedList {
 
     // if the head is being deleted, make its next node
     // the new head
-    if(this.head && this.head.data === value) {
+    if (this.head && this.head.data === value) {
       deletedNode = this.head;
       this.head = this.head.nextNode;
       return deletedNode;
     }
 
     let currentNode = this.head;
-    if(currentNode !== null) {
-      while(currentNode.nextNode) {
+    if (currentNode !== null) {
+      while (currentNode.nextNode) {
         // If the next node has to be deleted, remove its
         // reference in the chain
-        if(currentNode.nextNode.data === value) {
+        if (currentNode.nextNode.data === value) {
           deletedNode = currentNode.nextNode;
           currentNode.nextNode = currentNode.nextNode.nextNode;
         } else {
@@ -86,7 +86,7 @@ class LinkedList {
     }
 
     // Check if tail has to be deleted
-    if(this.tail.data === value) {
+    if (this.tail.data === value) {
       this.tail = currentNode;
     }
 
@@ -99,20 +99,20 @@ class LinkedList {
    * @return {LinkedListNode} node containing value in the list
    */
   find({ value = undefined, callback = undefined }) {
-    if(!this.head) {
+    if (!this.head) {
       return null;
     }
 
     let currentNode = this.head;
 
-    while(currentNode) {
+    while (currentNode) {
       // if callback is spec'd, try to find node by callback
-      if(callback && callback(currentNode.data)) {
+      if (callback && callback(currentNode.data)) {
         return currentNode;
       }
 
       // if value is spec'd, try to compare by value
-      if(value !== undefined && currentNode.data === value) {
+      if (value !== undefined && currentNode.data === value) {
         return currentNode;
       }
 
