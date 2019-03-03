@@ -12,7 +12,7 @@ beforeEach(() => {
 
 describe("Array operations", () => {
   test("quicksort", () => {
-    const inputArray = TestUtils.getUnsortedArray(10);
+    const inputArray = TestUtils.getUnsortedArray(20);
     const input = quickSort(inputArray);
     expect(TestUtils.isArraySorted(input)).toBe(true);
   });

@@ -9,6 +9,7 @@ import { lessThan } from "../utils/comparators";
  * @returns {number[]} a sorted version of the given array
  */
 const quicksort = array => {
+  console.log("\n/////   QUICKSORT   //////////\n");
   const arrayCopy = array.slice(0);
   // TestUtils.printVariables([
   //   { name: "array", value: array },
@@ -41,24 +42,40 @@ const quicksortImpl = (array, left, right) => {
     const pivot = array[pivotIndex];
     leftNew = left;
     rightNew = right;
+    let debugMsg = `left = ${left}, right = ${right}\npivotIndex = ${pivotIndex}, pivot = ${pivot}`;
 
     do {
       while (lessThan(array[leftNew], pivot)) {
+        debugMsg = `${debugMsg}\n    array[${leftNew}] (${
+          array[leftNew]
+        }) < pivot, bumping up leftNew`;
         leftNew += 1;
+        debugMsg = `${debugMsg} to ${leftNew}`;
       }
       while (lessThan(pivot, array[rightNew])) {
+        debugMsg = `${debugMsg}\n    pivot < array[${rightNew}] (${
+          array[rightNew]
+        }), bumping down rightNew`;
         rightNew -= 1;
+        debugMsg = `${debugMsg} to ${rightNew}`;
       }
+      debugMsg = `${debugMsg}\nleftNew = ${leftNew}, rightNew = ${rightNew}`;
       if (leftNew <= rightNew) {
+        debugMsg = `${debugMsg}\n    leftNew <= rightNew, swapping array[${leftNew}] (${
+          array[leftNew]
+        }) and array[${rightNew}] (${array[rightNew]})\n`;
         swapElementsOfArray(array, leftNew, rightNew);
         leftNew += 1;
         rightNew -= 1;
       }
+      console.log(`${debugMsg}`);
     } while (leftNew <= rightNew);
 
+    let debugMsg2 = `Sorting complete for this section.\nCalling quicksortImpl(array,${left},${rightNew})`;
     console.log(
-      `left = ${left}, leftNew = ${leftNew}, right = ${right}, rightNew = ${rightNew}`
+      `${debugMsg2}\ncalling quicksortImpl(array,${leftNew},${right})\n---------------\n\n`
     );
+
     quicksortImpl(array, left, rightNew);
     quicksortImpl(array, leftNew, right);
   }
@@ -68,6 +85,10 @@ const quicksortImpl = (array, left, right) => {
  * Swaps two elements in an array (in-place)
  */
 const swapElementsOfArray = (array, index1, index2) => {
+  if (index1 === index2) {
+    // indices are the same. No need to do anything.
+    return 0;
+  }
   const swapTemp = array[index1];
   array[index1] = array[index2];
   array[index2] = swapTemp;

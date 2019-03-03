@@ -20,6 +20,5 @@ export function simpleComparator(a, b) {
  */
 export function lessThan(a, b) {
   const result = a < b;
-  console.log(`a = ${a}, b = ${b}, result = ${result}`);
   return result;
 }
