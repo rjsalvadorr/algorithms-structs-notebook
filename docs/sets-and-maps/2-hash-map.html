@@ -450,12 +450,12 @@
 <li><a class="" href="..\1-study-journal.html">study journal</a></li>
 <li class="heading"><span>algorithms</span></li>
 <ul>
-<li><a class="" href="1-binary-search-on-array.html">binary search on array</a></li>
-<li><a class="" href="2-breadth-first-search.html">breadth first search</a></li>
-<li><a class="" href="3-depth-first-search.html">depth first search</a></li>
-<li><a class="" href="4-dijkstras-algo.html">dijkstras algo</a></li>
-<li><a class="" href="5-mergesort.html">mergesort</a></li>
-<li><a class="active" href="6-quicksort.html">quicksort</a></li>
+<li><a class="" href="..\algorithms\1-binary-search-on-array.html">binary search on array</a></li>
+<li><a class="" href="..\algorithms\2-breadth-first-search.html">breadth first search</a></li>
+<li><a class="" href="..\algorithms\3-depth-first-search.html">depth first search</a></li>
+<li><a class="" href="..\algorithms\4-dijkstras-algo.html">dijkstras algo</a></li>
+<li><a class="" href="..\algorithms\5-mergesort.html">mergesort</a></li>
+<li><a class="" href="..\algorithms\6-quicksort.html">quicksort</a></li>
 </ul>
 <li class="heading"><span>lists</span></li>
 <ul>
@@ -470,63 +470,33 @@
 </ul>
 <li class="heading"><span>sets and maps</span></li>
 <ul>
-<li><a class="" href="..\sets-and-maps\1-binary-search-tree.html">binary search tree</a></li>
-<li><a class="" href="..\sets-and-maps\2-hash-map.html">hash map</a></li>
-<li><a class="" href="..\sets-and-maps\3-heap.html">heap</a></li>
+<li><a class="" href="1-binary-search-tree.html">binary search tree</a></li>
+<li><a class="active" href="2-hash-map.html">hash map</a></li>
+<li><a class="" href="3-heap.html">heap</a></li>
 </ul>
 </ul>
     </nav>
     <article id="main" class="content">
-      <h1>Quicksort</h1>
-<p>Quicksort is a divide and conquer algorithm.
-Quicksort first divides a large array into two smaller
-sub-arrays: the low elements and the high elements.
-Quicksort can then recursively sort the sub-arrays</p>
-<p>The steps are:</p>
-<ol>
-<li>Pick an element, called a pivot, from the array.</li>
-<li>Partitioning: reorder the array so that all elements with
-values less than the pivot come before the pivot, while all
-elements with values greater than the pivot come after it
-(equal values can go either way). After this partitioning,
-the pivot is in its final position. This is called the
-partition operation.</li>
-<li>Recursively apply the above steps to the sub-array of
-elements with smaller values and separately to the
-sub-array of elements with greater values.</li>
-</ol>
-<p>Animated visualization of the quicksort algorithm.
-The horizontal lines are pivot values.</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif" alt="Quicksort"></p>
-<h2>Complexity</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th style="text-align:center">Best</th>
-<th style="text-align:center">Average</th>
-<th style="text-align:center">Worst</th>
-<th style="text-align:center">Memory</th>
-<th style="text-align:center">Stable</th>
-<th style="text-align:left">Comments</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Quick sort</strong></td>
-<td style="text-align:center">n log(n)</td>
-<td style="text-align:center">n log(n)</td>
-<td style="text-align:center">n<sup>2</sup></td>
-<td style="text-align:center">log(n)</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">Quicksort is usually done in-place with O(log(n)) stack space</td>
-</tr>
-</tbody>
-</table>
+      <h1>Hash Table</h1>
+<p>In computing, a <strong>hash table</strong> (hash map) is a data
+structure which implements an <em>associative array</em>
+abstract data type, a structure that can <em>map keys
+to values</em>. A hash table uses a <em>hash function</em> to
+compute an index into an array of buckets or slots,
+from which the desired value can be found</p>
+<p>Ideally, the hash function will assign each key to a
+unique bucket, but most hash table designs employ an
+imperfect hash function, which might cause hash
+collisions where the hash function generates the same
+index for more than one key. Such collisions must be
+accommodated in some way.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg" alt="Hash Table"></p>
+<p>Hash collision resolved by separate chaining.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Hash_table_5_0_1_1_1_1_1_LL.svg" alt="Hash Collision"></p>
 <h2>References</h2>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Quicksort">Wikipedia</a></li>
-<li><a href="https://www.youtube.com/watch?v=SLauY6PpjW4&amp;index=28&amp;list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8">YouTube</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Hash_table">Wikipedia</a></li>
+<li><a href="https://www.youtube.com/watch?v=shs0KM3wKv8&amp;index=4&amp;list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8">YouTube</a></li>
 </ul>
 
     </article>

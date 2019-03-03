@@ -3,9 +3,9 @@ import { lessThan } from "../utils/comparators";
 /**
  * Runs a quicksort on an array of values. Does not modify the given array.
  * @function
- * @param {array} array - an unsorted array of numbers
+ * @param {number[]} array - an unsorted array of numbers
  * @param {value} value - the value to search for
- * @returns a sorted version of the given array
+ * @returns {number[]} a sorted version of the given array
  */
 const quicksort = array => {
   const arrayCopy = array.slice(0);
@@ -17,7 +17,7 @@ const quicksort = array => {
  * @function
  * @param {number[]} array - an array of numbers
  * @param {function} lessComparator - the value to search for
- * @returns the index number for the given value. Returns null otherwise
+ * @returns {number} the index number for the given value. Returns null otherwise
  */
 const quicksortImpl = (array, left, right) => {
   let leftNew = left;

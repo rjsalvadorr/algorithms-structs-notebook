@@ -450,12 +450,12 @@
 <li><a class="" href="..\1-study-journal.html">study journal</a></li>
 <li class="heading"><span>algorithms</span></li>
 <ul>
-<li><a class="" href="1-binary-search-on-array.html">binary search on array</a></li>
-<li><a class="" href="2-breadth-first-search.html">breadth first search</a></li>
-<li><a class="" href="3-depth-first-search.html">depth first search</a></li>
-<li><a class="" href="4-dijkstras-algo.html">dijkstras algo</a></li>
-<li><a class="" href="5-mergesort.html">mergesort</a></li>
-<li><a class="active" href="6-quicksort.html">quicksort</a></li>
+<li><a class="" href="..\algorithms\1-binary-search-on-array.html">binary search on array</a></li>
+<li><a class="" href="..\algorithms\2-breadth-first-search.html">breadth first search</a></li>
+<li><a class="" href="..\algorithms\3-depth-first-search.html">depth first search</a></li>
+<li><a class="" href="..\algorithms\4-dijkstras-algo.html">dijkstras algo</a></li>
+<li><a class="" href="..\algorithms\5-mergesort.html">mergesort</a></li>
+<li><a class="" href="..\algorithms\6-quicksort.html">quicksort</a></li>
 </ul>
 <li class="heading"><span>lists</span></li>
 <ul>
@@ -470,63 +470,255 @@
 </ul>
 <li class="heading"><span>sets and maps</span></li>
 <ul>
-<li><a class="" href="..\sets-and-maps\1-binary-search-tree.html">binary search tree</a></li>
-<li><a class="" href="..\sets-and-maps\2-hash-map.html">hash map</a></li>
-<li><a class="" href="..\sets-and-maps\3-heap.html">heap</a></li>
+<li><a class="active" href="1-binary-search-tree.html">binary search tree</a></li>
+<li><a class="" href="2-hash-map.html">hash map</a></li>
+<li><a class="" href="3-heap.html">heap</a></li>
 </ul>
 </ul>
     </nav>
     <article id="main" class="content">
-      <h1>Quicksort</h1>
-<p>Quicksort is a divide and conquer algorithm.
-Quicksort first divides a large array into two smaller
-sub-arrays: the low elements and the high elements.
-Quicksort can then recursively sort the sub-arrays</p>
-<p>The steps are:</p>
-<ol>
-<li>Pick an element, called a pivot, from the array.</li>
-<li>Partitioning: reorder the array so that all elements with
-values less than the pivot come before the pivot, while all
-elements with values greater than the pivot come after it
-(equal values can go either way). After this partitioning,
-the pivot is in its final position. This is called the
-partition operation.</li>
-<li>Recursively apply the above steps to the sub-array of
-elements with smaller values and separately to the
-sub-array of elements with greater values.</li>
-</ol>
-<p>Animated visualization of the quicksort algorithm.
-The horizontal lines are pivot values.</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif" alt="Quicksort"></p>
-<h2>Complexity</h2>
+      <h1>Binary Search Tree</h1>
+<p>In computer science, <strong>binary search trees</strong> (BST), sometimes called
+ordered or sorted binary trees, are a particular type of container:
+data structures that store “items” (such as numbers, names etc.)
+in memory. They allow fast lookup, addition and removal of
+items, and can be used to implement either dynamic sets of
+items, or lookup tables that allow finding an item by its key
+(e.g., finding the phone number of a person by name).</p>
+<p>Binary search trees keep their keys in sorted order, so that lookup
+and other operations can use the principle of binary search:
+when looking for a key in a tree (or a place to insert a new key),
+they traverse the tree from root to leaf, making comparisons to
+the operations to skip about half of the tree, so that each
+lookup, insertion or deletion takes time proportional to the
+logarithm of the number of items stored in the tree. This is
+much better than the linear time required to find items by key
+in an (unsorted) array, but slower than the corresponding
+operations on hash tables.</p>
+<p>A binary search tree of size 9 and depth 3, with 8 at the root.
+The leaves are not drawn.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/d/da/Binary_search_tree.svg" alt="Binary Search Tree"></p>
+<h2>Pseudocode for Basic Operations</h2>
+<h3>Insertion</h3>
+<pre><code class="language-text">insert(value)
+  Pre: value has passed custom type checks for type T
+  Post: value has been placed in the correct location in the tree
+  if root = ø
+    root ← node(value)
+  else
+    insertNode(root, value)
+  end if
+end insert
+</code></pre>
+<pre><code class="language-text">insertNode(current, value)
+  Pre: current is the node to start from
+  Post: value has been placed in the correct location in the tree
+  if value &lt; current.value
+    if current.left = ø
+      current.left ← node(value)
+    else
+      InsertNode(current.left, value)
+    end if
+  else
+    if current.right = ø
+      current.right ← node(value)
+    else
+      InsertNode(current.right, value)
+    end if
+  end if
+end insertNode
+</code></pre>
+<h3>Searching</h3>
+<pre><code class="language-text">contains(root, value)
+  Pre: root is the root node of the tree, value is what we would like to locate
+  Post: value is either located or not
+  if root = ø
+    return false
+  end if
+  if root.value = value
+    return true
+  else if value &lt; root.value
+    return contains(root.left, value)
+  else
+    return contains(root.right, value)
+  end if
+end contains
+</code></pre>
+<h3>Deletion</h3>
+<pre><code class="language-text">remove(value)
+  Pre: value is the value of the node to remove, root is the node of the BST
+      count is the number of items in the BST
+  Post: node with value is removed if found in which case yields true, otherwise false
+  nodeToRemove ← findNode(value)
+  if nodeToRemove = ø
+    return false
+  end if
+  parent ← findParent(value)
+  if count = 1
+    root ← ø
+  else if nodeToRemove.left = ø and nodeToRemove.right = ø
+    if nodeToRemove.value &lt; parent.value
+      parent.left ←  nodeToRemove.right
+    else
+      parent.right ← nodeToRemove.right
+    end if
+  else if nodeToRemove.left != ø and nodeToRemove.right != ø
+    next ← nodeToRemove.right
+    while next.left != ø
+      next ← next.left
+    end while
+    if next != nodeToRemove.right
+      remove(next.value)
+      nodeToRemove.value ← next.value
+    else
+      nodeToRemove.value ← next.value
+      nodeToRemove.right ← nodeToRemove.right.right
+    end if
+  else
+    if nodeToRemove.left = ø
+      next ← nodeToRemove.right
+    else
+      next ← nodeToRemove.left
+    end if
+    if root = nodeToRemove
+      root = next
+    else if parent.left = nodeToRemove
+      parent.left = next
+    else if parent.right = nodeToRemove
+      parent.right = next
+    end if
+  end if
+  count ← count - 1
+  return true
+end remove
+</code></pre>
+<h3>Find Parent of Node</h3>
+<pre><code class="language-text">findParent(value, root)
+  Pre: value is the value of the node we want to find the parent of
+       root is the root node of the BST and is != ø
+  Post: a reference to the prent node of value if found; otherwise ø
+  if value = root.value
+    return ø
+  end if
+  if value &lt; root.value
+    if root.left = ø
+      return ø
+    else if root.left.value = value
+      return root
+    else
+      return findParent(value, root.left)
+    end if
+  else
+    if root.right = ø
+      return ø
+    else if root.right.value = value
+      return root
+    else
+      return findParent(value, root.right)
+    end if
+  end if
+end findParent
+</code></pre>
+<h3>Find Node</h3>
+<pre><code class="language-text">findNode(root, value)
+  Pre: value is the value of the node we want to find the parent of
+       root is the root node of the BST
+  Post: a reference to the node of value if found; otherwise ø
+  if root = ø
+    return ø
+  end if
+  if root.value = value
+    return root
+  else if value &lt; root.value
+    return findNode(root.left, value)
+  else
+    return findNode(root.right, value)
+  end if
+end findNode
+</code></pre>
+<h3>Find Minimum</h3>
+<pre><code class="language-text">findMin(root)
+  Pre: root is the root node of the BST
+    root = ø
+  Post: the smallest value in the BST is located
+  if root.left = ø
+    return root.value
+  end if
+  findMin(root.left)
+end findMin
+</code></pre>
+<h3>Find Maximum</h3>
+<pre><code class="language-text">findMax(root)
+  Pre: root is the root node of the BST
+    root = ø
+  Post: the largest value in the BST is located
+  if root.right = ø
+    return root.value
+  end if
+  findMax(root.right)
+end findMax
+</code></pre>
+<h3>Traversal</h3>
+<h4>InOrder Traversal</h4>
+<pre><code class="language-text">inorder(root)
+  Pre: root is the root node of the BST
+  Post: the nodes in the BST have been visited in inorder
+  if root = ø
+    inorder(root.left)
+    yield root.value
+    inorder(root.right)
+  end if
+end inorder
+</code></pre>
+<h4>PreOrder Traversal</h4>
+<pre><code class="language-text">preorder(root)
+  Pre: root is the root node of the BST
+  Post: the nodes in the BST have been visited in preorder
+  if root = ø
+    yield root.value
+    preorder(root.left)
+    preorder(root.right)
+  end if
+end preorder
+</code></pre>
+<h4>PostOrder Traversal</h4>
+<pre><code class="language-text">postorder(root)
+  Pre: root is the root node of the BST
+  Post: the nodes in the BST have been visited in postorder
+  if root = ø
+    postorder(root.left)
+    postorder(root.right)
+    yield root.value
+  end if
+end postorder
+</code></pre>
+<h2>Complexities</h2>
+<h3>Time Complexity</h3>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th style="text-align:center">Best</th>
-<th style="text-align:center">Average</th>
-<th style="text-align:center">Worst</th>
-<th style="text-align:center">Memory</th>
-<th style="text-align:center">Stable</th>
-<th style="text-align:left">Comments</th>
+<th style="text-align:center">Access</th>
+<th style="text-align:center">Search</th>
+<th style="text-align:center">Insertion</th>
+<th style="text-align:center">Deletion</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Quick sort</strong></td>
-<td style="text-align:center">n log(n)</td>
-<td style="text-align:center">n log(n)</td>
-<td style="text-align:center">n<sup>2</sup></td>
-<td style="text-align:center">log(n)</td>
-<td style="text-align:center">No</td>
-<td style="text-align:left">Quicksort is usually done in-place with O(log(n)) stack space</td>
+<td style="text-align:center">O(log(n))</td>
+<td style="text-align:center">O(log(n))</td>
+<td style="text-align:center">O(log(n))</td>
+<td style="text-align:center">O(log(n))</td>
 </tr>
 </tbody>
 </table>
+<h3>Space Complexity</h3>
+<p>O(n)</p>
 <h2>References</h2>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Quicksort">Wikipedia</a></li>
-<li><a href="https://www.youtube.com/watch?v=SLauY6PpjW4&amp;index=28&amp;list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8">YouTube</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Binary_search_tree">Wikipedia</a></li>
+<li><a href="https://www.youtube.com/watch?v=wcIRPqTR3Kc&amp;list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&amp;index=9&amp;t=0s">Inserting to BST on YouTube</a></li>
+<li><a href="https://www.cs.usfca.edu/~galles/visualization/BST.html">BST Interactive Visualisations</a></li>
 </ul>
 
     </article>

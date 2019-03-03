@@ -1,4 +1,10 @@
-# Study Journal
+# Study Journal / Changelog
+
+## 2019-MAR-03
+
+- quicksort
+- binary search
+- lotsa cleanup
 
 ## 2019-MAR-01
 

@@ -1,6 +1,8 @@
 ## Studying algorithms and data structures (implementation)
 
-Main study notebook is [here](../index.html)
+To go back to the main study notebook: [click here](../index.html).
+
+To browse the code and documentation, use the nav menu to the right.
 
 ## Resources
 

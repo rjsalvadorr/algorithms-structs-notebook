@@ -4,7 +4,7 @@ Let's git gud
 
 ## Implementation docs
 
-Witness your mess [here](docs/index.html)
+The code implementations are documented with jsDoc. Every function is documented in detail for studying. Witness the mess [here](docs/index.html).
 
 ## Resources
 
@@ -20,21 +20,21 @@ Witness your mess [here](docs/index.html)
 
 ## Algorithms
 
-- [binary-search-on-array](./algorithms/binary-search-on-array.md)
-- [breadth-first-search](./algorithms/breadth-first-search.md)
-- [depth-first-search](./algorithms/depth-first-search.md)
-- [dijkstras-algo](./algorithms/dijkstras-algo.md)
-- [mergesort](./algorithms/mergesort.md)
-- [quicksort](./algorithms/quicksort.md)
+- [binary-search-on-array](./algorithms/1-binary-search-on-array.md)
+- [breadth-first-search](./algorithms/2-breadth-first-search.md)
+- [depth-first-search](./algorithms/3-depth-first-search.md)
+- [dijkstras-algo](./algorithms/4-dijkstras-algo.md)
+- [mergesort](./algorithms/5-mergesort.md)
+- [quicksort](./algorithms/6-quicksort.md)
 
 ## Lists
 
-- [arrays](./lists/arrays.md)
-- [dynamic-arrays](./lists/dynamic-arrays.md)
-- [linked-lists](./lists/linked-lists.md)
+- [array](./lists/1-array.md)
+- [dynamic-array](./lists/2-dynamic-array.md)
+- [linked-list](./lists/3-linked-list.md)
 
 ## Sets and maps
 
-- [binary-search-trees](./sets-and-maps/binary-search-trees.md)
-- [hash-maps](./sets-and-maps/hash-maps.md)
-- [heaps](./sets-and-maps/heaps.md)
+- [binary-search-tree](./sets-and-maps/1-binary-search-tree.md)
+- [hash-map](./sets-and-maps/2-hash-map.md)
+- [heap](./sets-and-maps/3-heap.md)
