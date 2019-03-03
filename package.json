@@ -4,7 +4,8 @@
   "description": "yep",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "yarn prettier && jest",
+    "test-clean": "jest --clearCache && yarn test",
     "prettier": "prettier --write \"src/**/*.js\"",
     "build": "yarn prettier && markdown-folder-to-html src && yarn build-docs && yarn copy-docs",
     "serve": "http-server docs",
@@ -16,6 +17,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
     "@babel/preset-env": "^7.3.4",
     "babel-jest": "^24.1.0",
     "cpx": "^1.5.0",
@@ -24,5 +26,8 @@
     "jsdoc": "^3.5.5",
     "markdown-folder-to-html": "^2.1.1",
     "prettier": "^1.16.4"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
   }
 }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: utils/comparators.js</title>
+    <title>JSDoc: Source: algorithms/binary-search.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: utils/comparators.js</h1>
+    <h1 class="page-title">Source: algorithms/binary-search.js</h1>
 
     
 
@@ -27,28 +27,42 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Simple comparison function. It just assumes that "a" and "b" are strings or numbers.
- * @param {(string|number)} a - first item
- * @param {(string|number)} b - second item
- * @returns {number} 0 if args are equal. Returns -1 if "a &lt; b", and 1 if "a > b"
+ * Runs a binary search on an array of values
+ * @function
+ * @param {array} array - an array of numbers
+ * @param {value} value - the value to search for
+ * @returns the index number for the given value. Returns null otherwise
  */
-export function simpleComparator(a, b) {
-  if (a === b) {
-    return 0;
-  }
-
-  return a &lt; b ? -1 : 1;
-}
+const binarySearch = (array, value) => {
+  return binarySearchImpl(array, value, 0, 100);
+};
 
 /**
- * Simple comparison function. It just assumes that "a" and "b" are strings or numbers.
- * @param {(string|number)} a - first item
- * @param {(string|number)} b - second item
- * @returns {boolean} true if a &lt; b
+ * Binary search implementation
+ * @function
+ * @param {array} array - an array of numbers
+ * @param {value} value - the value to search for
+ * @param {low} low - lowest index in array
+ * @param {high} high - highest index in array
+ * @returns the index number for the given value. Returns null otherwise
  */
-export function lessThan(a, b) {
-  return a &lt; b;
-}
+const binarySearchImpl = (array, value, low, high) => {
+  if (high &lt; low) {
+    // value not found
+    return null;
+  }
+  const mid = (low + high) / 2;
+  if (array[mid] > value) {
+    return binarySearchImpl(array, value, low, mid - 1);
+  }
+  if (array[mid] > value) {
+    return binarySearchImpl(array, value, low, mid + 1, high);
+  } else {
+    return mid;
+  }
+};
+
+export default binarySearch;
 </code></pre>
         </article>
     </section>

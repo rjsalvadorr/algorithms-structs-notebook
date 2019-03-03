@@ -147,6 +147,7 @@ module.exports = {
   testPathIgnorePatterns: [
     "\\\\node_modules\\\\",
     "\\\\_src\\\\",
+    "\\\\docs\\\\",
   ],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
