@@ -252,6 +252,23 @@ class TestUtils {
   static getPopulatedWeightedGraph() {
     return {};
   }
+
+  /**
+   * Prints variables to the console.
+   * @static
+   * @param {Object[]}} nameValuePairs - name/value of variable to print
+   */
+  static printVariables(nameValuePairs) {
+    let msg = "";
+    for (const nameValuePair of nameValuePairs) {
+      msg += `${nameValuePair.name} = ${JSON.stringify(
+        nameValuePair.value,
+        null,
+        2
+      )}\n`;
+    }
+    console.log(msg);
+  }
 }
 
 export default TestUtils;

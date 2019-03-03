@@ -1,3 +1,4 @@
+import TestUtils from "../utils/test-utils";
 import { lessThan } from "../utils/comparators";
 
 /**
@@ -9,30 +10,44 @@ import { lessThan } from "../utils/comparators";
  */
 const quicksort = array => {
   const arrayCopy = array.slice(0);
-  return quicksortImpl(array, 0, array.length - 1);
+  // TestUtils.printVariables([
+  //   { name: "array", value: array },
+  //   { name: "arrayCopy", value: arrayCopy },
+  //   { name: "arrayCopy.length", value: arrayCopy.length }
+  // ]);
+  const end = arrayCopy.length - 1;
+  quicksortImpl(arrayCopy, 0, end);
+  return arrayCopy;
 };
 
 /**
  * Quicksort implementation. Works in-place, so this modifies the given array
  * @function
  * @param {number[]} array - an array of numbers
- * @param {function} lessComparator - the value to search for
- * @returns {number} the index number for the given value. Returns null otherwise
+ * @param {number} left - left number
+ * @param {number} right - right number
  */
 const quicksortImpl = (array, left, right) => {
-  let leftNew = left;
-  let rightNew = right;
+  // TestUtils.printVariables([
+  //   { name: "array", value: array },
+  //   { name: "left", value: left },
+  //   { name: "right", value: right }
+  // ]);
+  let leftNew;
+  let rightNew;
 
   if (left < right) {
     const pivotIndex = left + Math.floor((right - left) / 2);
     const pivot = array[pivotIndex];
+    leftNew = left;
+    rightNew = right;
 
     do {
       while (lessThan(array[leftNew], pivot)) {
         leftNew += 1;
       }
-      while (lessThan(array[rightNew], pivot)) {
-        rightNew += 1;
+      while (lessThan(pivot, array[rightNew])) {
+        rightNew -= 1;
       }
       if (leftNew <= rightNew) {
         swapElementsOfArray(array, leftNew, rightNew);
@@ -40,17 +55,20 @@ const quicksortImpl = (array, left, right) => {
         rightNew -= 1;
       }
     } while (leftNew <= rightNew);
-  }
 
-  quicksortImpl(left, rightNew);
-  quicksortImpl(leftNew, right);
+    console.log(
+      `left = ${left}, leftNew = ${leftNew}, right = ${right}, rightNew = ${rightNew}`
+    );
+    quicksortImpl(array, left, rightNew);
+    quicksortImpl(array, leftNew, right);
+  }
 };
 
 /**
  * Swaps two elements in an array (in-place)
  */
 const swapElementsOfArray = (array, index1, index2) => {
-  var swapTemp = array[index1];
+  const swapTemp = array[index1];
   array[index1] = array[index2];
   array[index2] = swapTemp;
   return 0;
