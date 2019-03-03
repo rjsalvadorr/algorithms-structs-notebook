@@ -1,4 +1,4 @@
-import LinkedList from './linked-list';
+import LinkedList from "./linked-list";
 
 let linkedList;
 const val1 = 44;
@@ -13,8 +13,8 @@ afterEach(() => {
   linkedList = undefined;
 });
 
-describe('Linked List', () => {
-  it('should prepend', () => {
+describe("Linked List", () => {
+  it("should prepend", () => {
     linkedList.prepend(val1);
     linkedList.prepend(val2);
     linkedList.prepend(val3);
@@ -25,7 +25,7 @@ describe('Linked List', () => {
     expect(linkedList.find({ value: 123 })).toBeNull();
   });
 
-  it('should append', () => {
+  it("should append", () => {
     linkedList.append(val1);
     linkedList.append(val2);
     linkedList.append(val3);
@@ -36,7 +36,7 @@ describe('Linked List', () => {
     expect(linkedList.find({ value: 123 })).toBeNull();
   });
 
-  it('should delete', () => {
+  it("should delete", () => {
     linkedList.append(val1);
     linkedList.append(val2);
     linkedList.append(val3);

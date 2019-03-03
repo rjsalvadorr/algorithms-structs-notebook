@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "prettier": "prettier --write \"src/**/*.js\"",
-    "build": "markdown-folder-to-html src && yarn build-docs && yarn copy-docs",
+    "build": "yarn prettier && markdown-folder-to-html src && yarn build-docs && yarn copy-docs",
     "serve": "http-server docs",
     "start": "yarn build && yarn serve",
     "build-docs": "jsdoc src -r -d docs/docs -R ./docs-index.md",

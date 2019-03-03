@@ -450,12 +450,12 @@
 <li><a class="" href="..\1-study-journal.html">study journal</a></li>
 <li class="heading"><span>algorithms</span></li>
 <ul>
-<li><a class="" href="..\algorithms\1-binary-search-on-array.html">binary search on array</a></li>
-<li><a class="" href="..\algorithms\2-breadth-first-search.html">breadth first search</a></li>
-<li><a class="" href="..\algorithms\3-depth-first-search.html">depth first search</a></li>
-<li><a class="" href="..\algorithms\4-dijkstras-algo.html">dijkstras algo</a></li>
-<li><a class="" href="..\algorithms\5-mergesort.html">mergesort</a></li>
-<li><a class="" href="..\algorithms\6-quicksort.html">quicksort</a></li>
+<li><a class="active" href="1-binary-search-on-array.html">binary search on array</a></li>
+<li><a class="" href="2-breadth-first-search.html">breadth first search</a></li>
+<li><a class="" href="3-depth-first-search.html">depth first search</a></li>
+<li><a class="" href="4-dijkstras-algo.html">dijkstras algo</a></li>
+<li><a class="" href="5-mergesort.html">mergesort</a></li>
+<li><a class="" href="6-quicksort.html">quicksort</a></li>
 </ul>
 <li class="heading"><span>lists</span></li>
 <ul>
@@ -465,8 +465,8 @@
 </ul>
 <li class="heading"><span>maths</span></li>
 <ul>
-<li><a class="active" href="big-o-notation.html">big o notation</a></li>
-<li><a class="" href="graph.html">graph</a></li>
+<li><a class="" href="..\maths\big-o-notation.html">big o notation</a></li>
+<li><a class="" href="..\maths\graph.html">graph</a></li>
 </ul>
 <li class="heading"><span>sets and maps</span></li>
 <ul>
@@ -477,41 +477,24 @@
 </ul>
     </nav>
     <article id="main" class="content">
-      <h1>Big O notation</h1>
-<h2>Time complexities</h2>
-<h3>O(1)</h3>
-<p>Constant time. Never changes in respect to # of inputs.</p>
-<h3>O(log n)</h3>
-<p>Logarithmic time. Highly efficient, as the ratio of the number of operations to the size of the input decreases and tends to zero when <em>n</em> increases.</p>
-<h3>O(n)</h3>
-<p>Linear time. Scales linearly with # of inputs.</p>
-<h3>O(n²)</h3>
-<p>Quadratic time. Highly inefficient as <em>n</em> grows.</p>
-<h3>O(2ⁿ)</h3>
-<p>Exponential time. Crazy inefficient as <em>n</em> scales up.</p>
-<h3>O(n!)</h3>
-<p>Factorial time. Hilariously inefficient.</p>
-<h2>Space complexities</h2>
-<p>Space complexity is the amount of memory used by the algorithm (including the input values to the algorithm) to execute and produce the result.</p>
-<p>OR</p>
-<p>Space complexity is a measure of the amount of working storage an algorithm needs. That means how much memory, in the worst case, is needed at any point in the algorithm. As with time complexity, we’re mostly concerned with how the space needs grow, in big-Oh terms, as the size N of the input problem grows.</p>
-<h2>Tables</h2>
-<p><img src="./big-o-chart.png" alt="Big O chart" title="Big O"></p>
-<p><img src="./1-data-structs.jpg" alt="Big O chart" title="Big O"></p>
-<p><img src="./2-searching.jpg" alt="Big O chart" title="Big O"></p>
-<p><img src="./3-sorting.jpg" alt="Big O chart" title="Big O"></p>
-<p><img src="./4-heaps.jpg" alt="Big O chart" title="Big O"></p>
-<p><img src="./5-graphs.jpg" alt="Big O chart" title="Big O"></p>
-<p><img src="./big-o-cheatsheet-2.png" alt="Big O cheatsheet" title="Big O"></p>
-<h2>Resources</h2>
+      <h1>Binary Search</h1>
+<p>In computer science, binary search, also known as half-interval
+search, logarithmic search, or binary chop, is a search algorithm
+that finds the position of a target value within a sorted
+array. Binary search compares the target value to the middle
+element of the array; if they are unequal, the half in which
+the target cannot lie is eliminated and the search continues
+on the remaining half until it is successful. If the search
+ends with the remaining half being empty, the target is not
+in the array.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Binary_Search_Depiction.svg" alt="Binary Search"></p>
+<h2>Complexity</h2>
+<p><strong>Time Complexity</strong>: <code>O(log(n))</code> - since we split search area by two for every
+next iteration.</p>
+<h2>References</h2>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Computational_complexity">Wikipedia - Computational complexity</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Time_complexity">Wikipedia - Time complexity</a></li>
-<li><a href="http://bigocheatsheet.com/">Big-O Cheat Sheet</a></li>
-<li><a href="https://youtu.be/kgBjXUE_Nwc?t=452">Getting Sorted &amp; Big O Notation - Computerphile</a></li>
-<li><a href="https://www.youtube.com/watch?v=v4cd1O4zkGw">Big O Notation - Gayle Laakmann McDowell</a></li>
-<li><a href="https://www.youtube.com/watch?v=V6mKVRU1evU">Big O Notations - Derek Banas</a></li>
-<li><a href="https://www.cs.northwestern.edu/academics/courses/311/html/space-complexity.html">Northwestern University - Space Complexity EECS 311</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">Wikipedia</a></li>
+<li><a href="https://www.youtube.com/watch?v=P3YID7liBug&amp;index=29&amp;list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8">YouTube</a></li>
 </ul>
 
     </article>
