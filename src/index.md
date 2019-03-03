@@ -8,6 +8,7 @@ The code implementations are documented with jsDoc. Every function is documented
 
 ## Resources
 
+- [Rosetta Code - great place to find pseudocode and reference implementations in various languages](http://rosettacode.org/wiki/Rosetta_Code)
 - [Abstract data structures written in Ruby](https://github.com/Integralist/Data-Structures)
 - [Algorithms and data structures implemented in JavaScript with explanations and links to further readings](https://github.com/trekhleb/javascript-algorithms)
 
