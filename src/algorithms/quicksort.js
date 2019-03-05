@@ -11,11 +11,6 @@ import { lessThan } from "../utils/comparators";
 const quicksort = array => {
   console.log("\n/////   QUICKSORT   //////////\n");
   const arrayCopy = array.slice(0);
-  // TestUtils.printVariables([
-  //   { name: "array", value: array },
-  //   { name: "arrayCopy", value: arrayCopy },
-  //   { name: "arrayCopy.length", value: arrayCopy.length }
-  // ]);
   const end = arrayCopy.length - 1;
   quicksortImpl(arrayCopy, 0, end);
   return arrayCopy;
@@ -29,11 +24,6 @@ const quicksort = array => {
  * @param {number} right - right number
  */
 const quicksortImpl = (array, left, right) => {
-  // TestUtils.printVariables([
-  //   { name: "array", value: array },
-  //   { name: "left", value: left },
-  //   { name: "right", value: right }
-  // ]);
   let leftNew;
   let rightNew;
 

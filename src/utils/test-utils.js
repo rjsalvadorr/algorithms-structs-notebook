@@ -254,11 +254,12 @@ class TestUtils {
   }
 
   /**
-   * Prints variables to the console.
+   * Formats objects to a debug string
    * @static
    * @param {Object[]}} nameValuePairs - name/value of variable to print
+   * @return {string} debug string
    */
-  static printVariables(nameValuePairs) {
+  static formatVariablesForDebug(nameValuePairs) {
     let msg = "";
     for (const nameValuePair of nameValuePairs) {
       msg += `${nameValuePair.name} = ${JSON.stringify(
@@ -267,6 +268,16 @@ class TestUtils {
         2
       )}\n`;
     }
+    return msg;
+  }
+
+  /**
+   * Prints variables to the console.
+   * @static
+   * @param {Object[]}} nameValuePairs - name/value of variable to print
+   */
+  static printVariables(nameValuePairs) {
+    let msg = this.formatVariablesForDebug(nameValuePairs);
     console.log(msg);
   }
 }
