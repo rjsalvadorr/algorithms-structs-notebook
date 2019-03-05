@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: algorithms/mergesort.js</title>
+    <title>JSDoc: Source: utils/Comparator.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: algorithms/mergesort.js</h1>
+    <h1 class="page-title">Source: utils/Comparator.js</h1>
 
     
 
@@ -26,92 +26,90 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import TestUtils from "../utils/test-utils";
-import { lessThan } from "../utils/comparators";
+            <pre class="prettyprint source linenums"><code>// Stolen from:
+// https://github.com/trekhleb/javascript-algorithms
 
-/**
- * Runs a mergesort on an array of values. Does not modify the given array.
- * @function
- * @param {number[]} array - an unsorted array of numbers
- * @returns {number[]} a sorted version of the given array
- */
-const mergesort = array => {
-  console.log(
-    "\n////////////////////////////////////////\n/////   MERGESORT   ////////////////////\n"
-  );
-  const arrayCopy = array.slice(0);
-  mergesortImpl(arrayCopy);
-  return arrayCopy;
-};
-
-/**
- * Mergesort implementation. Works in-place, so this modifies the given array
- * @function
- * @param {number[]} array - an array of numbers
- */
-const mergesortImpl = array => {
-  const arrLength = array.length;
-
-  if (arrLength === 1) {
-    return;
+export default class Comparator {
+  /**
+   * @param {function} [compareFunction] - It may be custom compare function that, let's
+   * say may compare custom objects together.
+   */
+  constructor(compareFunction) {
+    this.compare = compareFunction || Comparator.defaultCompareFunction;
   }
 
-  const mid = Math.floor(arrLength / 2);
-  const left = array.slice(0, mid);
-  const right = array.slice(mid);
-
-  console.log(
-    `split ${JSON.stringify(array)}\ninto ${JSON.stringify(
-      left
-    )} and ${JSON.stringify(right)}\n`
-  );
-
-  mergesortImpl(left);
-  mergesortImpl(right);
-  merge(array, left, right);
-};
-
-/**
- * Merge function
- * @function
- * @param {number[]} array - original array of numbers to sort
- * @param {number[]} left - left array
- * @param {number[]} right - right array
- */
-const merge = (array, left, right) => {
-  let idx = 0;
-  let shiftedValue;
-  let shiftDirection;
-  let debugMsg = "";
-
-  while (left.length &amp;&amp; right.length) {
-    if (right[0] &lt; left[0]) {
-      debugMsg += "right element &lt; left element\n";
-      shiftedValue = right.shift();
-      shiftDirection = "right";
-    } else {
-      debugMsg += "right element >= left element\n";
-      shiftedValue = left.shift();
-      shiftDirection = "left";
+  /**
+   * Default comparison function. It just assumes that "a" and "b" are strings or numbers.
+   * @param {(string|number)} a
+   * @param {(string|number)} b
+   * @returns {number}
+   */
+  static defaultCompareFunction(a, b) {
+    if (a === b) {
+      return 0;
     }
-    debugMsg += `    adding ${shiftedValue} to array from ${shiftDirection}\n`;
-    array[idx++] = shiftedValue;
-  }
-  while (left.length) {
-    shiftedValue = left.shift();
-    debugMsg += `shifting ${shiftedValue} from left\n`;
-    array[idx++] = shiftedValue;
-  }
-  while (right.length) {
-    shiftedValue = right.shift();
-    debugMsg += `shifting ${shiftedValue} from right\n`;
-    array[idx++] = shiftedValue;
+
+    return a &lt; b ? -1 : 1;
   }
 
-  console.log(debugMsg + "\n");
-};
+  /**
+   * Checks if two variables are equal.
+   * @param {number} a
+   * @param {number} b
+   * @return {boolean}
+   */
+  equal(a, b) {
+    return this.compare(a, b) === 0;
+  }
 
-export default mergesort;
+  /**
+   * Checks if variable "a" is less than "b".
+   * @param {number} a
+   * @param {number} b
+   * @return {boolean}
+   */
+  lessThan(a, b) {
+    return this.compare(a, b) &lt; 0;
+  }
+
+  /**
+   * Checks if variable "a" is greater than "b".
+   * @param {number} a
+   * @param {number} b
+   * @return {boolean}
+   */
+  greaterThan(a, b) {
+    return this.compare(a, b) > 0;
+  }
+
+  /**
+   * Checks if variable "a" is less than or equal to "b".
+   * @param {number} a
+   * @param {number} b
+   * @return {boolean}
+   */
+  lessThanOrEqual(a, b) {
+    return this.lessThan(a, b) || this.equal(a, b);
+  }
+
+  /**
+   * Checks if variable "a" is greater than or equal to "b".
+   * @param {number} a
+   * @param {number} b
+   * @return {boolean}
+   */
+  greaterThanOrEqual(a, b) {
+    return this.greaterThan(a, b) || this.equal(a, b);
+  }
+
+  /**
+   * Reverses the comparison order.
+   */
+  reverse() {
+    const compareOriginal = this.compare;
+    this.compare = (a, b) => compareOriginal(b, a);
+  }
+}
 </code></pre>
         </article>
     </section>

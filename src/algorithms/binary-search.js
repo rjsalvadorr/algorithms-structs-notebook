@@ -6,7 +6,9 @@
  * @returns {number} the index number for the given value. Returns null otherwise
  */
 const binarySearch = (array, value) => {
-  console.log("\n/////   BINARY SEARCH   //////////\n");
+  console.log(
+    "\n////////////////////////////////////////////\n/////   BINARY SEARCH   ////////////////////\n"
+  );
   return binarySearchImpl(array, value, 0, 100);
 };
 

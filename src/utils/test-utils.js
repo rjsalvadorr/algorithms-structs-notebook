@@ -1,4 +1,6 @@
 import shuffle from "lodash/shuffle";
+import { simpleComparator } from "./comparators";
+import BinarySearchTree from "../sets-and-maps/binary-search-tree";
 
 /**
  * Utilities for running tests
@@ -242,8 +244,15 @@ class TestUtils {
   /**
    * Returns a binary tree that's populated with number values
    */
-  static getPopulatedBinaryTree() {
-    return {};
+  static getPopulatedBinaryTree(values) {
+    const valuesForTree = values || this.getUnsortedArray(20);
+    const bTree = new BinarySearchTree(simpleComparator);
+
+    for (let val of valuesForTree) {
+      bTree.insert(val);
+    }
+
+    return bTree;
   }
 
   /**

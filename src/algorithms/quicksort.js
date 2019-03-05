@@ -9,7 +9,9 @@ import { lessThan } from "../utils/comparators";
  * @returns {number[]} a sorted version of the given array
  */
 const quicksort = array => {
-  console.log("\n/////   QUICKSORT   //////////\n");
+  console.log(
+    "\n////////////////////////////////////////\n/////   QUICKSORT   ////////////////////\n"
+  );
   const arrayCopy = array.slice(0);
   const end = arrayCopy.length - 1;
   quicksortImpl(arrayCopy, 0, end);

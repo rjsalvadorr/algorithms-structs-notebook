@@ -1,6 +1,7 @@
 import TestUtils from "../utils/test-utils";
 import binarySearch from "./binary-search";
-import quickSort from "./quicksort";
+import quicksort from "./quicksort";
+import mergesort from "./mergesort";
 
 beforeEach(() => {
   // set up tests
@@ -13,7 +14,13 @@ beforeEach(() => {
 describe("Array operations", () => {
   test("quicksort", () => {
     const inputArray = TestUtils.getUnsortedArray(20);
-    const input = quickSort(inputArray);
+    const input = quicksort(inputArray);
+    expect(TestUtils.isArraySorted(input)).toBe(true);
+  });
+
+  test("mergesort", () => {
+    const inputArray = TestUtils.getUnsortedArray(20);
+    const input = mergesort(inputArray);
     expect(TestUtils.isArraySorted(input)).toBe(true);
   });
 
