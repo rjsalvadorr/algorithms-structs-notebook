@@ -459,7 +459,7 @@
 </ul>
 <li class="heading"><span>interview</span></li>
 <ul>
-<li><a class="" href="..\interview\1-example-questions.html">example questions</a></li>
+<li><a class="active" href="1-example-questions.html">example questions</a></li>
 </ul>
 <li class="heading"><span>lists</span></li>
 <ul>
@@ -469,8 +469,8 @@
 </ul>
 <li class="heading"><span>maths</span></li>
 <ul>
-<li><a class="active" href="big-o-notation.html">big o notation</a></li>
-<li><a class="" href="graph.html">graph</a></li>
+<li><a class="" href="..\maths\big-o-notation.html">big o notation</a></li>
+<li><a class="" href="..\maths\graph.html">graph</a></li>
 </ul>
 <li class="heading"><span>sets and maps</span></li>
 <ul>
@@ -481,42 +481,77 @@
 </ul>
     </nav>
     <article id="main" class="content">
-      <h1>Big O notation</h1>
-<h2>Time complexities</h2>
-<h3>O(1)</h3>
-<p>Constant time. Never changes in respect to # of inputs.</p>
-<h3>O(log n)</h3>
-<p>Logarithmic time. Highly efficient, as the ratio of the number of operations to the size of the input decreases and tends to zero when <em>n</em> increases.</p>
-<h3>O(n)</h3>
-<p>Linear time. Scales linearly with # of inputs.</p>
-<h3>O(n²)</h3>
-<p>Quadratic time. Highly inefficient as <em>n</em> grows.</p>
-<h3>O(2ⁿ)</h3>
-<p>Exponential time. Crazy inefficient as <em>n</em> scales up.</p>
-<h3>O(n!)</h3>
-<p>Factorial time. Hilariously inefficient.</p>
-<h2>Space complexities</h2>
-<p>Space complexity is the amount of memory used by the algorithm (including the input values to the algorithm) to execute and produce the result.</p>
-<p>OR</p>
-<p>Space complexity is a measure of the amount of working storage an algorithm needs. That means how much memory, in the worst case, is needed at any point in the algorithm. As with time complexity, we’re mostly concerned with how the space needs grow, in big-Oh terms, as the size N of the input problem grows.</p>
-<h2>Tables</h2>
-<p><img src="./big-o-chart.png" alt="Big O chart" title="Big O"></p>
-<p><img src="./1-data-structs.jpg" alt="Big O chart" title="Big O"></p>
-<p><img src="./2-searching.jpg" alt="Big O chart" title="Big O"></p>
-<p><img src="./3-sorting.jpg" alt="Big O chart" title="Big O"></p>
-<p><img src="./4-heaps.jpg" alt="Big O chart" title="Big O"></p>
-<p><img src="./5-graphs.jpg" alt="Big O chart" title="Big O"></p>
-<p><img src="./big-o-cheatsheet-2.png" alt="Big O cheatsheet" title="Big O"></p>
-<h2>Resources</h2>
-<ul>
-<li><a href="https://en.wikipedia.org/wiki/Computational_complexity">Wikipedia - Computational complexity</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Time_complexity">Wikipedia - Time complexity</a></li>
-<li><a href="http://bigocheatsheet.com/">Big-O Cheat Sheet</a></li>
-<li><a href="https://youtu.be/kgBjXUE_Nwc?t=452">Getting Sorted &amp; Big O Notation - Computerphile</a></li>
-<li><a href="https://www.youtube.com/watch?v=v4cd1O4zkGw">Big O Notation - Gayle Laakmann McDowell</a></li>
-<li><a href="https://www.youtube.com/watch?v=V6mKVRU1evU">Big O Notations - Derek Banas</a></li>
-<li><a href="https://www.cs.northwestern.edu/academics/courses/311/html/space-complexity.html">Northwestern University - Space Complexity EECS 311</a></li>
-</ul>
+      <h1>Example Questions</h1>
+<h2>Service for interviews?</h2>
+<p><a href="https://www.interviewbit.com/">https://www.interviewbit.com/</a></p>
+<h2>50+ questions from HackerNoon</h2>
+<p><a href="https://hackernoon.com/50-data-structure-and-algorithms-interview-questions-for-programmers-b4b1ac61f5b0">https://hackernoon.com/50-data-structure-and-algorithms-interview-questions-for-programmers-b4b1ac61f5b0</a></p>
+<p>IDK how much trust to put in these, but they seem like the right kind of brain-teaser BS.</p>
+<h3>Arrays</h3>
+<ol>
+<li>How do you find the missing number in a given integer array of 1 to 100? (solution)</li>
+<li>How do you find the duplicate number on a given integer array? (solution)</li>
+<li>How do you find the largest and smallest number in an unsorted integer array? (solution)</li>
+<li>How do you find all pairs of an integer array whose sum is equal to a given number? (solution)</li>
+<li>How do you find duplicate numbers in an array if it contains multiple duplicates? (solution)</li>
+<li>How are duplicates removed from a given array in Java? (solution)</li>
+<li>How is an integer array sorted in place using the quicksort algorithm? (solution)</li>
+<li>How do you remove duplicates from an array in place? (solution)</li>
+<li>How do you reverse an array in place in Java? (solution)</li>
+<li>How are duplicates removed from an array without using any library? (solution)</li>
+</ol>
+<h3>Linked Lists</h3>
+<ol>
+<li>How do you find the middle element of a singly linked list in one pass? (solution)</li>
+<li>How do you check if a given linked list contains a cycle? How do you find the starting node of the cycle? (solution)</li>
+<li>How do you reverse a linked list? (solution)</li>
+<li>How do you reverse a singly linked list without recursion? (solution)</li>
+<li>How are duplicate nodes removed in an unsorted linked list? (solution)</li>
+<li>How do you find the length of a singly linked list? (solution)</li>
+<li>How do you find the third node from the end in a singly linked list? (solution)</li>
+<li>How do you find the sum of two linked lists using Stack? (solution)</li>
+</ol>
+<h3>Strings</h3>
+<ol>
+<li>How do you print duplicate characters from a string? (solution)</li>
+<li>How do you check if two strings are anagrams of each other? (solution)</li>
+<li>How do you print the first non-repeated character from a string? (solution)</li>
+<li>How can a given string be reversed using recursion? (solution)</li>
+<li>How do you check if a string contains only digits? (solution)</li>
+<li>How are duplicate characters found in a string? (solution)</li>
+<li>How do you count a number of vowels and consonants in a given string? (solution)</li>
+<li>How do you count the occurrence of a given character in a string? (solution)</li>
+<li>How do you find all permutations of a string? (solution)</li>
+<li>How do you reverse words in a given sentence without using any library method? (solution)</li>
+<li>How do you check if two strings are a rotation of each other? (solution)</li>
+<li>How do you check if a given string is a palindrome? (solution)</li>
+</ol>
+<h3>Binary Trees</h3>
+<ol>
+<li>How is a binary search tree implemented? (solution)</li>
+<li>How do you perform preorder traversal in a given binary tree? (solution)</li>
+<li>How do you traverse a given binary tree in preorder without recursion? (solution)</li>
+<li>How do you perform an inorder traversal in a given binary tree? (solution)</li>
+<li>How do you print all nodes of a given binary tree using inorder traversal without recursion? (solution)</li>
+<li>How do you implement a postorder traversal algorithm? (solution)</li>
+<li>How do you traverse a binary tree in postorder traversal without recursion? (solution)</li>
+<li>How are all leaves of a binary search tree printed? (solution)</li>
+<li>How do you count a number of leaf nodes in a given binary tree? (solution)</li>
+<li>How do you perform a binary search in a given array? (solution)</li>
+</ol>
+<h3>Misc</h3>
+<ol>
+<li>How is a bubble sort algorithm implemented? (solution)</li>
+<li>How is an iterative quicksort algorithm implemented? (solution)</li>
+<li>How do you implement an insertion sort algorithm? (solution)</li>
+<li>How is a merge sort algorithm implemented? (solution)</li>
+<li>How do you implement a bucket sort algorithm? (solution)</li>
+<li>How do you implement a counting sort algorithm? (solution)</li>
+<li>How is a radix sort algorithm implemented? (solution)</li>
+<li>How do you swap two numbers without using the third variable? (solution)</li>
+<li>How do you check if two rectangles overlap with each other? (solution)</li>
+<li>How do you design a vending machine? (solution)</li>
+</ol>
 
     </article>
   </div>

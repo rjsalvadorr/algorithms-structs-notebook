@@ -1,5 +1,15 @@
 # Study Journal / Changelog
 
+## 2019-MAR-07
+
+- example interview questions
+- tree-traversal implementations
+
+## 2019-MAR-05
+
+- depth-first tree traversal
+- breadth-first tree traversal
+
 ## 2019-MAR-03
 
 - quicksort
