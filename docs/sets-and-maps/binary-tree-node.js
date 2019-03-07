@@ -2,9 +2,11 @@
 // https://github.com/trekhleb/javascript-algorithms
 
 import Comparator from "../utils/Comparator";
-// import HashTable from "../hash-table/HashTable";
 
-export default class BinaryTreeNode {
+/**
+ * Implementation of a binary tree node
+ */
+class BinaryTreeNode {
   /**
    * @param {number} [value] - node value.
    */
@@ -220,3 +222,5 @@ export default class BinaryTreeNode {
     return this.traverseInOrder().toString();
   }
 }
+
+export default BinaryTreeNode;

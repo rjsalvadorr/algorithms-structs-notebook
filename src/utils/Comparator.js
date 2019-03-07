@@ -1,7 +1,10 @@
 // Stolen from:
 // https://github.com/trekhleb/javascript-algorithms
 
-export default class Comparator {
+/**
+ * Utility class for comparators
+ */
+class Comparator {
   /**
    * @param {function} [compareFunction] - It may be custom compare function that, let's
    * say may compare custom objects together.
@@ -82,3 +85,5 @@ export default class Comparator {
     this.compare = (a, b) => compareOriginal(b, a);
   }
 }
+
+export default Comparator;

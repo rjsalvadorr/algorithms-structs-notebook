@@ -4,7 +4,10 @@
 import BinaryTreeNode from "./binary-tree-node";
 import Comparator from "../utils/Comparator";
 
-export default class BinarySearchTreeNode extends BinaryTreeNode {
+/**
+ * Implementation of a binary search tree node
+ */
+class BinarySearchTreeNode extends BinaryTreeNode {
   /**
    * @param {number} [value] - node value.
    * @param {function} [compareFunction] - comparator function for node values.
@@ -165,3 +168,5 @@ export default class BinarySearchTreeNode extends BinaryTreeNode {
     return returnString;
   }
 }
+
+export default BinarySearchTreeNode;

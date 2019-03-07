@@ -3,7 +3,10 @@
 
 import BinarySearchTreeNode from "./binary-search-tree-node";
 
-export default class BinarySearchTree {
+/**
+ * Implementation of a binary search tree
+ */
+class BinarySearchTree {
   /**
    * @param {function} [nodeValueCompareFunction]
    */
@@ -46,3 +49,5 @@ export default class BinarySearchTree {
     return this.root.toString();
   }
 }
+
+export default BinarySearchTree;
