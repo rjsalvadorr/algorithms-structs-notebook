@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: sets-and-maps/binary-search-tree.js</title>
+    <title>JSDoc: Source: lists/queue.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: sets-and-maps/binary-search-tree.js</h1>
+    <h1 class="page-title">Source: lists/queue.js</h1>
 
     
 
@@ -26,59 +26,54 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>// Stolen from:
-// https://github.com/trekhleb/javascript-algorithms
-
-import BinarySearchTreeNode from "./binary-search-tree-node";
+            <pre class="prettyprint source linenums"><code>import LinkedList from "./linked-list";
 
 /**
- * Implementation of a binary search tree
+ * RJ's implementation of a queue
  */
-class BinarySearchTree {
-  /**
-   * @param {function} [nodeValueCompareFunction]
-   */
-  constructor(nodeValueCompareFunction) {
-    this.root = new BinarySearchTreeNode(null, nodeValueCompareFunction);
-
-    // Steal node comparator from the root.
-    this.nodeComparator = this.root.nodeComparator;
+class Queue {
+  constructor() {
+    this.linkedList = new LinkedList();
   }
 
   /**
-   * @param {number} value
-   * @return {BinarySearchTreeNode}
+   * @return {boolean} true if the queue is empty
    */
-  insert(value) {
-    return this.root.insert(value);
+  isEmpty() {
+    return !this.linkedList.head;
   }
 
   /**
-   * @param {number} value
-   * @return {boolean}
+   * Reads the element at the front of the queue without removing it
+   * @return {number|string|Object} value of element at the front of the queue
    */
-  contains(value) {
-    console.log(`\n\nSearching for ${value}...`);
-    return this.root.contains(value);
+  peek() {
+    if (this.isEmpty()) {
+      return null;
+    }
+
+    return this.linkedList.head.data;
   }
 
   /**
-   * @param {number} value
-   * @return {boolean}
+   * Adds a new element to the back of the queue (tail of the linked list)
+   * @param {number|string|Object} value - value to add to the queue
    */
-  remove(value) {
-    return this.root.remove(value);
+  enqueue(value) {
+    this.linkedList.append(value);
   }
 
   /**
-   * @return {string}
+   * Remove the element at the front of the queue (head of the linked list)
+   * @return {number|string|Object} value of element at the front of the queue
    */
-  toString() {
-    return this.root.toString();
+  dequeue() {
+    const removedHead = this.linkedList.deleteHead();
+    return removedHead ? removedHead.value : null;
   }
 }
 
-export default BinarySearchTree;
+export default Queue;
 </code></pre>
         </article>
     </section>

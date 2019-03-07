@@ -2,7 +2,7 @@ import LinkedListNode from "./linked-list-node";
 import { simpleComparator } from "../utils/comparators";
 
 /**
- * Implementation of a linked list
+ * RJ's implementation of a linked list
  */
 class LinkedList {
   /**
@@ -126,8 +126,25 @@ class LinkedList {
     return 0;
   }
 
-  deleteHead(value) {
-    return 0;
+  /**
+   * Deletes the head node of the linked list
+   * @return {LinkedListNode} head node that's been deleted
+   */
+  deleteHead() {
+    if (!this.head) {
+      return null;
+    }
+
+    const deletedHead = this.head;
+
+    if (this.head.next) {
+      this.head = this.head.next;
+    } else {
+      this.head = null;
+      this.tail = null;
+    }
+
+    return deletedHead;
   }
 
   fromArray(value) {

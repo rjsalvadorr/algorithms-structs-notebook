@@ -1,5 +1,5 @@
 /**
- * Implementation of a linked list node
+ * RJ's implementation of a linked list node
  */
 class LinkedListNode {
   /**
