@@ -1,10 +1,8 @@
-// Stolen from:
-// https://github.com/trekhleb/javascript-algorithms
-
 import BinarySearchTreeNode from "./binary-search-tree-node";
 
 /**
- * Implementation of a binary search tree
+ * Implementation of a binary search tree. Stolen from:
+ * https://github.com/trekhleb/javascript-algorithms
  */
 class BinarySearchTree {
   /**

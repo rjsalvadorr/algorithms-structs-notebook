@@ -1,10 +1,8 @@
-// Stolen from:
-// https://github.com/trekhleb/javascript-algorithms
-
 import Comparator from "../utils/Comparator";
 
 /**
- * Implementation of a binary tree node
+ * Implementation of a binary tree node. Stolen from:
+ * https://github.com/trekhleb/javascript-algorithms
  */
 class BinaryTreeNode {
   /**

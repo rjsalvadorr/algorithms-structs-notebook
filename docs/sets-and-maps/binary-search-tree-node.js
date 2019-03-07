@@ -1,16 +1,14 @@
-// Stolen from:
-// https://github.com/trekhleb/javascript-algorithms
-
 import BinaryTreeNode from "./binary-tree-node";
 import Comparator from "../utils/Comparator";
 
 /**
- * Implementation of a binary search tree node
+ * Implementation of a binary search tree node. Stolen from:
+ * https://github.com/trekhleb/javascript-algorithms
  */
 class BinarySearchTreeNode extends BinaryTreeNode {
   /**
-   * @param {number} [value] - node value.
-   * @param {function} [compareFunction] - comparator function for node values.
+   * @param {number} value - node value.
+   * @param {function} compareFunction - comparator function for node values.
    */
   constructor(value = null, compareFunction = undefined) {
     super(value);
@@ -133,7 +131,6 @@ class BinarySearchTreeNode extends BinaryTreeNode {
     } else {
       // Node has only one child.
       // Make this child to be a direct child of current node's parent.
-      /** @var BinarySearchTreeNode */
       const childNode = nodeToRemove.left || nodeToRemove.right;
 
       if (parent) {

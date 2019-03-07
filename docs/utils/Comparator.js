@@ -1,8 +1,7 @@
-// Stolen from:
-// https://github.com/trekhleb/javascript-algorithms
-
 /**
  * Utility class for comparators
+ * Stolen from:
+ * https://github.com/trekhleb/javascript-algorithms
  */
 class Comparator {
   /**
