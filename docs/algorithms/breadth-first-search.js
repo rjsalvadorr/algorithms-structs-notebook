@@ -12,8 +12,7 @@ function bfsInitCallbacks(callbacks = {}) {
   const stubCallback = () => {};
   const defaultAllowTraversal = () => true;
 
-  initiatedCallback.allowTraversal =
-    callbacks.allowTraversal || defaultAllowTraversal;
+  initiatedCallback.allowTraversal = callbacks.allowTraversal || defaultAllowTraversal;
   initiatedCallback.enterNode = callbacks.enterNode || stubCallback;
   initiatedCallback.leaveNode = callbacks.leaveNode || stubCallback;
 
@@ -30,6 +29,26 @@ function bfsInitCallbacks(callbacks = {}) {
 function breadthFirstSearch(rootNode, origCallbacks) {
   const callbacks = bfsInitCallbacks(origCallbacks);
   const nodeQueue = new Queue();
+
+  nodeQueue.enqueue(rootNode);
+
+  while (!nodeQueue.isEmpty()) {
+    const currentNode = nodeQueue.dequeue();
+
+    callbacks.enterNode(currentNode);
+
+    // traverse left
+    if (currentNode.left && callbacks.allowTraversal(currentNode, currentNode.left)) {
+      nodeQueue.enqueue(currentNode.left);
+    }
+
+    // traverse right
+    if (currentNode.right && callbacks.allowTraversal(currentNode, currentNode.right)) {
+      nodeQueue.enqueue(currentNode.right);
+    }
+
+    callbacks.leaveNode(currentNode);
+  }
 }
 
 export default breadthFirstSearch;

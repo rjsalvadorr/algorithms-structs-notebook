@@ -8,9 +8,7 @@ import { lessThan } from "../utils/comparators";
  * @returns {number[]} a sorted version of the given array
  */
 const mergesort = array => {
-  console.log(
-    "\n////////////////////////////////////////\n/////   MERGESORT   ////////////////////\n"
-  );
+  console.log("\n////////////////////////////////////////\n/////   MERGESORT   ////////////////////\n");
   const arrayCopy = array.slice(0);
   mergesortImpl(arrayCopy);
   return arrayCopy;
@@ -32,11 +30,7 @@ const mergesortImpl = array => {
   const left = array.slice(0, mid);
   const right = array.slice(mid);
 
-  console.log(
-    `split ${JSON.stringify(array)}\ninto ${JSON.stringify(
-      left
-    )} and ${JSON.stringify(right)}\n`
-  );
+  console.log(`split ${JSON.stringify(array)}\ninto ${JSON.stringify(left)} and ${JSON.stringify(right)}\n`);
 
   mergesortImpl(left);
   mergesortImpl(right);

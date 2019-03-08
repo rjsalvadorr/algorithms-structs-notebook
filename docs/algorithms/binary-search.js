@@ -6,10 +6,8 @@
  * @returns {number} the index number for the given value. Returns null otherwise
  */
 const binarySearch = (array, value) => {
-  console.log(
-    "\n////////////////////////////////////////////\n/////   BINARY SEARCH   ////////////////////\n"
-  );
-  return binarySearchImpl(array, value, 0, 100);
+  console.log("\n////////////////////////////////////////////\n/////   BINARY SEARCH   ////////////////////\n");
+  return binarySearchImpl(array, value, 0, array.length);
 };
 
 /**
@@ -27,19 +25,13 @@ const binarySearchImpl = (array, value, low, high) => {
     return null;
   }
   const mid = Math.floor((low + high) / 2);
-  let debugMsg = `value = ${value}, low = ${low}, high = ${high}\nmid = ${mid}, midValue = ${
-    array[mid]
-  }`;
+  let debugMsg = `value = ${value}, low = ${low}, high = ${high}\nmid = ${mid}, midValue = ${array[mid]}`;
   if (array[mid] > value) {
-    console.log(
-      `${debugMsg}\nMid value > search value. Looking in the lower half.\n`
-    );
+    console.log(`${debugMsg}\nMid value > search value. Looking in the lower half.\n`);
     return binarySearchImpl(array, value, low, mid - 1);
   }
   if (array[mid] < value) {
-    console.log(
-      `${debugMsg}\nMid value < search value. Looking in the upper half.\n`
-    );
+    console.log(`${debugMsg}\nMid value < search value. Looking in the upper half.\n`);
     return binarySearchImpl(array, value, mid + 1, high);
   } else {
     console.log(`${debugMsg}\nValue found!\n`);

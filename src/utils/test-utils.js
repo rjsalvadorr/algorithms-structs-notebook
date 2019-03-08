@@ -120,109 +120,10 @@ class TestUtils {
   /**
    * Returns an sorted array of 100 number elements
    */
-  static getSortedArray() {
-    return [
-      -9397,
-      -9365,
-      -9321,
-      -9260,
-      -9195,
-      -8400,
-      -8244,
-      -8225,
-      -7997,
-      -7788,
-      -7265,
-      -6918,
-      -6813,
-      -6718,
-      -6591,
-      -6546,
-      -5879,
-      -5848,
-      -5560,
-      -5391,
-      -4997,
-      -4981,
-      -4909,
-      -4882,
-      -4432,
-      -4409,
-      -4104,
-      -4016,
-      -3589,
-      -3432,
-      -3280,
-      -3154,
-      -3032,
-      -2983,
-      -2574,
-      -2441,
-      -1826,
-      -1791,
-      -1759,
-      -1746,
-      -1362,
-      -1229,
-      -1126,
-      -1119,
-      -906,
-      -820,
-      -741,
-      -704,
-      -332,
-      -43,
-      858,
-      1077,
-      1207,
-      1313,
-      1464,
-      1530,
-      2441,
-      2536,
-      2544,
-      2558,
-      2588,
-      2950,
-      3241,
-      3549,
-      3581,
-      3593,
-      3602,
-      3820,
-      3865,
-      4160,
-      4411,
-      4912,
-      5009,
-      5348,
-      5378,
-      5646,
-      5878,
-      6195,
-      6459,
-      6528,
-      6967,
-      7124,
-      7388,
-      7579,
-      7982,
-      7999,
-      8358,
-      8581,
-      8672,
-      8902,
-      9089,
-      9286,
-      9649,
-      9654,
-      9730,
-      9771,
-      9776,
-      9814,
-      9952,
-      9981
-    ];
+  static getSortedArray(length) {
+    const sortedArray = this.getUnsortedArray(length);
+    sortedArray.sort();
+    return sortedArray;
   }
 
   /**
@@ -245,7 +146,7 @@ class TestUtils {
    * Returns a binary tree that's populated with number values
    */
   static getPopulatedBinaryTree(values) {
-    const valuesForTree = values || this.getUnsortedArray(20);
+    const valuesForTree = values || this.getSortedArray(20);
     const bTree = new BinarySearchTree(simpleComparator);
 
     for (let val of valuesForTree) {
@@ -271,11 +172,7 @@ class TestUtils {
   static formatVariablesForDebug(nameValuePairs) {
     let msg = "";
     for (const nameValuePair of nameValuePairs) {
-      msg += `${nameValuePair.name} = ${JSON.stringify(
-        nameValuePair.value,
-        null,
-        2
-      )}\n`;
+      msg += `${nameValuePair.name} = ${JSON.stringify(nameValuePair.value, null, 2)}\n`;
     }
     return msg;
   }
