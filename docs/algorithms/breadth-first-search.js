@@ -1,6 +1,6 @@
 import Queue from "../lists/queue";
 import TestUtils from "../utils/test-utils";
-const DEBUG_MODE_ENABLED = false;
+const DEBUG_MODE_ENABLED = true;
 
 /**
  * Initializes callback functions for breadth-first search
@@ -33,24 +33,29 @@ function breadthFirstSearch(rootNode, origCallbacks) {
   const nodeQueue = new Queue();
 
   nodeQueue.enqueue(rootNode);
+  TestUtils.print(`rootNode=${rootNode}`, DEBUG_MODE_ENABLED);
 
   let currentNode;
+  let debugMsg = "";
   while (!nodeQueue.isEmpty()) {
+    debugMsg = "";
     currentNode = nodeQueue.dequeue();
     callbacks.enterNode(currentNode);
 
     // traverse left
     if (currentNode.left && callbacks.allowTraversal(currentNode, currentNode.left)) {
       nodeQueue.enqueue(currentNode.left);
+      debugMsg += `enqueuing left (${currentNode.left.value})\n`;
     }
 
     // traverse right
     if (currentNode.right && callbacks.allowTraversal(currentNode, currentNode.right)) {
       nodeQueue.enqueue(currentNode.right);
+      debugMsg += `enqueuing right (${currentNode.right.value})\n`;
     }
 
     callbacks.leaveNode(currentNode);
-    TestUtils.print(`nodeQueue=${nodeQueue.toString()}`, DEBUG_MODE_ENABLED);
+    TestUtils.print(`${debugMsg}nodeQueue=${nodeQueue.toString()}`, DEBUG_MODE_ENABLED);
   }
 }
 

@@ -160,12 +160,12 @@ class BinarySearchTreeNode extends BinaryTreeNode {
   }
 
   toString() {
-    const rightVal = this.right ? this.right.value : "";
-    const leftVal = this.left ? this.left.value : "";
+    // const rightVal = this.right ? this.right.value : "";
+    // const leftVal = this.left ? this.left.value : "";
     let returnString = "";
-    returnString += `{VAL=${this.value}, `;
-    returnString += `L=${leftVal}, `;
-    returnString += `R=${rightVal}}`;
+    returnString += `{ value: ${this.value} }`;
+    // returnString += `L=${leftVal}, `;
+    // returnString += `R=${rightVal}}`;
     return returnString;
   }
 }

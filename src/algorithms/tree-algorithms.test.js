@@ -5,7 +5,7 @@ let testTree = {};
 let DEBUG_MODE_ENABLED = false;
 
 beforeEach(() => {
-  const testVals = TestUtils.getSortedArray(16);
+  const testVals = TestUtils.getUnsortedArray(16);
   testTree = TestUtils.getPopulatedBinaryTree(testVals);
 });
 
