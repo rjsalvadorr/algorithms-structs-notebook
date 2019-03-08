@@ -1,3 +1,4 @@
+import { inspect } from "util";
 import LinkedListNode from "./linked-list-node";
 import { simpleComparator } from "../utils/comparators";
 
@@ -137,8 +138,8 @@ class LinkedList {
 
     const deletedHead = this.head;
 
-    if (this.head.next) {
-      this.head = this.head.next;
+    if (this.head.nextNode) {
+      this.head = this.head.nextNode;
     } else {
       this.head = null;
       this.tail = null;
@@ -147,12 +148,26 @@ class LinkedList {
     return deletedHead;
   }
 
-  fromArray(value) {
+  fromArray(arr) {
     return 0;
   }
 
-  toArray(value) {
-    return 0;
+  toArray() {
+    const nodes = [];
+
+    let currentNode = this.head;
+    while (currentNode) {
+      nodes.push(currentNode.data);
+      currentNode = currentNode.nextNode;
+    }
+
+    return nodes;
+  }
+
+  toString() {
+    return this.toArray()
+      .map(nodeValue => `${nodeValue}`)
+      .join(", ");
   }
 
   reverse(value) {

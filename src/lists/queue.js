@@ -29,10 +29,10 @@ class Queue {
 
   /**
    * Adds a new element to the back of the queue (tail of the linked list)
-   * @param {number|string|Object} value - value to add to the queue
+   * @param {number|string|Object} data - data to add to the queue
    */
-  enqueue(value) {
-    this.linkedList.append(value);
+  enqueue(data) {
+    this.linkedList.append(data);
   }
 
   /**
@@ -41,7 +41,12 @@ class Queue {
    */
   dequeue() {
     const removedHead = this.linkedList.deleteHead();
-    return removedHead ? removedHead.value : null;
+    return removedHead ? removedHead.data : null;
+  }
+
+  toString() {
+    // Return string representation of the queue's linked list.
+    return this.linkedList.toString();
   }
 }
 

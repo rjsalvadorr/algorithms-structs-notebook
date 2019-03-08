@@ -1,10 +1,12 @@
+import { inspect } from "util";
 import TestUtils from "../utils/test-utils";
 import breadthFirstSearch from "./breadth-first-search";
 
 let testTree = {};
 
 beforeEach(() => {
-  testTree = TestUtils.getPopulatedBinaryTree();
+  const testVals = TestUtils.getSortedArray(16);
+  testTree = TestUtils.getPopulatedBinaryTree(testVals);
 });
 
 beforeEach(() => {
@@ -24,11 +26,14 @@ describe("Tree operations", () => {
   });
 
   it("should perform depth-first search", () => {
+    console.log("\n/////   BREADTH-FIRST SEARCH ////////////////////\n");
+
     const enterNodeCallback = node => {
-      console.log(`entering node ${JSON.stringify(node)}`);
+      const parentVal = node.parent ? node.parent.value : "null";
+      console.log(`entering node ${node.value} from ${parentVal}`);
     };
     const leaveNodeCallback = node => {
-      console.log(`leaving node ${JSON.stringify(node)}`);
+      // console.log(`leaving node ${node.value}`);
     };
 
     breadthFirstSearch(testTree.root, {

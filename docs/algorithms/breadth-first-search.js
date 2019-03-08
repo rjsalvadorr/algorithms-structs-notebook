@@ -32,9 +32,9 @@ function breadthFirstSearch(rootNode, origCallbacks) {
 
   nodeQueue.enqueue(rootNode);
 
+  let currentNode;
   while (!nodeQueue.isEmpty()) {
-    const currentNode = nodeQueue.dequeue();
-
+    currentNode = nodeQueue.dequeue();
     callbacks.enterNode(currentNode);
 
     // traverse left
@@ -48,6 +48,7 @@ function breadthFirstSearch(rootNode, origCallbacks) {
     }
 
     callbacks.leaveNode(currentNode);
+    console.log(`nodeQueue=${nodeQueue.toString()}`);
   }
 }
 

@@ -54,4 +54,26 @@ describe("Linked List", () => {
     expect(linkedList.find({ value: val3 })).toBeTruthy();
     expect(linkedList.find({ value: val2 })).toBeTruthy();
   });
+
+  it("should convert to array", () => {
+    linkedList.append(val1);
+    linkedList.append(val2);
+    linkedList.append(val3);
+
+    const array = linkedList.toArray();
+
+    expect(array[0]).toBe(val1);
+    expect(array[1]).toBe(val2);
+    expect(array[2]).toBe(val3);
+  });
+
+  it("should convert to string", () => {
+    linkedList.append(val1);
+    linkedList.append(val2);
+    linkedList.append(val3);
+
+    const string = linkedList.toString();
+
+    expect(string).toBe("44, 88, 33");
+  });
 });

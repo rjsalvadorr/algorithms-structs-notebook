@@ -11,6 +11,10 @@ class LinkedListNode {
     this.data = data || null;
     this.nextNode = nextNode || null;
   }
+
+  toString(callback) {
+    return callback ? callback(this.data) : `${this.data}`;
+  }
 }
 
 export default LinkedListNode;
