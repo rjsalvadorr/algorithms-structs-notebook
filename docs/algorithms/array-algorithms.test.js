@@ -26,7 +26,9 @@ describe("Array operations", () => {
 
   test("binary search", () => {
     const inputArray = TestUtils.getSortedArray(30);
-    const searchVal = inputArray[25];
+    expect(TestUtils.isArraySorted(inputArray)).toBe(true);
+
+    const searchVal = inputArray[12];
     const expected = inputArray.indexOf(searchVal);
     expect(binarySearch(inputArray, searchVal)).toBe(expected);
   });

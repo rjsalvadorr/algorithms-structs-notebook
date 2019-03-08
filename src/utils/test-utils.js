@@ -1,3 +1,4 @@
+import { inspect } from "util";
 import shuffle from "lodash/shuffle";
 import { simpleComparator } from "./comparators";
 import BinarySearchTree from "../sets-and-maps/binary-search-tree";
@@ -122,8 +123,9 @@ class TestUtils {
    */
   static getSortedArray(length) {
     const sortedArray = this.getUnsortedArray(length);
-    sortedArray.sort();
-    return sortedArray;
+    return sortedArray.sort(function(a, b) {
+      return a - b;
+    });
   }
 
   /**
@@ -172,7 +174,7 @@ class TestUtils {
   static formatVariablesForDebug(nameValuePairs) {
     let msg = "";
     for (const nameValuePair of nameValuePairs) {
-      msg += `${nameValuePair.name} = ${JSON.stringify(nameValuePair.value, null, 2)}\n`;
+      msg += `${nameValuePair.name} = ${inspect(nameValuePair.value)}\n`;
     }
     return msg;
   }
@@ -182,9 +184,21 @@ class TestUtils {
    * @static
    * @param {Object[]}} nameValuePairs - name/value of variable to print
    */
-  static printVariables(nameValuePairs) {
+  static printVariables(nameValuePairs, debugEnabled) {
     let msg = this.formatVariablesForDebug(nameValuePairs);
-    console.log(msg);
+    this.print(msg, debugEnabled);
+  }
+
+  /**
+   * Prints variables to the console.
+   * @static
+   * @param {string}} string - string to print
+   * @param {boolean}} debugEnabled - debug variable flag
+   */
+  static print(string, debugEnabled) {
+    if (debugEnabled) {
+      console.log(string);
+    }
   }
 }
 

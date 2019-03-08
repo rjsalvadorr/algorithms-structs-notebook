@@ -1,5 +1,6 @@
 import TestUtils from "../utils/test-utils";
 import { lessThan } from "../utils/comparators";
+const DEBUG_MODE_ENABLED = false;
 
 /**
  * Runs a mergesort on an array of values. Does not modify the given array.
@@ -8,7 +9,10 @@ import { lessThan } from "../utils/comparators";
  * @returns {number[]} a sorted version of the given array
  */
 const mergesort = array => {
-  console.log("\n////////////////////////////////////////\n/////   MERGESORT   ////////////////////\n");
+  TestUtils.print(
+    "\n////////////////////////////////////////\n/////   MERGESORT   ////////////////////\n",
+    DEBUG_MODE_ENABLED
+  );
   const arrayCopy = array.slice(0);
   mergesortImpl(arrayCopy);
   return arrayCopy;
@@ -30,7 +34,10 @@ const mergesortImpl = array => {
   const left = array.slice(0, mid);
   const right = array.slice(mid);
 
-  console.log(`split ${JSON.stringify(array)}\ninto ${JSON.stringify(left)} and ${JSON.stringify(right)}\n`);
+  TestUtils.print(
+    `split ${JSON.stringify(array)}\ninto ${JSON.stringify(left)} and ${JSON.stringify(right)}\n`,
+    DEBUG_MODE_ENABLED
+  );
 
   mergesortImpl(left);
   mergesortImpl(right);
@@ -74,7 +81,7 @@ const merge = (array, left, right) => {
     array[idx++] = shiftedValue;
   }
 
-  console.log(debugMsg + "\n");
+  TestUtils.print(debugMsg + "\n", DEBUG_MODE_ENABLED);
 };
 
 export default mergesort;

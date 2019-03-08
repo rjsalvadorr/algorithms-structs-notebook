@@ -1,5 +1,6 @@
 import TestUtils from "../utils/test-utils";
 import { lessThan } from "../utils/comparators";
+const DEBUG_MODE_ENABLED = false;
 
 /**
  * Runs a quicksort on an array of values. Does not modify the given array.
@@ -9,7 +10,10 @@ import { lessThan } from "../utils/comparators";
  * @returns {number[]} a sorted version of the given array
  */
 const quicksort = array => {
-  console.log("\n////////////////////////////////////////\n/////   QUICKSORT   ////////////////////\n");
+  TestUtils.print(
+    "\n////////////////////////////////////////\n/////   QUICKSORT   ////////////////////\n",
+    DEBUG_MODE_ENABLED
+  );
   const arrayCopy = array.slice(0);
   const end = arrayCopy.length - 1;
   quicksortImpl(arrayCopy, 0, end);
@@ -54,11 +58,14 @@ const quicksortImpl = (array, left, right) => {
         leftNew += 1;
         rightNew -= 1;
       }
-      console.log(`${debugMsg}`);
+      TestUtils.print(`${debugMsg}`, DEBUG_MODE_ENABLED);
     } while (leftNew <= rightNew);
 
     let debugMsg2 = `Sorting complete for this section.\nCalling quicksortImpl(array,${left},${rightNew})`;
-    console.log(`${debugMsg2}\ncalling quicksortImpl(array,${leftNew},${right})\n---------------\n\n`);
+    TestUtils.print(
+      `${debugMsg2}\ncalling quicksortImpl(array,${leftNew},${right})\n---------------\n\n`,
+      DEBUG_MODE_ENABLED
+    );
 
     quicksortImpl(array, left, rightNew);
     quicksortImpl(array, leftNew, right);

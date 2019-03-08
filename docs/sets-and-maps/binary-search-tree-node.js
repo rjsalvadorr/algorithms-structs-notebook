@@ -1,5 +1,7 @@
 import BinaryTreeNode from "./binary-tree-node";
 import Comparator from "../utils/Comparator";
+import TestUtils from "../utils/test-utils";
+const DEBUG_MODE_ENABLED = false;
 
 /**
  * Implementation of a binary search tree node. Stolen from:
@@ -63,23 +65,23 @@ class BinarySearchTreeNode extends BinaryTreeNode {
   find(value) {
     // Check the root.
     if (this.nodeValueComparator.equal(this.value, value)) {
-      console.log(`found ${value}!!`);
+      TestUtils.print(`found ${value}!!`, DEBUG_MODE_ENABLED);
       return this;
     }
 
     if (this.nodeValueComparator.lessThan(value, this.value) && this.left) {
       // Check left nodes.
-      console.log("going left");
+      TestUtils.print("going left", DEBUG_MODE_ENABLED);
       return this.left.find(value);
     }
 
     if (this.nodeValueComparator.greaterThan(value, this.value) && this.right) {
       // Check right nodes.
-      console.log("going right");
+      TestUtils.print("going right", DEBUG_MODE_ENABLED);
       return this.right.find(value);
     }
 
-    console.log(`${value} not found`);
+    TestUtils.print(`${value} not found`, DEBUG_MODE_ENABLED);
 
     return null;
   }

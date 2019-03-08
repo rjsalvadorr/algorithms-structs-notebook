@@ -1,8 +1,8 @@
-import { inspect } from "util";
 import TestUtils from "../utils/test-utils";
 import breadthFirstSearch from "./breadth-first-search";
 
 let testTree = {};
+let DEBUG_MODE_ENABLED = false;
 
 beforeEach(() => {
   const testVals = TestUtils.getSortedArray(16);
@@ -26,14 +26,14 @@ describe("Tree operations", () => {
   });
 
   it("should perform depth-first search", () => {
-    console.log("\n/////   BREADTH-FIRST SEARCH ////////////////////\n");
+    TestUtils.print("\n/////   BREADTH-FIRST SEARCH ////////////////////\n", DEBUG_MODE_ENABLED);
 
     const enterNodeCallback = node => {
       const parentVal = node.parent ? node.parent.value : "null";
-      console.log(`entering node ${node.value} from ${parentVal}`);
+      TestUtils.print(`entering node ${node.value} from ${parentVal}`, DEBUG_MODE_ENABLED);
     };
     const leaveNodeCallback = node => {
-      // console.log(`leaving node ${node.value}`);
+      // TestUtils.print(`leaving node ${node.value}`, DEBUG_MODE_ENABLED);
     };
 
     breadthFirstSearch(testTree.root, {

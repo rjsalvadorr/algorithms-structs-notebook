@@ -1,4 +1,6 @@
 import Queue from "../lists/queue";
+import TestUtils from "../utils/test-utils";
+const DEBUG_MODE_ENABLED = false;
 
 /**
  * Initializes callback functions for breadth-first search
@@ -48,7 +50,7 @@ function breadthFirstSearch(rootNode, origCallbacks) {
     }
 
     callbacks.leaveNode(currentNode);
-    console.log(`nodeQueue=${nodeQueue.toString()}`);
+    TestUtils.print(`nodeQueue=${nodeQueue.toString()}`, DEBUG_MODE_ENABLED);
   }
 }
 

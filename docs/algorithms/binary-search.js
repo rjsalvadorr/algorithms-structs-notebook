@@ -1,3 +1,6 @@
+import TestUtils from "../utils/test-utils";
+const DEBUG_MODE_ENABLED = false;
+
 /**
  * Runs a binary search on an array of values
  * @function
@@ -6,7 +9,10 @@
  * @returns {number} the index number for the given value. Returns null otherwise
  */
 const binarySearch = (array, value) => {
-  console.log("\n////////////////////////////////////////////\n/////   BINARY SEARCH   ////////////////////\n");
+  TestUtils.print(
+    "\n////////////////////////////////////////////\n/////   BINARY SEARCH   ////////////////////\n",
+    DEBUG_MODE_ENABLED
+  );
   return binarySearchImpl(array, value, 0, array.length);
 };
 
@@ -27,14 +33,14 @@ const binarySearchImpl = (array, value, low, high) => {
   const mid = Math.floor((low + high) / 2);
   let debugMsg = `value = ${value}, low = ${low}, high = ${high}\nmid = ${mid}, midValue = ${array[mid]}`;
   if (array[mid] > value) {
-    console.log(`${debugMsg}\nMid value > search value. Looking in the lower half.\n`);
+    TestUtils.print(`${debugMsg}\nMid value > search value. Looking in the lower half.\n`, DEBUG_MODE_ENABLED);
     return binarySearchImpl(array, value, low, mid - 1);
   }
   if (array[mid] < value) {
-    console.log(`${debugMsg}\nMid value < search value. Looking in the upper half.\n`);
+    TestUtils.print(`${debugMsg}\nMid value < search value. Looking in the upper half.\n`, DEBUG_MODE_ENABLED);
     return binarySearchImpl(array, value, mid + 1, high);
   } else {
-    console.log(`${debugMsg}\nValue found!\n`);
+    TestUtils.print(`${debugMsg}\nValue found!\n`, DEBUG_MODE_ENABLED);
     return mid;
   }
 };
