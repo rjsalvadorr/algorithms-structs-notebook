@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: sets-and-maps/binary-search-tree.js</title>
+    <title>JSDoc: Source: algorithms/depth-first-search.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: sets-and-maps/binary-search-tree.js</h1>
+    <h1 class="page-title">Source: algorithms/depth-first-search.js</h1>
 
     
 
@@ -26,56 +26,71 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import BinarySearchTreeNode from "./binary-search-tree-node";
+            <pre class="prettyprint source linenums"><code>import Queue from "../lists/queue";
+import TestUtils from "../utils/test-utils";
+const DEBUG_MODE_ENABLED = true;
 
 /**
- * Implementation of a binary search tree. Stolen from:
- * https://github.com/trekhleb/javascript-algorithms
+ * Initializes callback functions for depth-first search
+ * @function
+ * @param {Object} callbacks - callbacks to initialize
+ * @returns {function} the initiated callback
  */
-class BinarySearchTree {
-  /**
-   * @param {function} [nodeValueCompareFunction]
-   */
-  constructor(nodeValueCompareFunction) {
-    this.root = new BinarySearchTreeNode(null, nodeValueCompareFunction);
+function dfsInitCallbacks(callbacks = {}) {
+  const initiatedCallback = callbacks;
 
-    // Steal node comparator from the root.
-    this.nodeComparator = this.root.nodeComparator;
-  }
+  const stubCallback = () => {};
+  const defaultAllowTraversal = () => true;
 
-  /**
-   * @param {number} value
-   * @return {BinarySearchTreeNode}
-   */
-  insert(value) {
-    return this.root.insert(value);
-  }
+  initiatedCallback.allowTraversal = callbacks.allowTraversal || defaultAllowTraversal;
+  initiatedCallback.enterNode = callbacks.enterNode || stubCallback;
+  initiatedCallback.leaveNode = callbacks.leaveNode || stubCallback;
 
-  /**
-   * @param {number} value
-   * @return {boolean}
-   */
-  contains(value) {
-    return this.root.contains(value);
-  }
-
-  /**
-   * @param {number} value
-   * @return {boolean}
-   */
-  remove(value) {
-    return this.root.remove(value);
-  }
-
-  /**
-   * @return {string}
-   */
-  toString() {
-    return this.root.toString();
-  }
+  return initiatedCallback;
 }
 
-export default BinarySearchTree;
+/**
+ * Recursive implementation of a depth-first search on a binary tree
+ * @function
+ * @param {Object} node - binary tree node
+ * @param {Object} callbacks - original callbacks
+ * @returns {number[]} a sorted version of the given array
+ */
+function depthFirstSearchImpl(node, callbacks) {
+  callbacks.enterNode(node);
+  let debugMsg = "";
+
+  // traverse left
+  if (node.left &amp;&amp; callbacks.allowTraversal(node, node.left)) {
+    debugMsg += `calling function on left (${node.left.value})\n`;
+    depthFirstSearchImpl(node.left, callbacks);
+  }
+
+  // traverse right
+  if (node.right &amp;&amp; callbacks.allowTraversal(node, node.right)) {
+    debugMsg += `calling function on right (${node.right.value})\n`;
+    depthFirstSearchImpl(node.right, callbacks);
+  }
+
+  TestUtils.print(debugMsg, DEBUG_MODE_ENABLED);
+  callbacks.leaveNode(node);
+}
+
+/**
+ * Runs a depth-first search on a binary tree
+ * @function
+ * @param {Object} rootNode - binary tree node
+ * @param {Object} origCallbacks - original callbacks
+ * @returns {number[]} a sorted version of the given array
+ */
+function depthFirstSearch(rootNode, origCallbacks) {
+  TestUtils.print("\n/////   DEPTH-FIRST SEARCH ////////////////////\n", DEBUG_MODE_ENABLED);
+
+  const processedCallbacks = dfsInitCallbacks(origCallbacks);
+  depthFirstSearchImpl(rootNode, processedCallbacks);
+}
+
+export default depthFirstSearch;
 </code></pre>
         </article>
     </section>

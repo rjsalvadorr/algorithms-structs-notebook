@@ -850,6 +850,523 @@
     
 
     
+    <h4 class="name" id="depthFirstSearch"><span class="type-signature"></span>depthFirstSearch<span class="signature">(rootNode, origCallbacks)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Runs a depth-first search on a binary tree
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>rootNode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">binary tree node</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>origCallbacks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">original callbacks</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="algorithms_depth-first-search.js.html">algorithms/depth-first-search.js</a>, <a href="algorithms_depth-first-search.js.html#line58">line 58</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    a sorted version of the given array
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;number></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="depthFirstSearchImpl"><span class="type-signature"></span>depthFirstSearchImpl<span class="signature">(node, callbacks)</span><span class="type-signature"> &rarr; {Array.&lt;number>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Recursive implementation of a depth-first search on a binary tree
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>node</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">binary tree node</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callbacks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">original callbacks</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="algorithms_depth-first-search.js.html">algorithms/depth-first-search.js</a>, <a href="algorithms_depth-first-search.js.html#line31">line 31</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    a sorted version of the given array
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;number></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="dfsInitCallbacks"><span class="type-signature"></span>dfsInitCallbacks<span class="signature">(callbacks)</span><span class="type-signature"> &rarr; {function}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Initializes callback functions for depth-first search
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>callbacks</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">callbacks to initialize</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="algorithms_depth-first-search.js.html">algorithms/depth-first-search.js</a>, <a href="algorithms_depth-first-search.js.html#line11">line 11</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the initiated callback
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">function</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="lessThan"><span class="type-signature"></span>lessThan<span class="signature">(a, b)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
 
@@ -2152,13 +2669,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BinarySearchTree.html">BinarySearchTree</a></li><li><a href="BinarySearchTreeNode.html">BinarySearchTreeNode</a></li><li><a href="BinaryTreeNode.html">BinaryTreeNode</a></li><li><a href="Comparator.html">Comparator</a></li><li><a href="LinkedList.html">LinkedList</a></li><li><a href="LinkedListNode.html">LinkedListNode</a></li><li><a href="Queue.html">Queue</a></li><li><a href="TestUtils.html">TestUtils</a></li></ul><h3>Global</h3><ul><li><a href="global.html#bfsInitCallbacks">bfsInitCallbacks</a></li><li><a href="global.html#binarySearch">binarySearch</a></li><li><a href="global.html#binarySearchImpl">binarySearchImpl</a></li><li><a href="global.html#breadthFirstSearch">breadthFirstSearch</a></li><li><a href="global.html#lessThan">lessThan</a></li><li><a href="global.html#merge">merge</a></li><li><a href="global.html#mergesort">mergesort</a></li><li><a href="global.html#mergesortImpl">mergesortImpl</a></li><li><a href="global.html#quicksort">quicksort</a></li><li><a href="global.html#quicksortImpl">quicksortImpl</a></li><li><a href="global.html#simpleComparator">simpleComparator</a></li><li><a href="global.html#swapElementsOfArray">swapElementsOfArray</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BinarySearchTree.html">BinarySearchTree</a></li><li><a href="BinarySearchTreeNode.html">BinarySearchTreeNode</a></li><li><a href="BinaryTreeNode.html">BinaryTreeNode</a></li><li><a href="Comparator.html">Comparator</a></li><li><a href="LinkedList.html">LinkedList</a></li><li><a href="LinkedListNode.html">LinkedListNode</a></li><li><a href="Queue.html">Queue</a></li><li><a href="TestUtils.html">TestUtils</a></li></ul><h3>Global</h3><ul><li><a href="global.html#bfsInitCallbacks">bfsInitCallbacks</a></li><li><a href="global.html#binarySearch">binarySearch</a></li><li><a href="global.html#binarySearchImpl">binarySearchImpl</a></li><li><a href="global.html#breadthFirstSearch">breadthFirstSearch</a></li><li><a href="global.html#depthFirstSearch">depthFirstSearch</a></li><li><a href="global.html#depthFirstSearchImpl">depthFirstSearchImpl</a></li><li><a href="global.html#dfsInitCallbacks">dfsInitCallbacks</a></li><li><a href="global.html#lessThan">lessThan</a></li><li><a href="global.html#merge">merge</a></li><li><a href="global.html#mergesort">mergesort</a></li><li><a href="global.html#mergesortImpl">mergesortImpl</a></li><li><a href="global.html#quicksort">quicksort</a></li><li><a href="global.html#quicksortImpl">quicksortImpl</a></li><li><a href="global.html#simpleComparator">simpleComparator</a></li><li><a href="global.html#swapElementsOfArray">swapElementsOfArray</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Mar 08 2019 17:16:01 GMT-0500 (Eastern Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Mar 08 2019 17:29:05 GMT-0500 (Eastern Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -29,6 +29,8 @@ function bfsInitCallbacks(callbacks = {}) {
  * @returns {number[]} a sorted version of the given array
  */
 function breadthFirstSearch(rootNode, origCallbacks) {
+  TestUtils.print("\n/////   BREADTH-FIRST SEARCH ////////////////////\n", DEBUG_MODE_ENABLED);
+
   const callbacks = bfsInitCallbacks(origCallbacks);
   const nodeQueue = new Queue();
 
