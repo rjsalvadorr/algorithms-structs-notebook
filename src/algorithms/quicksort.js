@@ -51,9 +51,7 @@ const quicksortImpl = (array, left, right) => {
       }
       debugMsg = `${debugMsg}\nleftNew = ${leftNew}, rightNew = ${rightNew}`;
       if (leftNew <= rightNew) {
-        debugMsg = `${debugMsg}\n    leftNew <= rightNew, swapping array[${leftNew}] (${
-          array[leftNew]
-        }) and array[${rightNew}] (${array[rightNew]})\n`;
+        debugMsg = `${debugMsg}\n    leftNew <= rightNew, swapping array[${leftNew}] (${array[leftNew]}) and array[${rightNew}] (${array[rightNew]})\n`;
         swapElementsOfArray(array, leftNew, rightNew);
         leftNew += 1;
         rightNew -= 1;
