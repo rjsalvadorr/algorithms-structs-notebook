@@ -39,6 +39,10 @@ function breadthFirstSearch(rootNode, origCallbacks) {
 
   let currentNode;
   let debugMsg = "";
+
+  // In contrast to DFS, breadth first search uses a queue to define search order.
+  // Nodes are enqueued as necessary, without having to use recursion
+
   while (!nodeQueue.isEmpty()) {
     debugMsg = "";
     currentNode = nodeQueue.dequeue();

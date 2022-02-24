@@ -1,6 +1,6 @@
 import Queue from "../lists/queue";
 import TestUtils from "../utils/test-utils";
-const DEBUG_MODE_ENABLED = true;
+const DEBUG_MODE_ENABLED = false;
 
 /**
  * Initializes callback functions for depth-first search
