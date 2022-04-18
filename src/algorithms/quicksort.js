@@ -69,7 +69,7 @@ const quicksortImpl = (array, left, right) => {
       DEBUG_MODE_ENABLED
     );
 
-    // call quicksort on sub-arrays 
+    // call quicksort on sub-arrays
     quicksortImpl(array, left, rightNew);
     quicksortImpl(array, leftNew, right);
   }

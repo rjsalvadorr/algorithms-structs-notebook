@@ -488,6 +488,11 @@
 <li><a class="" href="..\algorithms\5-mergesort.html">mergesort</a></li>
 <li><a class="" href="..\algorithms\6-quicksort.html">quicksort</a></li>
 </ul>
+<li class="heading"><span>graphs and trees</span></li>
+<ul>
+<li><a class="" href="..\graphs-and-trees\1-binary-search-tree.html">binary search tree</a></li>
+<li><a class="" href="..\graphs-and-trees\graph.html">graph</a></li>
+</ul>
 <li class="heading"><span>interview</span></li>
 <ul>
 <li><a class="" href="..\interview\1-example-questions.html">example questions</a></li>
@@ -498,15 +503,14 @@
 <li><a class="" href="..\lists\2-dynamic-array.html">dynamic array</a></li>
 <li><a class="" href="..\lists\3-linked-list.html">linked list</a></li>
 <li><a class="" href="..\lists\4-queue.html">queue</a></li>
+<li><a class="" href="..\lists\5-stack.html">stack</a></li>
 </ul>
 <li class="heading"><span>maths</span></li>
 <ul>
 <li><a class="" href="..\maths\big-o-notation.html">big o notation</a></li>
-<li><a class="" href="..\maths\graph.html">graph</a></li>
 </ul>
 <li class="heading"><span>sets and maps</span></li>
 <ul>
-<li><a class="" href="1-binary-search-tree.html">binary search tree</a></li>
 <li><a class="active" href="2-hash-map.html">hash map</a></li>
 <li><a class="" href="3-heap.html">heap</a></li>
 </ul>
@@ -529,6 +533,29 @@ accommodated in some way.</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Hash_table_3_1_1_0_1_0_0_SP.svg" alt="Hash Table"></p>
 <p>Hash collision resolved by separate chaining.</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Hash_table_5_0_1_1_1_1_1_LL.svg" alt="Hash Collision"></p>
+<h2 id="javascript">Javascript <a class="heading-anchor-permalink" href="#javascript">#</a></h2>
+<pre><code class="language-javascript">const map1 = new Map();
+
+map1.set('a', 1);
+map1.set('b', 2);
+map1.set('c', 3);
+
+console.log(map1.get('a'));
+// expected output: 1
+
+map1.set('a', 97);
+
+console.log(map1.get('a'));
+// expected output: 97
+
+console.log(map1.size);
+// expected output: 3
+
+map1.delete('b');
+
+console.log(map1.size);
+// expected output: 2
+</code></pre>
 <h2 id="references">References <a class="heading-anchor-permalink" href="#references">#</a></h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Hash_table">Wikipedia</a></li>

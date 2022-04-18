@@ -23,6 +23,69 @@ have better cache locality as compared to linked lists.
 
 ![Linked List](https://upload.wikimedia.org/wikipedia/commons/6/6d/Singly-linked-list.svg)
 
+## Javascript
+
+```javascript
+class SinglyLinkedListNode {
+    constructor(nodeData, next = null) {
+        this.data = nodeData;
+        this.next = next;
+    }
+};
+
+class SinglyLinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+    }
+
+    insertNode(nodeData) {
+        const node = new SinglyLinkedListNode(nodeData);
+
+        if (this.head == null) {
+            this.head = node;
+        } else {
+            this.tail.next = node;
+        }
+
+        this.tail = node;
+    }
+
+    getAt(index) {
+        let counter = 0;
+        let node = this.head;
+        while (node) {
+            if (counter === index) {
+               return node;
+            }
+            counter++;
+            node = node.next;
+        }
+        return null;
+    }
+
+    insertAt(nodeData, index) {
+        // if the list is empty i.e. head = null
+        if (!this.head) {
+            this.head = new SinglyLinkedListNode(nodeData);
+            return;
+        }
+        // if new node needs to be inserted at the front of the list i.e. before the head. 
+        if (index === 0) {
+           this.head = new SinglyLinkedListNode(nodeData, this.head);
+           return;
+        }
+        // else, use getAt() to find the previous node.
+        const previous = this.getAt(index - 1);
+        let newNode = new SinglyLinkedListNode(nodeData);
+        newNode.next = previous.next;
+        previous.next = newNode;
+
+        return this.head
+   }
+};
+```
+
 ## Pseudocode for Basic Operations
 
 ### Insert

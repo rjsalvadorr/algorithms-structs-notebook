@@ -1,6 +1,6 @@
 import Queue from "../lists/queue";
 import TestUtils from "../utils/test-utils";
-const DEBUG_MODE_ENABLED = false;
+const DEBUG_MODE_ENABLED = true;
 
 /**
  * Initializes callback functions for breadth-first search
@@ -39,6 +39,11 @@ function breadthFirstSearch(rootNode, origCallbacks) {
 
   let currentNode;
   let debugMsg = "";
+
+  // In contrast to DFS, breadth first search uses a queue and loop to define
+  // search order. Nodes are enqueued as necessary, without having to use
+  // recursion
+
   while (!nodeQueue.isEmpty()) {
     debugMsg = "";
     currentNode = nodeQueue.dequeue();

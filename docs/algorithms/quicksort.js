@@ -32,6 +32,7 @@ const quicksortImpl = (array, left, right) => {
   let rightNew;
 
   if (left < right) {
+    // choosing pivot value (middle position in arr)
     const pivotIndex = left + Math.floor((right - left) / 2);
     const pivot = array[pivotIndex];
     leftNew = left;
@@ -40,17 +41,20 @@ const quicksortImpl = (array, left, right) => {
 
     do {
       while (lessThan(array[leftNew], pivot)) {
+        // left value is in the correct place
         debugMsg = `${debugMsg}\n    array[${leftNew}] (${array[leftNew]}) < pivot, bumping up leftNew`;
         leftNew += 1;
         debugMsg = `${debugMsg} to ${leftNew}`;
       }
       while (lessThan(pivot, array[rightNew])) {
+        // right value is in the correct place
         debugMsg = `${debugMsg}\n    pivot < array[${rightNew}] (${array[rightNew]}), bumping down rightNew`;
         rightNew -= 1;
         debugMsg = `${debugMsg} to ${rightNew}`;
       }
       debugMsg = `${debugMsg}\nleftNew = ${leftNew}, rightNew = ${rightNew}`;
       if (leftNew <= rightNew) {
+        // left and right values are in the wrong places, and should be swapped
         debugMsg = `${debugMsg}\n    leftNew <= rightNew, swapping array[${leftNew}] (${array[leftNew]}) and array[${rightNew}] (${array[rightNew]})\n`;
         swapElementsOfArray(array, leftNew, rightNew);
         leftNew += 1;
@@ -65,6 +69,7 @@ const quicksortImpl = (array, left, right) => {
       DEBUG_MODE_ENABLED
     );
 
+    // call quicksort on sub-arrays
     quicksortImpl(array, left, rightNew);
     quicksortImpl(array, leftNew, right);
   }

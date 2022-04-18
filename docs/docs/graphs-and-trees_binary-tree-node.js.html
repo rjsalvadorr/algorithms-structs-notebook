@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: graphs-and-trees/binary-tree-node.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: graphs-and-trees/binary-tree-node.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import Comparator from "../utils/Comparator";
+
+/**
+ * Implementation of a binary tree node. Stolen from:
+ * https://github.com/trekhleb/javascript-algorithms
+ */
+class BinaryTreeNode {
+  /**
+   * @param {number} [value] - node value.
+   */
+  constructor(value = null) {
+    this.left = null;
+    this.right = null;
+    this.parent = null;
+    this.value = value;
+
+    // Any node related meta information may be stored here.
+    // this.meta = new HashTable();
+
+    // This comparator is used to compare binary tree nodes with each other.
+    this.nodeComparator = new Comparator();
+  }
+
+  /**
+   * @return {number}
+   */
+  get leftHeight() {
+    if (!this.left) {
+      return 0;
+    }
+
+    return this.left.height + 1;
+  }
+
+  /**
+   * @return {number}
+   */
+  get rightHeight() {
+    if (!this.right) {
+      return 0;
+    }
+
+    return this.right.height + 1;
+  }
+
+  /**
+   * @return {number}
+   */
+  get height() {
+    return Math.max(this.leftHeight, this.rightHeight);
+  }
+
+  /**
+   * @return {number}
+   */
+  get balanceFactor() {
+    return this.leftHeight - this.rightHeight;
+  }
+
+  /**
+   * Get parent's sibling if it exists.
+   * @return {BinaryTreeNode}
+   */
+  get uncle() {
+    // Check if current node has parent.
+    if (!this.parent) {
+      return undefined;
+    }
+
+    // Check if current node has grand-parent.
+    if (!this.parent.parent) {
+      return undefined;
+    }
+
+    // Check if grand-parent has two children.
+    if (!this.parent.parent.left || !this.parent.parent.right) {
+      return undefined;
+    }
+
+    // So for now we know that current node has grand-parent and this
+    // grand-parent has two children. Let's find out who is the uncle.
+    if (this.nodeComparator.equal(this.parent, this.parent.parent.left)) {
+      // Right one is an uncle.
+      return this.parent.parent.right;
+    }
+
+    // Left one is an uncle.
+    return this.parent.parent.left;
+  }
+
+  /**
+   * @param {number} value
+   * @return {BinaryTreeNode}
+   */
+  setValue(value) {
+    this.value = value;
+
+    return this;
+  }
+
+  /**
+   * @param {BinaryTreeNode} node
+   * @return {BinaryTreeNode}
+   */
+  setLeft(node) {
+    // Reset parent for left node since it is going to be detached.
+    if (this.left) {
+      this.left.parent = null;
+    }
+
+    // Attach new node to the left.
+    this.left = node;
+
+    // Make current node to be a parent for new left one.
+    if (this.left) {
+      this.left.parent = this;
+    }
+
+    return this;
+  }
+
+  /**
+   * @param {BinaryTreeNode} node
+   * @return {BinaryTreeNode}
+   */
+  setRight(node) {
+    // Reset parent for right node since it is going to be detached.
+    if (this.right) {
+      this.right.parent = null;
+    }
+
+    // Attach new node to the right.
+    this.right = node;
+
+    // Make current node to be a parent for new right one.
+    if (node) {
+      this.right.parent = this;
+    }
+
+    return this;
+  }
+
+  /**
+   * @param {BinaryTreeNode} nodeToRemove
+   * @return {boolean}
+   */
+  removeChild(nodeToRemove) {
+    if (this.left &amp;&amp; this.nodeComparator.equal(this.left, nodeToRemove)) {
+      this.left = null;
+      return true;
+    }
+
+    if (this.right &amp;&amp; this.nodeComparator.equal(this.right, nodeToRemove)) {
+      this.right = null;
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * @param {BinaryTreeNode} nodeToReplace
+   * @param {BinaryTreeNode} replacementNode
+   * @return {boolean}
+   */
+  replaceChild(nodeToReplace, replacementNode) {
+    if (!nodeToReplace || !replacementNode) {
+      return false;
+    }
+
+    if (this.left &amp;&amp; this.nodeComparator.equal(this.left, nodeToReplace)) {
+      this.left = replacementNode;
+      return true;
+    }
+
+    if (this.right &amp;&amp; this.nodeComparator.equal(this.right, nodeToReplace)) {
+      this.right = replacementNode;
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * @param {BinaryTreeNode} sourceNode
+   * @param {BinaryTreeNode} targetNode
+   */
+  static copyNode(sourceNode, targetNode) {
+    targetNode.setValue(sourceNode.value);
+    targetNode.setLeft(sourceNode.left);
+    targetNode.setRight(sourceNode.right);
+  }
+
+  /**
+   * @return {number[]}
+   */
+  traverseInOrder() {
+    let traverse = [];
+
+    // Add left node.
+    if (this.left) {
+      traverse = traverse.concat(this.left.traverseInOrder());
+    }
+
+    // Add root.
+    traverse.push(this.value);
+
+    // Add right node.
+    if (this.right) {
+      traverse = traverse.concat(this.right.traverseInOrder());
+    }
+
+    return traverse;
+  }
+
+  /**
+   * @return {string}
+   */
+  toString() {
+    return this.traverseInOrder().toString();
+  }
+}
+
+export default BinaryTreeNode;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BinarySearchTree.html">BinarySearchTree</a></li><li><a href="BinarySearchTreeNode.html">BinarySearchTreeNode</a></li><li><a href="BinaryTreeNode.html">BinaryTreeNode</a></li><li><a href="Comparator.html">Comparator</a></li><li><a href="LinkedList.html">LinkedList</a></li><li><a href="LinkedListNode.html">LinkedListNode</a></li><li><a href="Queue.html">Queue</a></li><li><a href="TestUtils.html">TestUtils</a></li></ul><h3>Global</h3><ul><li><a href="global.html#bfsInitCallbacks">bfsInitCallbacks</a></li><li><a href="global.html#binarySearch">binarySearch</a></li><li><a href="global.html#binarySearchImpl">binarySearchImpl</a></li><li><a href="global.html#breadthFirstSearch">breadthFirstSearch</a></li><li><a href="global.html#depthFirstSearch">depthFirstSearch</a></li><li><a href="global.html#depthFirstSearchImpl">depthFirstSearchImpl</a></li><li><a href="global.html#dfsInitCallbacks">dfsInitCallbacks</a></li><li><a href="global.html#lessThan">lessThan</a></li><li><a href="global.html#merge">merge</a></li><li><a href="global.html#mergesort">mergesort</a></li><li><a href="global.html#mergesortImpl">mergesortImpl</a></li><li><a href="global.html#quicksort">quicksort</a></li><li><a href="global.html#quicksortImpl">quicksortImpl</a></li><li><a href="global.html#simpleComparator">simpleComparator</a></li><li><a href="global.html#swapElementsOfArray">swapElementsOfArray</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Sun Apr 17 2022 20:48:29 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

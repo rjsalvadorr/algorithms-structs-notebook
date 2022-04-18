@@ -488,6 +488,11 @@
 <li><a class="" href="5-mergesort.html">mergesort</a></li>
 <li><a class="" href="6-quicksort.html">quicksort</a></li>
 </ul>
+<li class="heading"><span>graphs and trees</span></li>
+<ul>
+<li><a class="" href="..\graphs-and-trees\1-binary-search-tree.html">binary search tree</a></li>
+<li><a class="" href="..\graphs-and-trees\graph.html">graph</a></li>
+</ul>
 <li class="heading"><span>interview</span></li>
 <ul>
 <li><a class="" href="..\interview\1-example-questions.html">example questions</a></li>
@@ -498,15 +503,14 @@
 <li><a class="" href="..\lists\2-dynamic-array.html">dynamic array</a></li>
 <li><a class="" href="..\lists\3-linked-list.html">linked list</a></li>
 <li><a class="" href="..\lists\4-queue.html">queue</a></li>
+<li><a class="" href="..\lists\5-stack.html">stack</a></li>
 </ul>
 <li class="heading"><span>maths</span></li>
 <ul>
 <li><a class="" href="..\maths\big-o-notation.html">big o notation</a></li>
-<li><a class="" href="..\maths\graph.html">graph</a></li>
 </ul>
 <li class="heading"><span>sets and maps</span></li>
 <ul>
-<li><a class="" href="..\sets-and-maps\1-binary-search-tree.html">binary search tree</a></li>
 <li><a class="" href="..\sets-and-maps\2-hash-map.html">hash map</a></li>
 <li><a class="" href="..\sets-and-maps\3-heap.html">heap</a></li>
 </ul>
@@ -541,11 +545,69 @@ nodes first, before moving to the next level neighbors.</p>
   end while
 end BFS
 </code></pre>
+<h2 id="javascript">Javascript <a class="heading-anchor-permalink" href="#javascript">#</a></h2>
+<pre><code class="language-javascript">// const airports = 'PHX BKK OKC JFK LAX MEX EZE HEL LOS LAP LIM'.split(' ');
+
+// const routes = [
+//     ['PHX', 'LAX'],
+//     ['PHX', 'JFK'],
+//     ['JFK', 'OKC'],
+//     ['JFK', 'HEL'],
+//     ['JFK', 'LOS'],
+//     ['MEX', 'LAX'],
+//     ['MEX', 'BKK'],
+//     ['MEX', 'LIM'],
+//     ['MEX', 'EZE'],
+//     ['LIM', 'BKK'],
+// ];
+
+// // The graph
+// const adjacencyList = new Map();
+
+// // Add node
+// function addNode(airport) {
+//     adjacencyList.set(airport, []);
+// }
+
+// // Add edge, undirected
+// function addEdge(origin, destination) {
+//     adjacencyList.get(origin).push(destination);
+//     adjacencyList.get(destination).push(origin);
+// }
+
+// // Create the Graph
+// airports.forEach(addNode);
+// routes.forEach(route =&gt; addEdge(...route))
+
+function bfs(start) {
+
+    const visited = new Set();
+    const queue = [start];
+
+    while (queue.length &gt; 0) {
+        const airport = queue.shift(); // mutates the queue
+        const destinations = adjacencyList.get(airport);
+
+        for (const destination of destinations) {
+            if (destination === 'BKK')  {
+                console.log(`BFS found Bangkok!`)
+            }
+            if (!visited.has(destination)) {
+                visited.add(destination);
+                queue.push(destination);
+            }
+        }
+    }
+}
+
+bfs('PHX')
+</code></pre>
 <h2 id="references">References <a class="heading-anchor-permalink" href="#references">#</a></h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Breadth-first_search">Wikipedia</a></li>
 <li><a href="https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/">Tree Traversals (Inorder, Preorder and Postorder)</a></li>
 <li><a href="https://www.geeksforgeeks.org/bfs-vs-dfs-binary-tree/">BFS vs DFS</a></li>
+<li><a href="https://fireship.io/courses/javascript/interview-graphs/">https://fireship.io/courses/javascript/interview-graphs/</a></li>
 </ul>
 
       </article>

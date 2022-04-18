@@ -1,6 +1,6 @@
 import Queue from "../lists/queue";
 import TestUtils from "../utils/test-utils";
-const DEBUG_MODE_ENABLED = false;
+const DEBUG_MODE_ENABLED = true;
 
 /**
  * Initializes callback functions for depth-first search
@@ -31,6 +31,8 @@ function dfsInitCallbacks(callbacks = {}) {
 function depthFirstSearchImpl(node, callbacks) {
   callbacks.enterNode(node);
   let debugMsg = "";
+
+  // In contrast to BFS, depth-first search relies on recursion to visit leaf nodes first
 
   // traverse left
   if (node.left && callbacks.allowTraversal(node, node.left)) {

@@ -488,6 +488,11 @@
 <li><a class="" href="..\algorithms\5-mergesort.html">mergesort</a></li>
 <li><a class="" href="..\algorithms\6-quicksort.html">quicksort</a></li>
 </ul>
+<li class="heading"><span>graphs and trees</span></li>
+<ul>
+<li><a class="" href="..\graphs-and-trees\1-binary-search-tree.html">binary search tree</a></li>
+<li><a class="" href="..\graphs-and-trees\graph.html">graph</a></li>
+</ul>
 <li class="heading"><span>interview</span></li>
 <ul>
 <li><a class="" href="..\interview\1-example-questions.html">example questions</a></li>
@@ -498,15 +503,14 @@
 <li><a class="" href="2-dynamic-array.html">dynamic array</a></li>
 <li><a class="active" href="3-linked-list.html">linked list</a></li>
 <li><a class="" href="4-queue.html">queue</a></li>
+<li><a class="" href="5-stack.html">stack</a></li>
 </ul>
 <li class="heading"><span>maths</span></li>
 <ul>
 <li><a class="" href="..\maths\big-o-notation.html">big o notation</a></li>
-<li><a class="" href="..\maths\graph.html">graph</a></li>
 </ul>
 <li class="heading"><span>sets and maps</span></li>
 <ul>
-<li><a class="" href="..\sets-and-maps\1-binary-search-tree.html">binary search tree</a></li>
 <li><a class="" href="..\sets-and-maps\2-hash-map.html">hash map</a></li>
 <li><a class="" href="..\sets-and-maps\3-heap.html">heap</a></li>
 </ul>
@@ -534,6 +538,66 @@ time is linear (and difficult to pipeline). Faster
 access, such as random access, is not feasible. Arrays
 have better cache locality as compared to linked lists.</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Singly-linked-list.svg" alt="Linked List"></p>
+<h2 id="javascript">Javascript <a class="heading-anchor-permalink" href="#javascript">#</a></h2>
+<pre><code class="language-javascript">class SinglyLinkedListNode {
+    constructor(nodeData, next = null) {
+        this.data = nodeData;
+        this.next = next;
+    }
+};
+
+class SinglyLinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+    }
+
+    insertNode(nodeData) {
+        const node = new SinglyLinkedListNode(nodeData);
+
+        if (this.head == null) {
+            this.head = node;
+        } else {
+            this.tail.next = node;
+        }
+
+        this.tail = node;
+    }
+
+    getAt(index) {
+        let counter = 0;
+        let node = this.head;
+        while (node) {
+            if (counter === index) {
+               return node;
+            }
+            counter++;
+            node = node.next;
+        }
+        return null;
+    }
+
+    insertAt(nodeData, index) {
+        // if the list is empty i.e. head = null
+        if (!this.head) {
+            this.head = new SinglyLinkedListNode(nodeData);
+            return;
+        }
+        // if new node needs to be inserted at the front of the list i.e. before the head. 
+        if (index === 0) {
+           this.head = new SinglyLinkedListNode(nodeData, this.head);
+           return;
+        }
+        // else, use getAt() to find the previous node.
+        const previous = this.getAt(index - 1);
+        let newNode = new SinglyLinkedListNode(nodeData);
+        newNode.next = previous.next;
+        previous.next = newNode;
+
+        return this.head
+   }
+};
+</code></pre>
 <h2 id="pseudocode-for-basic-operations">Pseudocode for Basic Operations <a class="heading-anchor-permalink" href="#pseudocode-for-basic-operations">#</a></h2>
 <h3 id="insert">Insert <a class="heading-anchor-permalink" href="#insert">#</a></h3>
 <pre><code class="language-text">Add(value)
