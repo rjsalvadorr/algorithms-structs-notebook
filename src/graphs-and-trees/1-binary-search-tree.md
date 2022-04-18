@@ -24,6 +24,73 @@ The leaves are not drawn.
 
 ![Binary Search Tree](https://upload.wikimedia.org/wikipedia/commons/d/da/Binary_search_tree.svg)
 
+## Typescript
+
+```typescript
+class TreeNode {
+    data: number;
+    left: TreeNode;
+    right: TreeNode;
+
+    constructor(data: number, left: TreeNode = null, right: TreeNode = null) {
+        this.data = data;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+class BinarySearchTree {
+    root: TreeNode;
+    
+    constructor() {
+        this.root = null;
+    }
+    
+    insert(data: number) {
+        const searchTree = (node: TreeNode) => {
+            if (data < node.data && node.left) {
+                searchTree(node.left);
+            } else if (data < node.data) {
+                node.left = new TreeNode(data);
+            } else if (data > node.data && node.right) {
+                searchTree(node.right);
+            } else if (data > node.data) {
+                node.right = new TreeNode(data);
+            }
+        }
+
+        if (this.root === null) {
+            this.root = new TreeNode(data);
+        } else {
+            const node = this.root;
+            searchTree(node);
+        }
+    }
+    
+    getDepth(): number {
+        if (this.root === null) {
+            return 0;
+        }
+        
+        const traverseForDepth = (node: TreeNode, depth: number = 0): number => {
+            if(node.left === null && node.right === null) {
+                return depth;
+            } else if(node.left && node.right) {
+                const leftRes = traverseForDepth(node.left, depth + 1);
+                const rightRes = traverseForDepth(node.right, depth + 1);
+                return leftRes > rightRes ? leftRes : rightRes;
+            } else if(node.left && node.right === null) {
+                return traverseForDepth(node.left, depth + 1);
+            } else if(node.left === null && node.right) {
+                return traverseForDepth(node.right, depth + 1);
+            } 
+        }
+        
+        return traverseForDepth(this.root, 0);
+    }
+}
+```
+
 ## Pseudocode for Basic Operations
 
 ### Insertion

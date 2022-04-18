@@ -32,6 +32,8 @@ function depthFirstSearchImpl(node, callbacks) {
   callbacks.enterNode(node);
   let debugMsg = "";
 
+  // In contrast to BFS, depth-first search relies on recursion to visit leaf nodes first
+
   // traverse left
   if (node.left && callbacks.allowTraversal(node, node.left)) {
     debugMsg += `calling function on left (${node.left.value})\n`;

@@ -24,6 +24,18 @@ Representation of a FIFO (first in, first out) queue
 
 ![Queue](https://upload.wikimedia.org/wikipedia/commons/5/52/Data_Queue.svg)
 
+## Javascript
+
+```javascript
+const queue = [];
+
+//put value on end of queue
+queue.push(1);
+
+//Take first value from queue
+const value = queue.shift();
+```
+
 ## References
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Queue_(abstract_data_type))

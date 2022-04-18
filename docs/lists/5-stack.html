@@ -481,12 +481,12 @@
 <li><a class="" href="..\1-study-journal.html">study journal</a></li>
 <li class="heading"><span>algorithms</span></li>
 <ul>
-<li><a class="active" href="1-binary-search-on-array.html">binary search on array</a></li>
-<li><a class="" href="2-breadth-first-search.html">breadth first search</a></li>
-<li><a class="" href="3-depth-first-search.html">depth first search</a></li>
-<li><a class="" href="4-dijkstras-algo.html">dijkstras algo</a></li>
-<li><a class="" href="5-mergesort.html">mergesort</a></li>
-<li><a class="" href="6-quicksort.html">quicksort</a></li>
+<li><a class="" href="..\algorithms\1-binary-search-on-array.html">binary search on array</a></li>
+<li><a class="" href="..\algorithms\2-breadth-first-search.html">breadth first search</a></li>
+<li><a class="" href="..\algorithms\3-depth-first-search.html">depth first search</a></li>
+<li><a class="" href="..\algorithms\4-dijkstras-algo.html">dijkstras algo</a></li>
+<li><a class="" href="..\algorithms\5-mergesort.html">mergesort</a></li>
+<li><a class="" href="..\algorithms\6-quicksort.html">quicksort</a></li>
 </ul>
 <li class="heading"><span>graphs and trees</span></li>
 <ul>
@@ -499,11 +499,11 @@
 </ul>
 <li class="heading"><span>lists</span></li>
 <ul>
-<li><a class="" href="..\lists\1-array.html">array</a></li>
-<li><a class="" href="..\lists\2-dynamic-array.html">dynamic array</a></li>
-<li><a class="" href="..\lists\3-linked-list.html">linked list</a></li>
-<li><a class="" href="..\lists\4-queue.html">queue</a></li>
-<li><a class="" href="..\lists\5-stack.html">stack</a></li>
+<li><a class="" href="1-array.html">array</a></li>
+<li><a class="" href="2-dynamic-array.html">dynamic array</a></li>
+<li><a class="" href="3-linked-list.html">linked list</a></li>
+<li><a class="" href="4-queue.html">queue</a></li>
+<li><a class="active" href="5-stack.html">stack</a></li>
 </ul>
 <li class="heading"><span>maths</span></li>
 <ul>
@@ -517,25 +517,23 @@
 </ul>
       </nav>
       <article id="main" class="content">
-        <h1 id="binary-search">Binary Search <a class="heading-anchor-permalink" href="#binary-search">#</a></h1>
-<p>In computer science, binary search, also known as half-interval
-search, logarithmic search, or binary chop, is a search algorithm
-that finds the position of a target value within a sorted
-array. Binary search compares the target value to the middle
-element of the array; if they are unequal, the half in which
-the target cannot lie is eliminated and the search continues
-on the remaining half until it is successful. If the search
-ends with the remaining half being empty, the target is not
-in the array.</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Binary_Search_Depiction.svg" alt="Binary Search"></p>
-<h2 id="complexity">Complexity <a class="heading-anchor-permalink" href="#complexity">#</a></h2>
-<p><strong>Time Complexity</strong>: <code>O(log(n))</code> - since we split search area by two for every
-next iteration.</p>
-<h2 id="references">References <a class="heading-anchor-permalink" href="#references">#</a></h2>
+        <h1 id="stack">Stack <a class="heading-anchor-permalink" href="#stack">#</a></h1>
+<p>In computer science, a stack is an abstract data type that serves as a collection of elements, with two main principal operations:</p>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">Wikipedia</a></li>
-<li><a href="https://www.youtube.com/watch?v=P3YID7liBug&amp;index=29&amp;list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8">YouTube</a></li>
+<li>Push, which adds an element to the collection, and</li>
+<li>Pop, which removes the most recently added element that was not yet removed.</li>
 </ul>
+<p>The order in which elements come off a stack gives rise to its alternative name, LIFO (last in, first out). Additionally, a peek operation may give access to the top without modifying the stack.[1] The name “stack” for this type of structure comes from the analogy to a set of physical items stacked on top of each other. This structure makes it easy to take an item off the top of the stack, while getting to an item deeper in the stack may require taking off multiple other items first.[2]</p>
+<p>Considered as a linear data structure, or more abstractly a sequential collection, the push and pop operations occur only at one end of the structure, referred to as the top of the stack. This data structure makes it possible to implement a stack as a singly linked list and a pointer to the top element. A stack may be implemented to have a bounded capacity. If the stack is full and does not contain enough space to accept an entity to be pushed, the stack is then considered to be in an overflow state. The pop operation removes an item from the top of the stack.</p>
+<h2 id="javascript">Javascript <a class="heading-anchor-permalink" href="#javascript">#</a></h2>
+<pre><code class="language-javascript">const stack = [];
+
+//put value on top of stack
+stack.push(1);
+
+//remove value from top of stack
+const value = stack.pop();
+</code></pre>
 
       </article>
     </div>
