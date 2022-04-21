@@ -34,6 +34,8 @@ end BFS
 
 ## Javascript
 
+BFS can be implemented using a queue, and looping through it.
+
 ```javascript
 // const airports = 'PHX BKK OKC JFK LAX MEX EZE HEL LOS LAP LIM'.split(' ');
 

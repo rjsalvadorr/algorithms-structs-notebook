@@ -10,6 +10,8 @@ along each branch before backtracking.
 
 ## Javascript
 
+DFS can be implemented as a recursive function that traverses paths from root to leaf.
+
 ```javascript
 // const airports = 'PHX BKK OKC JFK LAX MEX EZE HEL LOS LAP LIM'.split(' ');
 
