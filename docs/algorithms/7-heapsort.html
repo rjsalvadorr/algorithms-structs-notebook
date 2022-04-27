@@ -481,13 +481,13 @@
 <li><a class="" href="..\1-study-journal.html">study journal</a></li>
 <li class="heading"><span>algorithms</span></li>
 <ul>
-<li><a class="" href="..\algorithms\1-binary-search-on-array.html">binary search on array</a></li>
-<li><a class="" href="..\algorithms\2-breadth-first-search.html">breadth first search</a></li>
-<li><a class="" href="..\algorithms\3-depth-first-search.html">depth first search</a></li>
-<li><a class="" href="..\algorithms\4-dijkstras-algo.html">dijkstras algo</a></li>
-<li><a class="" href="..\algorithms\5-mergesort.html">mergesort</a></li>
-<li><a class="" href="..\algorithms\6-quicksort.html">quicksort</a></li>
-<li><a class="" href="..\algorithms\7-heapsort.html">heapsort</a></li>
+<li><a class="" href="1-binary-search-on-array.html">binary search on array</a></li>
+<li><a class="" href="2-breadth-first-search.html">breadth first search</a></li>
+<li><a class="" href="3-depth-first-search.html">depth first search</a></li>
+<li><a class="" href="4-dijkstras-algo.html">dijkstras algo</a></li>
+<li><a class="" href="5-mergesort.html">mergesort</a></li>
+<li><a class="" href="6-quicksort.html">quicksort</a></li>
+<li><a class="active" href="7-heapsort.html">heapsort</a></li>
 </ul>
 <li class="heading"><span>graphs and trees</span></li>
 <ul>
@@ -500,11 +500,11 @@
 </ul>
 <li class="heading"><span>lists</span></li>
 <ul>
-<li><a class="active" href="1-array.html">array</a></li>
-<li><a class="" href="2-dynamic-array.html">dynamic array</a></li>
-<li><a class="" href="3-linked-list.html">linked list</a></li>
-<li><a class="" href="4-queue.html">queue</a></li>
-<li><a class="" href="5-stack.html">stack</a></li>
+<li><a class="" href="..\lists\1-array.html">array</a></li>
+<li><a class="" href="..\lists\2-dynamic-array.html">dynamic array</a></li>
+<li><a class="" href="..\lists\3-linked-list.html">linked list</a></li>
+<li><a class="" href="..\lists\4-queue.html">queue</a></li>
+<li><a class="" href="..\lists\5-stack.html">stack</a></li>
 </ul>
 <li class="heading"><span>maths</span></li>
 <ul>
@@ -518,20 +518,90 @@
 </ul>
       </nav>
       <article id="main" class="content">
-        <h1 id="array">Array <a class="heading-anchor-permalink" href="#array">#</a></h1>
-<p>In computer science, an array data structure, or simply an array, is a data structure consisting of a collection of elements (values or variables), each identified by at least one array index or key. An array is stored such that the position of each element can be computed from its index tuple by a mathematical formula.[1][2][3] The simplest type of data structure is a linear array, also called one-dimensional array.</p>
-<p>For example, an array of 10 32-bit integer variables, with indices 0 through 9, may be stored as 10 words at memory addresses 2000, 2004, 2008, … 2036, so that the element with index i has the address 2000 + 4 × i.[4]</p>
-<p>The memory address of the first element of an array is called first address or foundation address.</p>
-<p>Because the mathematical concept of a matrix can be represented as a two-dimensional grid, two-dimensional arrays are also sometimes called matrices. In some cases the term “vector” is used in computing to refer to an array, although tuples rather than vectors are the more mathematically correct equivalent. Tables are often implemented in the form of arrays, especially lookup tables; the word table is sometimes used as a synonym of array.</p>
-<p>Arrays are among the oldest and most important data structures, and are used by almost every program. They are also used to implement many other data structures, such as lists and strings. They effectively exploit the addressing logic of computers. In most modern computers and many external storage devices, the memory is a one-dimensional array of words, whose indices are their addresses. Processors, especially vector processors, are often optimized for array operations.</p>
-<p>Arrays are useful mostly because the element indices can be computed at run time. Among other things, this feature allows a single iterative statement to process arbitrarily many elements of an array. For that reason, the elements of an array data structure are required to have the same size and should use the same data representation. The set of valid index tuples and the addresses of the elements (and hence the element addressing formula) are usually,[3][5] but not always,[2] fixed while the array is in use.</p>
-<p>The term array is often used to mean array data type, a kind of data type provided by most high-level programming languages that consists of a collection of values or variables that can be selected by one or more indices computed at run-time. Array types are often implemented by array structures; however, in some languages they may be implemented by hash tables, linked lists, search trees, or other data structures.</p>
-<p>The term is also used, especially in the description of algorithms, to mean associative array or “abstract array”, a theoretical computer science model (an abstract data type or ADT) intended to capture the essential properties of arrays.</p>
-<h2 id="references">References <a class="heading-anchor-permalink" href="#references">#</a></h2>
-<ul>
-<li><a href="https://en.wikipedia.org/wiki/Array_data_structure">Wikipedia</a></li>
-<li>…</li>
-</ul>
+        <h1 id="heapsort">Heapsort <a class="heading-anchor-permalink" href="#heapsort">#</a></h1>
+<blockquote>
+<p>Heap Sort is an in-place, non-stable, comparison-based sorting algorithm.</p>
+</blockquote>
+<p>The heapsort algorithm can be divided into two parts.</p>
+<p>In the first step, a heap is built out of the data (see Binary heap § Building a heap). The heap is often placed in an array with the layout of a complete binary tree. The complete binary tree maps the binary tree structure into the array indices; each array index represents a node; the index of the node’s parent, left child branch, or right child branch are simple expressions. For a zero-based array, the root node is stored at index 0; if i is the index of the current node, then</p>
+<pre><code>  iParent(i)     = floor((i-1) / 2) where floor functions map a real number to the largest leading integer.
+  iLeftChild(i)  = 2*i + 1
+  iRightChild(i) = 2*i + 2
+</code></pre>
+<p>In the second step, a sorted array is created by repeatedly removing the largest element from the heap (the root of the heap), and inserting it into the array. The heap is updated after each removal to maintain the heap property. Once all objects have been removed from the heap, the result is a sorted array.</p>
+<p>Heapsort can be performed in place. The array can be split into two parts, the sorted array and the heap. The storage of heaps as arrays is diagrammed here. The heap’s invariant is preserved after each extraction, so the only cost is that of extraction.</p>
+<h2 id="javascript">Javascript <a class="heading-anchor-permalink" href="#javascript">#</a></h2>
+<h3 id="mapping-a-heap-to-an-array">Mapping a Heap to an Array <a class="heading-anchor-permalink" href="#mapping-a-heap-to-an-array">#</a></h3>
+<p>What we have defined and depicted as a heap up until this point is merely a diagram, a collection of circles and lines. To use this structure in a JavaScript-based computer program, we need to rework it into an array or a list.</p>
+<p>Luckily, this is a fairly straightforward operation that mimics the way we build the heap in the first place. We read and shift the elements off of the heap into an array in the same order we have placed them into the heap: from left to right and level by level.</p>
+<pre><code class="language-javascript">class MaxHeap{
+    constructor(){
+        this.heap = [];
+    }
+
+    parentIndex(index){
+        return Math.floor((index-1)/2);
+    }
+
+    leftChildIndex(index){
+        return (2*index + 1);
+    }
+
+    rightChildIndex(index){
+        return (2*index + 2);
+    }
+
+    swap(a, b) {
+        let temp = this.heap[a];
+        this.heap[a] = this.heap[b];
+        this.heap[b] = temp;
+    }
+
+    insert(item) {
+        this.heap.push(item);
+        var index = this.heap.length - 1;
+        var parent = this.parentIndex(index);
+        while(this.heap[parent] &amp;&amp; this.heap[parent] &lt; this.heap[index]) {
+            this.swap(parent, index);
+            index = this.parentIndex(index);
+            parent = this.parentIndex(index);
+        }
+    }
+
+    delete() {
+      var item = this.heap.shift();
+      this.heap.unshift(this.heap.pop());
+      var index = 0;
+      var leftChild = this.leftChildIndex(index);
+      var rightChild = this.rightChildIndex(index);
+      while(this.heap[leftChild] &amp;&amp; this.heap[leftChild] &gt; this.heap[index] || this.heap[rightChild] &gt; this.heap[index]){
+          var max = leftChild;
+          if(this.heap[rightChild] &amp;&amp; this.heap[rightChild] &gt; this.heap[max]){
+              max = rightChild
+          }
+          this.swap(max, index);
+          index = max;
+          leftChild = this.leftChildIndex(max);
+          rightChild = this.rightChildIndex(max);
+      }
+      return item;
+  }
+}
+
+const heapSort = (arr) =&gt; {
+    var sorted = [];
+    var heap1 = new MaxHeap();
+    
+    for(let i=0; i&lt;arr.length; i++){
+        heap1.insert(arr[i]);
+    }
+    
+    for(let i=0; i&lt;arr.length; i++){
+        sorted.push(heap1.delete());
+    }
+    return sorted;
+}
+</code></pre>
 
       </article>
     </div>

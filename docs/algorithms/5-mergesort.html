@@ -487,6 +487,7 @@
 <li><a class="" href="4-dijkstras-algo.html">dijkstras algo</a></li>
 <li><a class="active" href="5-mergesort.html">mergesort</a></li>
 <li><a class="" href="6-quicksort.html">quicksort</a></li>
+<li><a class="" href="7-heapsort.html">heapsort</a></li>
 </ul>
 <li class="heading"><span>graphs and trees</span></li>
 <ul>
@@ -535,6 +536,35 @@ and merged.</p>
 integer values. These are the steps a human would take to
 emulate merge sort (top-down).</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Merge_sort_algorithm_diagram.svg" alt="Merge Sort"></p>
+<h2 id="the-efficiency-of-merge-sort">The Efficiency of Merge Sort <a class="heading-anchor-permalink" href="#the-efficiency-of-merge-sort">#</a></h2>
+<p>The worst-case time complexity of Merge Sort is O(nlogn), same as that for best case time complexity for Quick Sort. When it comes to speed, Merge Sort is one of the fastest sorting algorithms out there.</p>
+<p>Unlike Quick Sort, Merge Sort is not an in-place sorting algorithm, meaning it takes extra space other than the input array. This is because we are using auxiliary (helper) arrays to store the sub-arrays. The space complexity of the merge sort is O(n).</p>
+<p>Another advantage of Merge Sort is that it lends itself very well to multi-threading, since each respective half and be sorted on its own. Another common way of reducing the runtime of Merge Sort is to stop when we get to relatively small subarrays (~7) and using Insertion Sort to sort them.</p>
+<h2 id="javascript">Javascript <a class="heading-anchor-permalink" href="#javascript">#</a></h2>
+<pre><code class="language-javascript">const unsortedArr = [31, 27, 28, 42, 13, 8, 11, 30, 17, 41, 15, 43, 1, 36, 9, 16, 20, 35, 48, 37, 7, 26, 34, 21, 22, 6, 29, 32, 49, 10, 12, 19, 24, 38, 5, 14, 44, 40, 3, 50, 46, 25, 18, 33, 47, 4, 45, 39, 23, 2];
+
+const merge = (arr1, arr2) =&gt; {
+  let sorted = [];
+
+  while (arr1.length &amp;&amp; arr2.length) {
+    if (arr1[0] &lt; arr2[0]) sorted.push(arr1.shift());
+    else sorted.push(arr2.shift());
+  };
+
+  return sorted.concat(arr1.slice().concat(arr2.slice()));
+};
+
+const mergeSort = arr =&gt; {
+  if (arr.length &lt;= 1) return arr;
+  let mid = Math.floor(arr.length / 2),
+      left = mergeSort(arr.slice(0, mid)),
+      right = mergeSort(arr.slice(mid));
+
+  return merge(left, right); 
+};
+
+mergeSort(unsortedArr);
+</code></pre>
 <h2 id="complexity">Complexity <a class="heading-anchor-permalink" href="#complexity">#</a></h2>
 <table>
 <thead>

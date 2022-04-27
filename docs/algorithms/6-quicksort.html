@@ -487,6 +487,7 @@
 <li><a class="" href="4-dijkstras-algo.html">dijkstras algo</a></li>
 <li><a class="" href="5-mergesort.html">mergesort</a></li>
 <li><a class="active" href="6-quicksort.html">quicksort</a></li>
+<li><a class="" href="7-heapsort.html">heapsort</a></li>
 </ul>
 <li class="heading"><span>graphs and trees</span></li>
 <ul>
@@ -538,6 +539,39 @@ sub-array of elements with greater values.</li>
 <p>Animated visualization of the quicksort algorithm.
 The horizontal lines are pivot values.</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif" alt="Quicksort"></p>
+<p>One problem of working with merge sorts is that they need to create and store so many arrays in memory with mostly the redundant data. If we’re limited on memory, we can resort to a quick sort to run it “in place”, meaning the changes and results all happen directly with what’s being sorted, thus saving on memory.</p>
+<h2 id="javascript">Javascript <a class="heading-anchor-permalink" href="#javascript">#</a></h2>
+<pre><code class="language-javascript">const unsortedArr = [31, 27, 28, 42, 13, 8, 11, 30, 17, 41, 15, 43, 1, 36, 9, 16, 20, 35, 48, 37, 7, 26, 34, 21, 22, 6, 29, 32, 49, 10, 12, 19, 24, 38, 5, 14, 44, 40, 3, 50, 46, 25, 18, 33, 47, 4, 45, 39, 23, 2];
+
+const pivot = (arr, start = 0, end = arr.length + 1) =&gt; {
+  const swap = (list, a, b) =&gt; [list[a], list[b]] = [list[b], list[a]];
+
+  let pivot = arr[start],
+      pointer = start;
+
+  for (let i = start; i &lt; arr.length; i++) {
+    if (arr[i] &lt; pivot  ) {
+      pointer++;
+      swap(arr, pointer, i);
+    }
+  };
+  swap(arr, start, pointer);
+
+  return pointer;
+}
+
+const quickSort = (arr, start = 0, end = arr.length) =&gt; {
+  let pivotIndex = pivot(arr, start, end);
+
+  if (start &gt;= end) return arr;
+  quickSort(arr, start, pivotIndex);
+  quickSort(arr, pivotIndex + 1, end);
+
+  return arr;
+};
+
+quickSort(unsortedArr);
+</code></pre>
 <h2 id="complexity">Complexity <a class="heading-anchor-permalink" href="#complexity">#</a></h2>
 <table>
 <thead>
