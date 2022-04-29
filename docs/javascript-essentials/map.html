@@ -527,19 +527,128 @@
       </nav>
       <article id="main" class="content">
         <h1 id="map">Map <a class="heading-anchor-permalink" href="#map">#</a></h1>
-<p>…</p>
-<h2 id="set()">set() <a class="heading-anchor-permalink" href="#set()">#</a></h2>
-<p>…</p>
-<h2 id="get()">get() <a class="heading-anchor-permalink" href="#get()">#</a></h2>
-<p>…</p>
-<h2 id="has()">has() <a class="heading-anchor-permalink" href="#has()">#</a></h2>
-<p>…</p>
-<h2 id="delete()">delete() <a class="heading-anchor-permalink" href="#delete()">#</a></h2>
-<p>…</p>
-<h2 id="clear()">clear() <a class="heading-anchor-permalink" href="#clear()">#</a></h2>
-<p>…</p>
+<p>The Map object holds key-value pairs and remembers the original insertion order of the keys. Any value (both objects and primitive values) may be used as either a key or a value.</p>
+<h3 id="key-equality">Key equality <a class="heading-anchor-permalink" href="#key-equality">#</a></h3>
+<ul>
+<li>Key equality is based on the <em>sameValueZero</em> algorithm.</li>
+<li>NaN is considered the same as NaN (even though NaN !== NaN) and all other values are considered equal according to the semantics of the === operator.</li>
+<li>In the current ECMAScript specification, -0 and +0 are considered equal, although this was not so in earlier drafts.</li>
+</ul>
+<pre><code class="language-javascript">const map1 = new Map();
+
+map1.set('a', 1);
+map1.set('b', 2);
+map1.set('c', 3);
+
+console.log(map1.get('a'));
+// expected output: 1
+
+map1.set('a', 97);
+
+console.log(map1.get('a'));
+// expected output: 97
+
+console.log(map1.size);
+// expected output: 3
+
+map1.delete('b');
+
+console.log(map1.size);
+// expected output: 2
+</code></pre>
+<h2 id="map.set()">Map.set() <a class="heading-anchor-permalink" href="#map.set()">#</a></h2>
+<p>The set() method adds or updates an element with a specified key and a value to a Map object.</p>
+<h3 id="return-value">Return value <a class="heading-anchor-permalink" href="#return-value">#</a></h3>
+<p>The Map object.</p>
+<pre><code class="language-javascript">const map1 = new Map();
+map1.set('bar', 'foo');
+
+console.log(map1.get('bar'));
+// expected output: &quot;foo&quot;
+
+console.log(map1.get('baz'));
+// expected output: undefined
+
+////// FUNCTION SIGNATURES
+
+set(key, value)
+</code></pre>
+<h2 id="map.get()">Map.get() <a class="heading-anchor-permalink" href="#map.get()">#</a></h2>
+<p>The get() method returns a specified element from a Map object. If the value that is associated to the provided key is an object, then you will get a reference to that object and any change made to that object will effectively modify it inside the Map object.</p>
+<h3 id="return-value-2">Return value <a class="heading-anchor-permalink" href="#return-value-2">#</a></h3>
+<p>The element associated with the specified key, or undefined if the key can’t be found in the Map object.</p>
+<pre><code class="language-javascript">const map1 = new Map();
+map1.set('bar', 'foo');
+
+console.log(map1.get('bar'));
+// expected output: &quot;foo&quot;
+
+console.log(map1.get('baz'));
+// expected output: undefined
+
+////// FUNCTION SIGNATURES
+
+get(key)
+</code></pre>
+<h2 id="map.has()">Map.has() <a class="heading-anchor-permalink" href="#map.has()">#</a></h2>
+<p>The has() method returns a boolean indicating whether an element with the specified key exists or not.</p>
+<h3 id="return-value-3">Return value <a class="heading-anchor-permalink" href="#return-value-3">#</a></h3>
+<p>true if an element with the specified key exists in the Map object; otherwise false.</p>
+<pre><code class="language-javascript">const map1 = new Map();
+map1.set('bar', 'foo');
+
+console.log(map1.has('bar'));
+// expected output: true
+
+console.log(map1.has('baz'));
+// expected output: false
+
+////// FUNCTION SIGNATURES
+
+has(key)
+
+</code></pre>
+<h2 id="map.delete()">Map.delete() <a class="heading-anchor-permalink" href="#map.delete()">#</a></h2>
+<p>The delete() method removes the specified element from a Map object by key.</p>
+<h3 id="return-value-4">Return value <a class="heading-anchor-permalink" href="#return-value-4">#</a></h3>
+<p>true if an element in the Map object existed and has been removed, or false if the element does not exist.</p>
+<pre><code class="language-javascript">const map1 = new Map();
+map1.set('bar', 'foo');
+
+console.log(map1.delete('bar'));
+// expected result: true
+// (true indicates successful removal)
+
+console.log(map1.has('bar'));
+// expected result: false
+
+////// FUNCTION SIGNATURES
+
+delete(key)
+</code></pre>
+<h2 id="map.clear()">Map.clear() <a class="heading-anchor-permalink" href="#map.clear()">#</a></h2>
+<p>The clear() method removes all elements from a Map object.</p>
+<h3 id="return-value-5">Return value <a class="heading-anchor-permalink" href="#return-value-5">#</a></h3>
+<p>undefined</p>
+<pre><code class="language-javascript">const map1 = new Map();
+
+map1.set('bar', 'baz');
+map1.set(1, 'foo');
+
+console.log(map1.size);
+// expected output: 2
+
+map1.clear();
+
+console.log(map1.size);
+// expected output: 0
+
+////// FUNCTION SIGNATURES
+
+clear()
+</code></pre>
 <h2 id="references">References <a class="heading-anchor-permalink" href="#references">#</a></h2>
-<p>…</p>
+<p>MDN – <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map</a></p>
 
       </article>
     </div>

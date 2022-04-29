@@ -298,4 +298,4 @@ every(function(element, index, array) { /* ... */ }, thisArg)
 
 ## References
 
-MDN - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+MDN -- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
