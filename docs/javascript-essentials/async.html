@@ -529,11 +529,153 @@
         <h1 id="asynchronous-functions">Asynchronous Functions <a class="heading-anchor-permalink" href="#asynchronous-functions">#</a></h1>
 <p>…</p>
 <h2 id="promises">Promises <a class="heading-anchor-permalink" href="#promises">#</a></h2>
-<p>…</p>
-<h2 id="generators">Generators <a class="heading-anchor-permalink" href="#generators">#</a></h2>
-<p>…</p>
+<p>The Promise object represents the eventual completion (or failure) of an asynchronous operation and its resulting value.</p>
+<p>A Promise is a proxy for a value not necessarily known when the promise is created. It allows you to associate handlers with an asynchronous action’s eventual success value or failure reason. This lets asynchronous methods return values like synchronous methods: instead of immediately returning the final value, the asynchronous method returns a promise to supply the value at some point in the future.</p>
+<p>A Promise is in one of these states:</p>
+<ul>
+<li>pending: initial state, neither fulfilled nor rejected.</li>
+<li>fulfilled: meaning that the operation was completed successfully.</li>
+<li>rejected: meaning that the operation failed.</li>
+</ul>
+<p>A pending promise can either be <em>fulfilled</em> with a value or <em>rejected</em> with a reason (error). When either of these options happens, the associated handlers queued up by a promise’s <code>then</code> method are called. If the promise has already been fulfilled or rejected when a corresponding handler is attached, the handler will be called, so there is no race condition between an asynchronous operation completing and its handlers being attached.</p>
+<h3 id="chained-promises">Chained Promises <a class="heading-anchor-permalink" href="#chained-promises">#</a></h3>
+<p>The methods <code>Promise.then()</code>, <code>Promise.catch()</code>, and <code>Promise.finally()</code> are used to associate further action with a promise that becomes settled.</p>
+<p>As the <code>Promise.then()</code> and <code>Promise.catch()</code> methods return promises, they can be chained.</p>
+<p>The <code>.then()</code> method takes up to two arguments; the first argument is a callback function for the resolved case of the promise, and the second argument is a callback function for the rejected case. Each <code>.then()</code> returns a newly generated promise object, which can optionally be used for chaining; for example:</p>
+<pre><code class="language-javascript">const myPromise = new Promise((resolve, reject) =&gt; {
+  setTimeout(() =&gt; {
+    resolve('foo');
+  }, 300);
+});
+
+myPromise
+  .then(handleResolvedA, handleRejectedA)
+  .then(handleResolvedB, handleRejectedB)
+  .then(handleResolvedC, handleRejectedC);
+</code></pre>
+<p>Processing continues to the next link of the chain even when a .then() lacks a callback function that returns a Promise object. Therefore, a chain can safely omit every rejection callback function until the final .catch().</p>
+<p>Handling a rejected promise in each <code>.then()</code> has consequences further down the promise chain. Sometimes there is no choice, because an error must be handled immediately. In such cases we must throw an error of some type to maintain error state down the chain. On the other hand, in the absence of an immediate need, it is simpler to leave out error handling until a final <code>.catch()</code> statement. A <code>.catch()</code> is really just a <code>.then()</code> without a slot for a callback function for the case when the promise is resolved.</p>
+<pre><code class="language-javascript">myPromise
+.then(handleResolvedA)
+.then(handleResolvedB)
+.then(handleResolvedC)
+.catch(handleRejectedAny);
+
+// or 
+
+promise1
+.then(value =&gt; { return value + ' and bar'; })
+.then(value =&gt; { return value + ' and bar again'; })
+.then(value =&gt; { return value + ' and again'; })
+.then(value =&gt; { return value + ' and again'; })
+.then(value =&gt; { console.log(value) })
+.catch(err =&gt; { console.log(err) });
+</code></pre>
+<p>The termination condition of a promise determines the “settled” state of the next promise in the chain. A “resolved” state indicates a successful completion of the promise, while a “rejected” state indicates a lack of success. The return value of each resolved promise in the chain is passed along to the next <code>.then()</code>, while the reason for rejection is passed along to the next rejection-handler function in the chain.</p>
+<p>The promises of a chain are nested like Russian dolls, but get popped like the top of a stack. The first promise in the chain is most deeply nested and is the first to pop.</p>
+<pre><code>(promise D, (promise C, (promise B, (promise A) ) ) )
+</code></pre>
+<p>A promise can participate in more than one nesting. For the following code, the transition of promiseA into a “settled” state will cause both instances of <code>.then()</code> to be invoked.</p>
+<pre><code class="language-javascript">const promiseA = new Promise(myExecutorFunc);
+const promiseB = promiseA.then(handleFulfilled1, handleRejected1);
+const promiseC = promiseA.then(handleFulfilled2, handleRejected2);
+</code></pre>
+<h2 id="asynchronous-functions-2">Asynchronous Functions <a class="heading-anchor-permalink" href="#asynchronous-functions-2">#</a></h2>
+<p>An async function is a function declared with the async keyword, and the await keyword is permitted within it. The async and await keywords enable asynchronous, promise-based behavior to be written in a cleaner style, avoiding the need to explicitly configure promise chains.</p>
+<p>Async functions can contain zero or more <code>await</code> expressions. Await expressions make promise-returning functions behave as though they’re synchronous by suspending execution until the returned promise is fulfilled or rejected. The resolved value of the promise is treated as the return value of the await expression. Use of <code>async</code> and <code>await</code> enables the use of ordinary <code>try</code> / <code>catch</code> blocks around asynchronous code.</p>
+<blockquote>
+<p>Note: The <code>await</code> keyword is only valid inside async functions within regular JavaScript code. If you use it outside of an async function’s body, you will get a SyntaxError. <code>await</code> can be used on its own with JavaScript modules.</p>
+</blockquote>
+<pre><code class="language-javascript">function resolveAfter2Seconds() {
+  return new Promise(resolve =&gt; {
+    setTimeout(() =&gt; {
+      resolve('resolved');
+    }, 2000);
+  });
+}
+
+async function asyncCall() {
+  console.log('calling');
+  const result = await resolveAfter2Seconds();
+  console.log(result);
+  // expected output: &quot;resolved&quot;
+}
+
+asyncCall();
+
+////// OR
+
+function resolveAfter2Seconds(x) {
+  return new Promise(resolve =&gt; {
+    setTimeout(() =&gt; {
+      resolve(x);
+    }, 2000);
+  });
+};
+
+const add = async function(x) { // async function expression assigned to a variable
+  let a = await resolveAfter2Seconds(20);
+  let b = await resolveAfter2Seconds(30);
+  return x + a + b;
+};
+
+add(10).then(v =&gt; {
+  console.log(v);  // prints 60 after 4 seconds.
+});
+
+(async function(x) { // async function expression used as an IIFE
+  let p_a = resolveAfter2Seconds(20);
+  let p_b = resolveAfter2Seconds(30);
+  return x + await p_a + await p_b;
+})(10).then(v =&gt; {
+  console.log(v);  // prints 60 after 2 seconds.
+});
+
+////// OR 
+
+const foo = async () =&gt; {
+  // do something
+}
+
+const foo = async evt =&gt; {
+  // do something with evt
+}
+
+const foo = async (evt, callback) =&gt; {
+  // do something with evt
+  // return response with callback
+}
+</code></pre>
+<p>Async functions always return a promise. If the return value of an async function is not explicitly a promise, it will be implicitly wrapped in a promise.</p>
+<p>For example, the following:</p>
+<pre><code class="language-javascript">async function foo() {
+   return 1
+}
+</code></pre>
+<p>…is similar to:</p>
+<pre><code class="language-javascript">function foo() {
+   return Promise.resolve(1)
+}
+</code></pre>
+<blockquote>
+<p>Note: Even though the return value of an async function behaves as if it’s wrapped in a Promise.resolve, they are not equivalent. An async function will return a different reference, whereas Promise.resolve returns the same reference if the given value is a promise.</p>
+</blockquote>
+<p>The body of an async function can be thought of as being split by zero or more await expressions. Top-level code, up to and including the first await expression (if there is one), is run synchronously. In this way, an async function without an await expression will run synchronously. If there is an await expression inside the function body, however, the async function will always complete asynchronously.</p>
+<p>For example:</p>
+<pre><code class="language-javascript">async function foo() {
+   await 1
+}
+</code></pre>
+<p>…is equivalent to:</p>
+<pre><code class="language-javascript">function foo() {
+   return Promise.resolve(1).then(() =&gt; undefined)
+}
+</code></pre>
+<p>Code after each await expression can be thought of as existing in a .then callback. In this way a promise chain is progressively constructed with each reentrant step through the function. The return value forms the final link in the chain.</p>
 <h2 id="references">References <a class="heading-anchor-permalink" href="#references">#</a></h2>
-<p>…</p>
+<p>MDN: Promise – <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise</a></p>
+<p>MDN: Promise guide – <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises</a></p>
+<p>MDN: async function – <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function</a></p>
 
       </article>
     </div>
