@@ -500,11 +500,11 @@
 </ul>
 <li class="heading"><span>javascript essentials</span></li>
 <ul>
-<li><a class="" href="..\javascript-essentials\array.html">array</a></li>
-<li><a class="" href="..\javascript-essentials\async.html">async</a></li>
-<li><a class="" href="..\javascript-essentials\iteration.html">iteration</a></li>
-<li><a class="" href="..\javascript-essentials\map.html">map</a></li>
-<li><a class="" href="..\javascript-essentials\set.html">set</a></li>
+<li><a class="active" href="array.html">array</a></li>
+<li><a class="" href="async.html">async</a></li>
+<li><a class="" href="iteration.html">iteration</a></li>
+<li><a class="" href="map.html">map</a></li>
+<li><a class="" href="set.html">set</a></li>
 </ul>
 <li class="heading"><span>lists</span></li>
 <ul>
@@ -516,7 +516,7 @@
 </ul>
 <li class="heading"><span>maths</span></li>
 <ul>
-<li><a class="active" href="big-o-notation.html">big o notation</a></li>
+<li><a class="" href="..\maths\big-o-notation.html">big o notation</a></li>
 </ul>
 <li class="heading"><span>sets and maps</span></li>
 <ul>
@@ -526,42 +526,249 @@
 </ul>
       </nav>
       <article id="main" class="content">
-        <h1 id="big-o-notation">Big O notation <a class="heading-anchor-permalink" href="#big-o-notation">#</a></h1>
-<h2 id="time-complexities">Time complexities <a class="heading-anchor-permalink" href="#time-complexities">#</a></h2>
-<h3 id="o(1)">O(1) <a class="heading-anchor-permalink" href="#o(1)">#</a></h3>
-<p>Constant time. Never changes in respect to # of inputs.</p>
-<h3 id="o(log-n)">O(log n) <a class="heading-anchor-permalink" href="#o(log-n)">#</a></h3>
-<p>Logarithmic time. Highly efficient, as the ratio of the number of operations to the size of the input decreases and tends to zero when <em>n</em> increases.</p>
-<h3 id="o(n)">O(n) <a class="heading-anchor-permalink" href="#o(n)">#</a></h3>
-<p>Linear time. Scales linearly with # of inputs.</p>
-<h3 id="o(n%C2%B2)">O(n²) <a class="heading-anchor-permalink" href="#o(n%C2%B2)">#</a></h3>
-<p>Quadratic time. Highly inefficient as <em>n</em> grows.</p>
-<h3 id="o(2%E2%81%BF)">O(2ⁿ) <a class="heading-anchor-permalink" href="#o(2%E2%81%BF)">#</a></h3>
-<p>Exponential time. Crazy inefficient as <em>n</em> scales up.</p>
-<h3 id="o(n!)">O(n!) <a class="heading-anchor-permalink" href="#o(n!)">#</a></h3>
-<p>Factorial time. Hilariously inefficient.</p>
-<h2 id="space-complexities">Space complexities <a class="heading-anchor-permalink" href="#space-complexities">#</a></h2>
-<p>Space complexity is the amount of memory used by the algorithm (including the input values to the algorithm) to execute and produce the result.</p>
-<p>OR</p>
-<p>Space complexity is a measure of the amount of working storage an algorithm needs. That means how much memory, in the worst case, is needed at any point in the algorithm. As with time complexity, we’re mostly concerned with how the space needs grow, in big-Oh terms, as the size N of the input problem grows.</p>
-<h2 id="tables">Tables <a class="heading-anchor-permalink" href="#tables">#</a></h2>
-<p><img src="./big-o-chart.png" alt="Big O chart" title="Big O"></p>
-<p><img src="./1-data-structs.jpg" alt="Big O chart" title="Big O"></p>
-<p><img src="./2-searching.jpg" alt="Big O chart" title="Big O"></p>
-<p><img src="./3-sorting.jpg" alt="Big O chart" title="Big O"></p>
-<p><img src="./4-heaps.jpg" alt="Big O chart" title="Big O"></p>
-<p><img src="./5-graphs.jpg" alt="Big O chart" title="Big O"></p>
-<p><img src="./big-o-cheatsheet-2.png" alt="Big O cheatsheet" title="Big O"></p>
-<h2 id="resources">Resources <a class="heading-anchor-permalink" href="#resources">#</a></h2>
+        <h1 id="arrays">Arrays <a class="heading-anchor-permalink" href="#arrays">#</a></h1>
+<p>The Array object, as with arrays in other programming languages, enables storing a collection of multiple items under a single variable name, and has members for performing common array operations.</p>
+<h2 id="description">Description <a class="heading-anchor-permalink" href="#description">#</a></h2>
+<p>In JavaScript, arrays aren’t primitives but are instead Array objects with the following core characteristics:</p>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Computational_complexity">Wikipedia - Computational complexity</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Time_complexity">Wikipedia - Time complexity</a></li>
-<li><a href="http://bigocheatsheet.com/">Big-O Cheat Sheet</a></li>
-<li><a href="https://youtu.be/kgBjXUE_Nwc?t=452">Getting Sorted &amp; Big O Notation - Computerphile</a></li>
-<li><a href="https://www.youtube.com/watch?v=v4cd1O4zkGw">Big O Notation - Gayle Laakmann McDowell</a></li>
-<li><a href="https://www.youtube.com/watch?v=V6mKVRU1evU">Big O Notations - Derek Banas</a></li>
-<li><a href="https://www.cs.northwestern.edu/academics/courses/311/html/space-complexity.html">Northwestern University - Space Complexity EECS 311</a></li>
+<li>JavaScript arrays are resizable and can contain a mix of different data types. (When those characteristics are undesirable, use typed arrays instead.)</li>
+<li>JavaScript arrays are not associative arrays and so, array elements cannot be accessed using strings as indexes, but must be accessed using integers as indexes.</li>
+<li>JavaScript arrays are zero-indexed: the first element of an array is at index 0, the second is at index 1, and so on — and the last element is at the value of the array’s length property minus 1.</li>
+<li>JavaScript array-copy operations create shallow copies. <em>(All standard built-in copy operations with any JavaScript objects create shallow copies, rather than deep copies).</em></li>
 </ul>
+<h2 id="array.map()">Array.map() <a class="heading-anchor-permalink" href="#array.map()">#</a></h2>
+<p>The map() method creates a new array populated with the results of calling a provided function on every element in the calling array.</p>
+<h3 id="return-value">Return value <a class="heading-anchor-permalink" href="#return-value">#</a></h3>
+<p>A new array with each element being the result of the callback function.</p>
+<pre><code class="language-javascript">const array1 = [1, 4, 9, 16];
+const map1 = array1.map(x =&gt; x * 2);
+console.log(map1);
+// expected output: Array [2, 8, 18, 32]
+
+////// FUNCTION SIGNATURES
+
+// Arrow function
+map((element) =&gt; { /* ... */ })
+map((element, index) =&gt; { /* ... */ })
+map((element, index, array) =&gt; { /* ... */ })
+
+// Callback function
+map(callbackFn)
+map(callbackFn, thisArg)
+
+// Inline callback function
+map(function(element) { /* ... */ })
+map(function(element, index) { /* ... */ })
+map(function(element, index, array){ /* ... */ })
+map(function(element, index, array) { /* ... */ }, thisArg)
+</code></pre>
+<p> </p>
+<h2 id="array.reduce()">Array.reduce() <a class="heading-anchor-permalink" href="#array.reduce()">#</a></h2>
+<p>The reduce() method executes a user-supplied “reducer” callback function on each element of the array, in order, passing in the return value from the calculation on the preceding element. The final result of running the reducer across all elements of the array is a single value.</p>
+<p>The first time that the callback is run there is no “return value of the previous calculation”. If supplied, an initial value may be used in its place. Otherwise the array element at index 0 is used as the initial value and iteration starts from the next element (index 1 instead of index 0).</p>
+<h3 id="return-value-2">Return value <a class="heading-anchor-permalink" href="#return-value-2">#</a></h3>
+<p>The value that results from running the “reducer” callback function to completion over the entire array.</p>
+<h3 id="edge-cases">Edge cases <a class="heading-anchor-permalink" href="#edge-cases">#</a></h3>
+<p>If the array only has one element (regardless of position) and no initialValue is provided, or if initialValue is provided but the array is empty, the solo value will be returned without calling callbackFn.</p>
+<p>If initialValue is provided and the array is not empty, then the reduce method will always invoke the callback function starting at index 0.</p>
+<p>If initialValue is not provided then the reduce method will act differently for arrays with length larger than 1, equal to 1 and 0, as shown in the following example:</p>
+<pre><code class="language-javascript">////// EXAMPLE 1
+const array1 = [1, 2, 3, 4];
+
+// 0 + 1 + 2 + 3 + 4
+const initialValue = 0;
+const sumWithInitial = array1.reduce(
+  (previousValue, currentValue) =&gt; previousValue + currentValue,
+  initialValue
+);
+console.log(sumWithInitial);
+// expected output: 10
+
+////// EXAMPLE 2 (without initial value)
+const otherArray = [15, 16, 17, 18, 19];
+
+function reducer(previous, current, index, otherArray) {
+  const returns = previous + current;
+  console.log(`prev: ${previous}, current: ${current}, idx: ${index}, returns: ${returns}`);
+  return returns;
+}
+
+otherArray.reduce(reducer);
+
+////// FUNCTION SIGNATURES
+
+// Arrow function
+reduce((previousValue, currentValue) =&gt; { /* ... */ } )
+reduce((previousValue, currentValue, currentIndex) =&gt; { /* ... */ } )
+reduce((previousValue, currentValue, currentIndex, array) =&gt; { /* ... */ } )
+reduce((previousValue, currentValue, currentIndex, array) =&gt; { /* ... */ }, initialValue)
+
+// Callback function
+reduce(callbackFn)
+reduce(callbackFn, initialValue)
+
+// Inline callback function
+reduce(function(previousValue, currentValue) { /* ... */ })
+reduce(function(previousValue, currentValue, currentIndex) { /* ... */ })
+reduce(function(previousValue, currentValue, currentIndex, array) { /* ... */ })
+reduce(function(previousValue, currentValue, currentIndex, array) { /* ... */ }, initialValue)
+</code></pre>
+<p> </p>
+<h2 id="array.filter()">Array.filter() <a class="heading-anchor-permalink" href="#array.filter()">#</a></h2>
+<p>The filter() method creates a new array with all elements that pass the test implemented by the provided function.</p>
+<h3 id="return-value-3">Return value <a class="heading-anchor-permalink" href="#return-value-3">#</a></h3>
+<p>A new array with the elements that pass the test. If no elements pass the test, an empty array will be returned.</p>
+<pre><code class="language-javascript">const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+const result = words.filter(word =&gt; word.length &gt; 6);
+console.log(result);
+// expected output: Array [&quot;exuberant&quot;, &quot;destruction&quot;, &quot;present&quot;]
+
+////// FUNCTION SIGNATURES
+
+// Arrow function
+filter((element) =&gt; { /* ... */ } )
+filter((element, index) =&gt; { /* ... */ } )
+filter((element, index, array) =&gt; { /* ... */ } )
+
+// Callback function
+filter(callbackFn)
+filter(callbackFn, thisArg)
+
+// Inline callback function
+filter(function(element) { /* ... */ })
+filter(function(element, index) { /* ... */ })
+filter(function(element, index, array){ /* ... */ })
+filter(function(element, index, array) { /* ... */ }, thisArg)
+
+</code></pre>
+<p> </p>
+<h2 id="array.sort()">Array.sort() <a class="heading-anchor-permalink" href="#array.sort()">#</a></h2>
+<p>The sort() method sorts the elements of an array in place and returns the sorted array. The default sort order is ascending, built upon converting the elements into strings, then comparing their sequences of UTF-16 code units values.</p>
+<h3 id="return-value-4">Return value <a class="heading-anchor-permalink" href="#return-value-4">#</a></h3>
+<p>The sorted array. Note that the array is sorted in place, and no copy is made.</p>
+<pre><code class="language-javascript">const months = ['March', 'Jan', 'Feb', 'Dec'];
+months.sort();
+console.log(months);
+// expected output: Array [&quot;Dec&quot;, &quot;Feb&quot;, &quot;Jan&quot;, &quot;March&quot;]
+
+const array1 = [1, 30, 4, 21, 100000];
+array1.sort();
+console.log(array1);
+// expected output: Array [1, 100000, 21, 30, 4]
+
+////// FUNCTION SIGNATURES
+
+// Functionless
+sort()
+
+// Arrow function
+sort((a, b) =&gt; { /* ... */ } )
+
+// Compare function
+sort(compareFn)
+
+// Inline compare function
+sort(function compareFn(a, b) { /* ... */ })
+</code></pre>
+<h3 id="sorting-order">Sorting order <a class="heading-anchor-permalink" href="#sorting-order">#</a></h3>
+<p><code>compareFunction(a, b)</code> return value --&gt; sort order</p>
+<ul>
+<li><code>&lt; 0</code> --&gt; sort a before b</li>
+<li><code>&gt; 0</code>	--&gt; sort b before a</li>
+<li><code>=== 0</code> --&gt; keep original order of a and b</li>
+</ul>
+<pre><code class="language-javascript">function compare(a, b) {
+  if (a is less than b by some ordering criterion) {
+    return -1;
+  }
+  if (a is greater than b by the ordering criterion) {
+    return 1;
+  }
+  // a must be equal to b
+  return 0;
+}
+</code></pre>
+<p> </p>
+<h2 id="array.find()-and-array.findindex()">Array.find() and Array.findIndex() <a class="heading-anchor-permalink" href="#array.find()-and-array.findindex()">#</a></h2>
+<p>The find() method returns the first element in the provided array that satisfies the provided testing function. If no values satisfy the testing function, undefined is returned.</p>
+<p>The findIndex() method returns the index of the first element in the array that satisfies the provided testing function. Otherwise, it returns -1, indicating that no element passed the test.</p>
+<h3 id="return-values">Return values <a class="heading-anchor-permalink" href="#return-values">#</a></h3>
+<p><code>Array.find()</code> – The first element in the array that satisfies the provided testing function. Otherwise, undefined is returned.</p>
+<p><code>Array.findIndex()</code> – The index of the first element in the array that passes the test. Otherwise, -1.<br>
+<em>Note: if the index of the first element in the array that passes the test is 0, the return value of <code>findIndex()</code> will be interpreted as Falsy in conditional statements.</em></p>
+<pre><code class="language-javascript">const array1 = [5, 12, 8, 130, 44];
+
+const found = array1.find(element =&gt; element &gt; 10);
+console.log(found);
+// expected output: 12
+
+const isLargeNumber = (element) =&gt; element &gt; 13;
+console.log(array1.findIndex(isLargeNumber));
+// expected output: 3
+
+////// FUNCTION SIGNATURES
+
+// Arrow function
+find((element) =&gt; { /* ... */ } )
+find((element, index) =&gt; { /* ... */ } )
+find((element, index, array) =&gt; { /* ... */ } )
+
+// Callback function
+find(callbackFn)
+find(callbackFn, thisArg)
+
+// Inline callback function
+find(function(element) { /* ... */ })
+find(function(element, index) { /* ... */ })
+find(function(element, index, array){ /* ... */ })
+find(function(element, index, array) { /* ... */ }, thisArg)
+
+// Arrow function
+findIndex((element) =&gt; { /* ... */ } )
+findIndex((element, index) =&gt; { /* ... */ } )
+findIndex((element, index, array) =&gt; { /* ... */ } )
+
+// Callback function
+findIndex(callbackFn)
+findIndex(callbackFn, thisArg)
+
+// Inline callback function
+findIndex(function(element) { /* ... */ })
+findIndex(function(element, index) { /* ... */ })
+findIndex(function(element, index, array){ /* ... */ })
+findIndex(function(element, index, array) { /* ... */ }, thisArg)
+</code></pre>
+<p> </p>
+<h2 id="array.every()">Array.every() <a class="heading-anchor-permalink" href="#array.every()">#</a></h2>
+<p>The every() method tests whether all elements in the array pass the test implemented by the provided function. It returns a Boolean value.</p>
+<h3 id="return-value-5">Return value <a class="heading-anchor-permalink" href="#return-value-5">#</a></h3>
+<p><code>true</code> if the callbackFn function returns a truthy value for every array element. Otherwise, <code>false</code>.</p>
+<pre><code class="language-javascript">const isBelowThreshold = (currentValue) =&gt; currentValue &lt; 40;
+const array1 = [1, 30, 39, 29, 10, 13];
+
+console.log(array1.every(isBelowThreshold));
+// expected output: true
+
+////// FUNCTION SIGNATURES
+
+// Arrow function
+every((element) =&gt; { /* ... */ } )
+every((element, index) =&gt; { /* ... */ } )
+every((element, index, array) =&gt; { /* ... */ } )
+
+// Callback function
+every(callbackFn)
+every(callbackFn, thisArg)
+
+// Inline callback function
+every(function(element) { /* ... */ })
+every(function(element, index) { /* ... */ })
+every(function(element, index, array){ /* ... */ })
+every(function(element, index, array) { /* ... */ }, thisArg)
+</code></pre>
+<p> </p>
+<h2 id="references">References <a class="heading-anchor-permalink" href="#references">#</a></h2>
+<p>MDN - <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array</a></p>
 
       </article>
     </div>
