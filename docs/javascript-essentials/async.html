@@ -502,6 +502,7 @@
 <ul>
 <li><a class="" href="array.html">array</a></li>
 <li><a class="active" href="async.html">async</a></li>
+<li><a class="" href="concurrency-and-events.html">concurrency and events</a></li>
 <li><a class="" href="iteration.html">iteration</a></li>
 <li><a class="" href="map.html">map</a></li>
 <li><a class="" href="set.html">set</a></li>
@@ -538,6 +539,7 @@
 <li>rejected: meaning that the operation failed.</li>
 </ul>
 <p>A pending promise can either be <em>fulfilled</em> with a value or <em>rejected</em> with a reason (error). When either of these options happens, the associated handlers queued up by a promise’s <code>then</code> method are called. If the promise has already been fulfilled or rejected when a corresponding handler is attached, the handler will be called, so there is no race condition between an asynchronous operation completing and its handlers being attached.</p>
+<p>JavaScript promises and the Mutation Observer API both use the microtask queue to run their callbacks.</p>
 <h3 id="chained-promises">Chained Promises <a class="heading-anchor-permalink" href="#chained-promises">#</a></h3>
 <p>The methods <code>Promise.then()</code>, <code>Promise.catch()</code>, and <code>Promise.finally()</code> are used to associate further action with a promise that becomes settled.</p>
 <p>As the <code>Promise.then()</code> and <code>Promise.catch()</code> methods return promises, they can be chained.</p>

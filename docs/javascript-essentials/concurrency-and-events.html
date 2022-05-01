@@ -502,9 +502,9 @@
 <ul>
 <li><a class="" href="array.html">array</a></li>
 <li><a class="" href="async.html">async</a></li>
-<li><a class="" href="concurrency-and-events.html">concurrency and events</a></li>
+<li><a class="active" href="concurrency-and-events.html">concurrency and events</a></li>
 <li><a class="" href="iteration.html">iteration</a></li>
-<li><a class="active" href="map.html">map</a></li>
+<li><a class="" href="map.html">map</a></li>
 <li><a class="" href="set.html">set</a></li>
 </ul>
 <li class="heading"><span>lists</span></li>
@@ -527,129 +527,63 @@
 </ul>
       </nav>
       <article id="main" class="content">
-        <h1 id="map">Map <a class="heading-anchor-permalink" href="#map">#</a></h1>
-<p>The Map object holds key-value pairs and remembers the original insertion order of the keys. Any value (both objects and primitive values) may be used as either a key or a value.</p>
-<h3 id="key-equality">Key equality <a class="heading-anchor-permalink" href="#key-equality">#</a></h3>
+        <h1 id="concurrency-model-and-event-loop">Concurrency model and Event Loop <a class="heading-anchor-permalink" href="#concurrency-model-and-event-loop">#</a></h1>
+<h2 id="js-runtime">JS Runtime <a class="heading-anchor-permalink" href="#js-runtime">#</a></h2>
+<p>JavaScript has a runtime model based on an event loop, which is responsible for executing the code, collecting and processing events, and executing queued sub-tasks. This model is quite different from models in other languages like C and Java.</p>
+<h3 id="stack">Stack <a class="heading-anchor-permalink" href="#stack">#</a></h3>
+<p>Function calls form a stack of frames.</p>
+<pre><code class="language-javascript">function foo(b) {
+  let a = 10
+  return a + b + 11
+}
+
+function bar(x) {
+  let y = 3
+  return foo(x * y)
+}
+
+const baz = bar(7) // assigns 42 to baz
+</code></pre>
+<p>Order of operations:</p>
+<ol>
+<li>When calling bar, a first frame is created containing references to bar’s arguments and local variables.</li>
+<li>When bar calls foo, a second frame is created and pushed on top of the first one, containing references to foo’s arguments and local variables.</li>
+<li>When foo returns, the top frame element is popped out of the stack (leaving only bar’s call frame).</li>
+<li>When bar returns, the stack is empty.
+Note that the arguments and local variables may continue to exist, as they are stored outside the stack — so they can be accessed by any nested functions long after their outer function has returned.</li>
+</ol>
+<h3 id="heap">Heap <a class="heading-anchor-permalink" href="#heap">#</a></h3>
+<p>Objects are allocated in a heap which is just a name to denote a large (mostly unstructured) region of memory.</p>
+<h3 id="queue">Queue <a class="heading-anchor-permalink" href="#queue">#</a></h3>
+<p>A JavaScript runtime uses a message queue, which is a list of messages to be processed. Each message has an associated function that gets called to handle the message.</p>
+<p>At some point during the event loop, the runtime starts handling the messages on the queue, starting with the oldest one. To do so, the message is removed from the queue and its corresponding function is called with the message as an input parameter. As always, calling a function creates a new stack frame for that function’s use.</p>
+<p>The processing of functions continues until the stack is once again empty. Then, the event loop will process the next message in the queue (if there is one).</p>
+<h2 id="runtime-queues">Runtime queues <a class="heading-anchor-permalink" href="#runtime-queues">#</a></h2>
+<h3 id="tasks-queue">Tasks Queue <a class="heading-anchor-permalink" href="#tasks-queue">#</a></h3>
+<p>A task is any JavaScript code which is scheduled to be run by the standard mechanisms such as initially starting to run a program, an event callback being run, or an interval or timeout being fired. These all get scheduled on the task queue.</p>
+<p>Tasks get added to the task queue when:</p>
 <ul>
-<li>Key equality is based on the <em>sameValueZero</em> algorithm.</li>
-<li>NaN is considered the same as NaN (even though NaN !== NaN) and all other values are considered equal according to the semantics of the === operator.</li>
-<li>In the current ECMAScript specification, -0 and +0 are considered equal, although this was not so in earlier drafts.</li>
+<li>A new JavaScript program or subprogram is executed (such as from a console, or by running the code in a <code>&lt;script&gt;</code> element) directly.</li>
+<li>An event fires, adding the event’s callback function to the task queue.</li>
+<li>A timeout or interval created with <code>setTimeout()</code> or <code>setInterval()</code> is reached, causing the corresponding callback to be added to the task queue.</li>
 </ul>
-<pre><code class="language-javascript">const map1 = new Map();
-
-map1.set('a', 1);
-map1.set('b', 2);
-map1.set('c', 3);
-
-console.log(map1.get('a'));
-// expected output: 1
-
-map1.set('a', 97);
-
-console.log(map1.get('a'));
-// expected output: 97
-
-console.log(map1.size);
-// expected output: 3
-
-map1.delete('b');
-
-console.log(map1.size);
-// expected output: 2
-</code></pre>
-<h2 id="map.set()">Map.set() <a class="heading-anchor-permalink" href="#map.set()">#</a></h2>
-<p>The set() method adds or updates an element with a specified key and a value to a Map object.</p>
-<h3 id="return-value">Return value <a class="heading-anchor-permalink" href="#return-value">#</a></h3>
-<p>The Map object.</p>
-<pre><code class="language-javascript">const map1 = new Map();
-map1.set('bar', 'foo');
-
-console.log(map1.get('bar'));
-// expected output: &quot;foo&quot;
-
-console.log(map1.get('baz'));
-// expected output: undefined
-
-////// FUNCTION SIGNATURES
-
-set(key, value)
-</code></pre>
-<h2 id="map.get()">Map.get() <a class="heading-anchor-permalink" href="#map.get()">#</a></h2>
-<p>The get() method returns a specified element from a Map object. If the value that is associated to the provided key is an object, then you will get a reference to that object and any change made to that object will effectively modify it inside the Map object.</p>
-<h3 id="return-value-2">Return value <a class="heading-anchor-permalink" href="#return-value-2">#</a></h3>
-<p>The element associated with the specified key, or undefined if the key can’t be found in the Map object.</p>
-<pre><code class="language-javascript">const map1 = new Map();
-map1.set('bar', 'foo');
-
-console.log(map1.get('bar'));
-// expected output: &quot;foo&quot;
-
-console.log(map1.get('baz'));
-// expected output: undefined
-
-////// FUNCTION SIGNATURES
-
-get(key)
-</code></pre>
-<h2 id="map.has()">Map.has() <a class="heading-anchor-permalink" href="#map.has()">#</a></h2>
-<p>The has() method returns a boolean indicating whether an element with the specified key exists or not.</p>
-<h3 id="return-value-3">Return value <a class="heading-anchor-permalink" href="#return-value-3">#</a></h3>
-<p>true if an element with the specified key exists in the Map object; otherwise false.</p>
-<pre><code class="language-javascript">const map1 = new Map();
-map1.set('bar', 'foo');
-
-console.log(map1.has('bar'));
-// expected output: true
-
-console.log(map1.has('baz'));
-// expected output: false
-
-////// FUNCTION SIGNATURES
-
-has(key)
-
-</code></pre>
-<h2 id="map.delete()">Map.delete() <a class="heading-anchor-permalink" href="#map.delete()">#</a></h2>
-<p>The delete() method removes the specified element from a Map object by key.</p>
-<h3 id="return-value-4">Return value <a class="heading-anchor-permalink" href="#return-value-4">#</a></h3>
-<p>true if an element in the Map object existed and has been removed, or false if the element does not exist.</p>
-<pre><code class="language-javascript">const map1 = new Map();
-map1.set('bar', 'foo');
-
-console.log(map1.delete('bar'));
-// expected result: true
-// (true indicates successful removal)
-
-console.log(map1.has('bar'));
-// expected result: false
-
-////// FUNCTION SIGNATURES
-
-delete(key)
-</code></pre>
-<h2 id="map.clear()">Map.clear() <a class="heading-anchor-permalink" href="#map.clear()">#</a></h2>
-<p>The clear() method removes all elements from a Map object.</p>
-<h3 id="return-value-5">Return value <a class="heading-anchor-permalink" href="#return-value-5">#</a></h3>
-<p>undefined</p>
-<pre><code class="language-javascript">const map1 = new Map();
-
-map1.set('bar', 'baz');
-map1.set(1, 'foo');
-
-console.log(map1.size);
-// expected output: 2
-
-map1.clear();
-
-console.log(map1.size);
-// expected output: 0
-
-////// FUNCTION SIGNATURES
-
-clear()
-</code></pre>
-<h2 id="references">References <a class="heading-anchor-permalink" href="#references">#</a></h2>
-<p>MDN – <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map</a></p>
+<p>The event loop driving your code handles these tasks one after another, in the order in which they were enqueued. The oldest runnable task in the task queue will be executed during a single iteration of the event loop. After that, microtasks will be executed until the microtask queue is empty, and then the browser may choose to update rendering. Then the browser moves on to the next iteration of event loop.</p>
+<h3 id="animation-callback-queue">Animation Callback Queue <a class="heading-anchor-permalink" href="#animation-callback-queue">#</a></h3>
+<p>Queue of <code>requestAnimationFrame()</code> callbacks.</p>
+<h3 id="microtasks-queue">Microtasks Queue <a class="heading-anchor-permalink" href="#microtasks-queue">#</a></h3>
+<p>At first the difference between microtasks and tasks seems minor. And they are similar; both are made up of JavaScript code which gets placed on a queue and run at an appropriate time. However, whereas the event loop runs only the tasks present on the queue when the iteration began, one after another, it handles the microtask queue very differently.</p>
+<p>There are two key differences.</p>
+<p>First, each time a task exits, the event loop checks to see if the task is returning control to other JavaScript code. If not, it runs all of the microtasks in the microtask queue. The microtask queue is, then, processed multiple times per iteration of the event loop, including after handling events and other callbacks.</p>
+<p>Second, if a microtask adds more microtasks to the queue by calling <code>queueMicrotask()</code>, those newly-added microtasks execute before the next task is run. That’s because the event loop will keep calling microtasks until there are none left in the queue, even if more keep getting added.</p>
+<p><em>Warning: Since microtasks can themselves enqueue more microtasks, and the event loop continues processing microtasks until the queue is empty, there’s a real risk of getting the event loop endlessly processing microtasks. Be cautious with how you go about recursively adding microtasks.</em></p>
+<p>JavaScript promises and the Mutation Observer API both use the microtask queue to run their callbacks, but there are other times when the ability to defer work until the current event loop pass is wrapping up. In order to allow microtasks to be used by third-party libraries, frameworks, and polyfills, the <code>queueMicrotask()</code> method is exposed on the <code>Window</code> and <code>Worker</code> interfaces.</p>
+<h2 id="resources">Resources <a class="heading-anchor-permalink" href="#resources">#</a></h2>
+<p>MDN: The event loop – <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop">https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop</a></p>
+<p>MDN: Microtasks (guide) – <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide">https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide</a></p>
+<p>MDN: Microtasks (in depth) – <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide/In_depth">https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide/In_depth</a></p>
+<p>What the heck is the event loop anyway? | Philip Roberts | JSConf EU – <a href="https://www.youtube.com/watch?v=8aGhZQkoFbQ">https://www.youtube.com/watch?v=8aGhZQkoFbQ</a></p>
+<p>Jake Archibald: In The Loop - <a href="http://JSConf.Asia">JSConf.Asia</a> – <a href="https://www.youtube.com/watch?v=cCOL7MC4Pl0">https://www.youtube.com/watch?v=cCOL7MC4Pl0</a></p>
+<p>Exploration of requestAnimationFrame execution mechanism – <a href="https://segmentfault.com/a/1190000040945949/en">https://segmentfault.com/a/1190000040945949/en</a></p>
 
       </article>
     </div>

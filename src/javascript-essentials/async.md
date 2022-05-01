@@ -14,8 +14,9 @@ A Promise is in one of these states:
 - fulfilled: meaning that the operation was completed successfully.
 - rejected: meaning that the operation failed.
 
-
 A pending promise can either be _fulfilled_ with a value or _rejected_ with a reason (error). When either of these options happens, the associated handlers queued up by a promise's `then` method are called. If the promise has already been fulfilled or rejected when a corresponding handler is attached, the handler will be called, so there is no race condition between an asynchronous operation completing and its handlers being attached.
+
+JavaScript promises and the Mutation Observer API both use the microtask queue to run their callbacks.
 
 ### Chained Promises
 
