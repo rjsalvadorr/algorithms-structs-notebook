@@ -1,15 +1,15 @@
 {
   "name": "algorithms-data-structs-notebook",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "yep",
   "main": "index.js",
   "scripts": {
-    "test": "yarn prettier && jest",
-    "test-clean": "jest --clearCache && yarn test",
+    "test": "npm run prettier && jest",
+    "test-clean": "jest --clearCache && npm run test",
     "prettier": "prettier --write \"src/**/*.js\"",
-    "build": "yarn prettier && markdown-folder-to-html src && yarn build-docs && yarn copy-docs",
+    "build": "npm run prettier && markdown-folder-to-html src && npm run build-docs && npm run copy-docs",
     "serve": "http-server docs",
-    "start": "yarn build && yarn serve",
+    "start": "npm run build && npm run serve",
     "build-docs": "jsdoc src -r -d docs/docs -R ./docs-index.md",
     "copy-docs": "cpx \"_src/**/*\" docs"
   },
