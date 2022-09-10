@@ -248,6 +248,50 @@ function* makeRangeIterator(start = 0, end = 100, step = 1) {
 }
 ```
 
+### Advanced generators
+
+Generators compute their `yield`ed values on demand, which allows them to efficiently represent sequences that are expensive to compute (or even infinite sequences, as demonstrated above).
+
+The `next()` method also accepts a value, which can be used to modify the internal state of the generator. A value passed to `next()` will be received by `yield` .
+
+> Note: A value passed to the first invocation of `next()` is always ignored.
+
+Here is the fibonacci generator using `next(x)` to restart the sequence:
+
+```javascript
+function* fibonacci() {
+  let current = 0;
+  let next = 1;
+  while (true) {
+    const reset = yield current;
+    [current, next] = [next, next + current];
+    if (reset) {
+      current = 0;
+      next = 1;
+    }
+  }
+}
+
+const sequence = fibonacci();
+console.log(sequence.next().value);     // 0
+console.log(sequence.next().value);     // 1
+console.log(sequence.next().value);     // 1
+console.log(sequence.next().value);     // 2
+console.log(sequence.next().value);     // 3
+console.log(sequence.next().value);     // 5
+console.log(sequence.next().value);     // 8
+console.log(sequence.next(true).value); // 0
+console.log(sequence.next().value);     // 1
+console.log(sequence.next().value);     // 1
+console.log(sequence.next().value);     // 2
+```
+
+You can force a generator to throw an exception by calling its `throw()` method and passing the exception value it should throw. This exception will be thrown from the current suspended context of the generator, as if the `yield` that is currently suspended were instead a `throw value` statement.
+
+If the exception is not caught from within the generator, it will propagate up through the call to `throw()`, and subsequent calls to `next()` will result in the done property being true.
+
+Generators have a `return(value)` method that returns the given value and finishes the generator itself.
+
 &nbsp;
 
 ## References
