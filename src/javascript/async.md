@@ -194,3 +194,7 @@ MDN: Promise -- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Referenc
 MDN: Promise guide -- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
 
 MDN: async function -- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+
+JavaScript Promise in 100 Seconds: https://www.youtube.com/watch?v=RvYYCGs45L4
+
+The Async Await Episode I Promised: https://www.youtube.com/watch?v=vn3tm0quoqE

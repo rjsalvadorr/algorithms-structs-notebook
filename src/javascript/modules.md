@@ -98,7 +98,7 @@ Browser support is growing, but it’s possibly a little premature to switch to 
 
 ## References
 
-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
-- https://www.sitepoint.com/understanding-es6-modules/
-- https://blog.logrocket.com/commonjs-vs-es-modules-node-js/
-- https://reflectoring.io/nodejs-modules-imports/
+- MDN - JavaScript modules: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules
+- Understanding ES6 Modules: https://www.sitepoint.com/understanding-es6-modules/
+- CommonJS vs. ES modules in Node.js: https://blog.logrocket.com/commonjs-vs-es-modules-node-js/
+- CommonJS vs. ES Modules: Modules and Imports in NodeJS: https://reflectoring.io/nodejs-modules-imports/
