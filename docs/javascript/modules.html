@@ -500,22 +500,22 @@
 </ul>
 <li class="heading"><span>javascript</span></li>
 <ul>
-<li><a class="" href="..\javascript\array.html">array</a></li>
-<li><a class="" href="..\javascript\async.html">async</a></li>
-<li><a class="" href="..\javascript\concurrency-and-events.html">concurrency and events</a></li>
-<li><a class="" href="..\javascript\editions.html">editions</a></li>
-<li><a class="" href="..\javascript\iteration.html">iteration</a></li>
-<li><a class="" href="..\javascript\map.html">map</a></li>
-<li><a class="" href="..\javascript\modules.html">modules</a></li>
-<li><a class="" href="..\javascript\set.html">set</a></li>
+<li><a class="" href="array.html">array</a></li>
+<li><a class="" href="async.html">async</a></li>
+<li><a class="" href="concurrency-and-events.html">concurrency and events</a></li>
+<li><a class="" href="editions.html">editions</a></li>
+<li><a class="" href="iteration.html">iteration</a></li>
+<li><a class="" href="map.html">map</a></li>
+<li><a class="active" href="modules.html">modules</a></li>
+<li><a class="" href="set.html">set</a></li>
 </ul>
 <li class="heading"><span>lists</span></li>
 <ul>
-<li><a class="" href="1-array.html">array</a></li>
-<li><a class="" href="2-dynamic-array.html">dynamic array</a></li>
-<li><a class="active" href="3-linked-list.html">linked list</a></li>
-<li><a class="" href="4-queue.html">queue</a></li>
-<li><a class="" href="5-stack.html">stack</a></li>
+<li><a class="" href="..\lists\1-array.html">array</a></li>
+<li><a class="" href="..\lists\2-dynamic-array.html">dynamic array</a></li>
+<li><a class="" href="..\lists\3-linked-list.html">linked list</a></li>
+<li><a class="" href="..\lists\4-queue.html">queue</a></li>
+<li><a class="" href="..\lists\5-stack.html">stack</a></li>
 </ul>
 <li class="heading"><span>maths</span></li>
 <ul>
@@ -529,214 +529,75 @@
 </ul>
       </nav>
       <article id="main" class="content">
-        <h1 id="linked-list">Linked List <a class="heading-anchor-permalink" href="#linked-list">#</a></h1>
-<p><em>Read this in other languages:</em>
-<a href="README.zh-CN.html"><em>简体中文</em></a>,
-<a href="README.ru-RU.html"><em>Русский</em></a></p>
-<p>In computer science, a <strong>linked list</strong> is a linear collection
-of data elements, in which linear order is not given by
-their physical placement in memory. Instead, each
-element points to the next. It is a data structure
-consisting of a group of nodes which together represent
-a sequence. Under the simplest form, each node is
-composed of data and a reference (in other words,
-a link) to the next node in the sequence. This structure
-allows for efficient insertion or removal of elements
-from any position in the sequence during iteration.
-More complex variants add additional links, allowing
-efficient insertion or removal from arbitrary element
-references. A drawback of linked lists is that access
-time is linear (and difficult to pipeline). Faster
-access, such as random access, is not feasible. Arrays
-have better cache locality as compared to linked lists.</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Singly-linked-list.svg" alt="Linked List"></p>
-<h2 id="javascript">Javascript <a class="heading-anchor-permalink" href="#javascript">#</a></h2>
-<pre><code class="language-javascript">class SinglyLinkedListNode {
-    constructor(nodeData, next = null) {
-        this.data = nodeData;
-        this.next = next;
-    }
-};
+        <h1 id="modules">Modules <a class="heading-anchor-permalink" href="#modules">#</a></h1>
+<p>By default, Node.js treats JavaScript code as CommonJS modules. CommonJS modules are characterized by the require() statement for module imports and module.exports for module exports.</p>
+<p>For example, this is a CommonJS module that exports two functions:</p>
+<pre><code class="language-javascript">module.exports.add = function(a, b) {
+        return a + b;
+} 
 
-class SinglyLinkedList {
-    constructor() {
-        this.head = null;
-        this.tail = null;
-    }
+module.exports.subtract = function(a, b) {
+        return a - b;
+} 
+</code></pre>
+<p>We can also import the public functions into another Node.js script using <code>require()</code>, just as we do here:</p>
+<pre><code class="language-javascript">const {add, subtract} = require('./util')
 
-    insertNode(nodeData) {
-        const node = new SinglyLinkedListNode(nodeData);
+console.log(add(5, 5)) // 10
+console.log(subtract(10, 5)) // 5
+</code></pre>
+<p>On the other hand, library authors can also simply enable ES modules in a Node.js package by changing the file extensions from <code>.js</code> to <code>.mjs</code>.</p>
+<p>For example, here’s a simple ES module (with an <code>.mjs</code> extension) exporting two functions for public use:</p>
+<pre><code class="language-javascript">// util.mjs
 
-        if (this.head == null) {
-            this.head = node;
-        } else {
-            this.tail.next = node;
-        }
+export function add(a, b) {
+        return a + b;
+}
 
-        this.tail = node;
-    }
+export function subtract(a, b) {
+        return a - b;
+}
+</code></pre>
+<p>We can then import both functions using the import statement:</p>
+<pre><code class="language-javascript">// app.mjs
 
-    getAt(index) {
-        let counter = 0;
-        let node = this.head;
-        while (node) {
-            if (counter === index) {
-               return node;
-            }
-            counter++;
-            node = node.next;
-        }
-        return null;
-    }
+import {add, subtract} from './util.mjs'
 
-    insertAt(nodeData, index) {
-        // if the list is empty i.e. head = null
-        if (!this.head) {
-            this.head = new SinglyLinkedListNode(nodeData);
-            return;
-        }
-        // if new node needs to be inserted at the front of the list i.e. before the head. 
-        if (index === 0) {
-           this.head = new SinglyLinkedListNode(nodeData, this.head);
-           return;
-        }
-        // else, use getAt() to find the previous node.
-        const previous = this.getAt(index - 1);
-        let newNode = new SinglyLinkedListNode(nodeData);
-        newNode.next = previous.next;
-        previous.next = newNode;
-
-        return this.head
-   }
-};
+console.log(add(5, 5)) // 10
+console.log(subtract(10, 5)) // 5
 </code></pre>
-<h2 id="pseudocode-for-basic-operations">Pseudocode for Basic Operations <a class="heading-anchor-permalink" href="#pseudocode-for-basic-operations">#</a></h2>
-<h3 id="insert">Insert <a class="heading-anchor-permalink" href="#insert">#</a></h3>
-<pre><code class="language-text">Add(value)
-  Pre: value is the value to add to the list
-  Post: value has been placed at the tail of the list
-  n ← node(value)
-  if head = ø
-    head ← n
-    tail ← n
-  else
-    tail.next ← n
-    tail ← n
-  end if
-end Add
+<p>Another way to enable ES modules in your project can be done by adding a <code>&quot;type: module&quot;</code> field inside the nearest <code>package.json</code> file (the same folder as the package you’re making):</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;my-library&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;type&quot;: &quot;module&quot;,
+  // ...
+}
 </code></pre>
-<pre><code class="language-text">Prepend(value)
- Pre: value is the value to add to the list
- Post: value has been placed at the head of the list
- n ← node(value)
- n.next ← head
- head ← n
- if tail = ø
-   tail ← n
- end
-end Prepend
+<p>With that inclusion, Node.js treats all files inside that package as ES modules, and you won’t have to change the file to <code>.mjs</code> extension.</p>
+<p>Alternatively, you can install and set up a transpiler like Babel to compile your ES module syntax down to CommonJS syntax. Projects like React and Vue support ES modules because they use Babel under the hood to compile the code.</p>
+<hr>
+<h2 id="using-es6-modules-in-browsers">Using ES6 Modules in Browsers <a class="heading-anchor-permalink" href="#using-es6-modules-in-browsers">#</a></h2>
+<p>At the time of writing, ES6 modules are supported in Chromium-based browsers (v63+), Safari 11+, and Edge 16+. Firefox support will arrive in version 60 (it’s behind an about:config flag in v58+).</p>
+<p>Scripts which use modules must be loaded by setting a type=“module” attribute in the <code>&lt;script&gt;</code> tag. For example:</p>
+<pre><code class="language-html">&lt;script type=&quot;module&quot; src=&quot;./main.js&quot;&gt;&lt;/script&gt;
 </code></pre>
-<h3 id="search">Search <a class="heading-anchor-permalink" href="#search">#</a></h3>
-<pre><code class="language-text">Contains(head, value)
-  Pre: head is the head node in the list
-       value is the value to search for
-  Post: the item is either in the linked list, true; otherwise false
-  n ← head
-  while n != ø and n.value != value
-    n ← n.next
-  end while
-  if n = ø
-    return false
-  end if
-  return true
-end Contains
+<p>or inline:</p>
+<pre><code class="language-html">&lt;script type=&quot;module&quot;&gt;
+  import { something } from './somewhere.js';
+  // ...
+&lt;/script&gt;
 </code></pre>
-<h3 id="delete">Delete <a class="heading-anchor-permalink" href="#delete">#</a></h3>
-<pre><code class="language-text">Remove(head, value)
-  Pre: head is the head node in the list
-       value is the value to remove from the list
-  Post: value is removed from the list, true, otherwise false
-  if head = ø
-    return false
-  end if
-  n ← head
-  if n.value = value
-    if head = tail
-      head ← ø
-      tail ← ø
-    else
-      head ← head.next
-    end if
-    return true
-  end if
-  while n.next != ø and n.next.value != value
-    n ← n.next
-  end while
-  if n.next != ø
-    if n.next = tail
-      tail ← n
-    end if
-    n.next ← n.next.next
-    return true
-  end if
-  return false
-end Remove
-</code></pre>
-<h3 id="traverse">Traverse <a class="heading-anchor-permalink" href="#traverse">#</a></h3>
-<pre><code class="language-text">Traverse(head)
-  Pre: head is the head node in the list
-  Post: the items in the list have been traversed
-  n ← head
-  while n != ø
-    yield n.value
-    n ← n.next
-  end while
-end Traverse
-</code></pre>
-<h3 id="traverse-in-reverse">Traverse in Reverse <a class="heading-anchor-permalink" href="#traverse-in-reverse">#</a></h3>
-<pre><code class="language-text">ReverseTraversal(head, tail)
-  Pre: head and tail belong to the same list
-  Post: the items in the list have been traversed in reverse order
-  if tail != ø
-    curr ← tail
-    while curr != head
-      prev ← head
-      while prev.next != curr
-        prev ← prev.next
-      end while
-      yield curr.value
-      curr ← prev
-    end while
-   yeild curr.value
-  end if
-end ReverseTraversal
-</code></pre>
-<h2 id="complexities">Complexities <a class="heading-anchor-permalink" href="#complexities">#</a></h2>
-<h3 id="time-complexity">Time Complexity <a class="heading-anchor-permalink" href="#time-complexity">#</a></h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Access</th>
-<th style="text-align:center">Search</th>
-<th style="text-align:center">Insertion</th>
-<th style="text-align:center">Deletion</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">O(n)</td>
-<td style="text-align:center">O(n)</td>
-<td style="text-align:center">O(1)</td>
-<td style="text-align:center">O(1)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="space-complexity">Space Complexity <a class="heading-anchor-permalink" href="#space-complexity">#</a></h3>
-<p>O(n)</p>
+<p>Modules are parsed once, regardless of how many times they’re referenced in the page or other modules.</p>
+<h2 id="should-you-use-modules-in-the-browser%3F">Should You Use Modules in the Browser? <a class="heading-anchor-permalink" href="#should-you-use-modules-in-the-browser%3F">#</a></h2>
+<p>Browser support is growing, but it’s possibly a little premature to switch to ES6 modules. For the moment, it’s probably better to use a module bundler to create a script that works everywhere.</p>
+<p> </p>
 <h2 id="references">References <a class="heading-anchor-permalink" href="#references">#</a></h2>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Linked_list">Wikipedia</a></li>
-<li><a href="https://www.youtube.com/watch?v=njTh_OwMljA&amp;index=2&amp;t=1s&amp;list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8">YouTube</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules</a></li>
+<li><a href="https://www.sitepoint.com/understanding-es6-modules/">https://www.sitepoint.com/understanding-es6-modules/</a></li>
+<li><a href="https://blog.logrocket.com/commonjs-vs-es-modules-node-js/">https://blog.logrocket.com/commonjs-vs-es-modules-node-js/</a></li>
+<li><a href="https://reflectoring.io/nodejs-modules-imports/">https://reflectoring.io/nodejs-modules-imports/</a></li>
 </ul>
 
       </article>

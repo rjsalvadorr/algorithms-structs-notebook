@@ -1,7 +1,7 @@
 import { inspect } from "util";
 import shuffle from "lodash/shuffle";
 import { simpleComparator } from "./comparators";
-import BinarySearchTree from "../sets-and-maps/binary-search-tree";
+import BinarySearchTree from "../graphs-and-trees/binary-search-tree";
 
 /**
  * Utilities for running tests
