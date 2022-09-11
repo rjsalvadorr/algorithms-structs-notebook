@@ -491,8 +491,8 @@
 </ul>
 <li class="heading"><span>graphs and trees</span></li>
 <ul>
-<li><a class="active" href="1-binary-search-tree.html">binary search tree</a></li>
-<li><a class="" href="graph.html">graph</a></li>
+<li><a class="" href="..\graphs-and-trees\1-binary-search-tree.html">binary search tree</a></li>
+<li><a class="" href="..\graphs-and-trees\graph.html">graph</a></li>
 </ul>
 <li class="heading"><span>interview</span></li>
 <ul>
@@ -500,14 +500,14 @@
 </ul>
 <li class="heading"><span>javascript</span></li>
 <ul>
-<li><a class="" href="..\javascript\array.html">array</a></li>
-<li><a class="" href="..\javascript\concurrency-and-event-loop.html">concurrency and event loop</a></li>
-<li><a class="" href="..\javascript\editions.html">editions</a></li>
-<li><a class="" href="..\javascript\iteration.html">iteration</a></li>
-<li><a class="" href="..\javascript\map.html">map</a></li>
-<li><a class="" href="..\javascript\modules.html">modules</a></li>
-<li><a class="" href="..\javascript\promises-async.html">promises async</a></li>
-<li><a class="" href="..\javascript\set.html">set</a></li>
+<li><a class="" href="array.html">array</a></li>
+<li><a class="" href="concurrency-and-event-loop.html">concurrency and event loop</a></li>
+<li><a class="" href="editions.html">editions</a></li>
+<li><a class="" href="iteration.html">iteration</a></li>
+<li><a class="" href="map.html">map</a></li>
+<li><a class="" href="modules.html">modules</a></li>
+<li><a class="active" href="promises-async.html">promises async</a></li>
+<li><a class="" href="set.html">set</a></li>
 </ul>
 <li class="heading"><span>lists</span></li>
 <ul>
@@ -529,313 +529,161 @@
 </ul>
       </nav>
       <article id="main" class="content">
-        <h1 id="binary-search-tree">Binary Search Tree <a class="heading-anchor-permalink" href="#binary-search-tree">#</a></h1>
-<p>In computer science, <strong>binary search trees</strong> (BST), sometimes called
-ordered or sorted binary trees, are a particular type of container:
-data structures that store “items” (such as numbers, names etc.)
-in memory. They allow fast lookup, addition and removal of
-items, and can be used to implement either dynamic sets of
-items, or lookup tables that allow finding an item by its key
-(e.g., finding the phone number of a person by name).</p>
-<p>Binary search trees keep their keys in sorted order, so that lookup
-and other operations can use the principle of binary search:
-when looking for a key in a tree (or a place to insert a new key),
-they traverse the tree from root to leaf, making comparisons to
-the operations to skip about half of the tree, so that each
-lookup, insertion or deletion takes time proportional to the
-logarithm of the number of items stored in the tree. This is
-much better than the linear time required to find items by key
-in an (unsorted) array, but slower than the corresponding
-operations on hash tables.</p>
-<p>A binary search tree of size 9 and depth 3, with 8 at the root.
-The leaves are not drawn.</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/d/da/Binary_search_tree.svg" alt="Binary Search Tree"></p>
-<h2 id="typescript">Typescript <a class="heading-anchor-permalink" href="#typescript">#</a></h2>
-<pre><code class="language-typescript">class TreeNode {
-    data: number;
-    left: TreeNode;
-    right: TreeNode;
-
-    constructor(data: number, left: TreeNode = null, right: TreeNode = null) {
-        this.data = data;
-        this.left = left;
-        this.right = right;
-    }
-}
-
-class BinarySearchTree {
-    root: TreeNode;
-    
-    constructor() {
-        this.root = null;
-    }
-    
-    insert(data: number) {
-        const searchTree = (node: TreeNode) =&gt; {
-            if (data &lt; node.data &amp;&amp; node.left) {
-                searchTree(node.left);
-            } else if (data &lt; node.data) {
-                node.left = new TreeNode(data);
-            } else if (data &gt; node.data &amp;&amp; node.right) {
-                searchTree(node.right);
-            } else if (data &gt; node.data) {
-                node.right = new TreeNode(data);
-            }
-        }
-
-        if (this.root === null) {
-            this.root = new TreeNode(data);
-        } else {
-            const node = this.root;
-            searchTree(node);
-        }
-    }
-    
-    getDepth(): number {
-        if (this.root === null) {
-            return 0;
-        }
-        
-        const traverseForDepth = (node: TreeNode, depth: number = 0): number =&gt; {
-            if(node.left === null &amp;&amp; node.right === null) {
-                return depth;
-            } else if(node.left &amp;&amp; node.right) {
-                const leftRes = traverseForDepth(node.left, depth + 1);
-                const rightRes = traverseForDepth(node.right, depth + 1);
-                return leftRes &gt; rightRes ? leftRes : rightRes;
-            } else if(node.left &amp;&amp; node.right === null) {
-                return traverseForDepth(node.left, depth + 1);
-            } else if(node.left === null &amp;&amp; node.right) {
-                return traverseForDepth(node.right, depth + 1);
-            } 
-        }
-        
-        return traverseForDepth(this.root, 0);
-    }
-}
-</code></pre>
-<h2 id="pseudocode-for-basic-operations">Pseudocode for Basic Operations <a class="heading-anchor-permalink" href="#pseudocode-for-basic-operations">#</a></h2>
-<h3 id="insertion">Insertion <a class="heading-anchor-permalink" href="#insertion">#</a></h3>
-<pre><code class="language-text">insert(value)
-  Pre: value has passed custom type checks for type T
-  Post: value has been placed in the correct location in the tree
-  if root = ø
-    root ← node(value)
-  else
-    insertNode(root, value)
-  end if
-end insert
-</code></pre>
-<pre><code class="language-text">insertNode(current, value)
-  Pre: current is the node to start from
-  Post: value has been placed in the correct location in the tree
-  if value &lt; current.value
-    if current.left = ø
-      current.left ← node(value)
-    else
-      InsertNode(current.left, value)
-    end if
-  else
-    if current.right = ø
-      current.right ← node(value)
-    else
-      InsertNode(current.right, value)
-    end if
-  end if
-end insertNode
-</code></pre>
-<h3 id="searching">Searching <a class="heading-anchor-permalink" href="#searching">#</a></h3>
-<pre><code class="language-text">contains(root, value)
-  Pre: root is the root node of the tree, value is what we would like to locate
-  Post: value is either located or not
-  if root = ø
-    return false
-  end if
-  if root.value = value
-    return true
-  else if value &lt; root.value
-    return contains(root.left, value)
-  else
-    return contains(root.right, value)
-  end if
-end contains
-</code></pre>
-<h3 id="deletion">Deletion <a class="heading-anchor-permalink" href="#deletion">#</a></h3>
-<pre><code class="language-text">remove(value)
-  Pre: value is the value of the node to remove, root is the node of the BST
-      count is the number of items in the BST
-  Post: node with value is removed if found in which case yields true, otherwise false
-  nodeToRemove ← findNode(value)
-  if nodeToRemove = ø
-    return false
-  end if
-  parent ← findParent(value)
-  if count = 1
-    root ← ø
-  else if nodeToRemove.left = ø and nodeToRemove.right = ø
-    if nodeToRemove.value &lt; parent.value
-      parent.left ←  nodeToRemove.right
-    else
-      parent.right ← nodeToRemove.right
-    end if
-  else if nodeToRemove.left != ø and nodeToRemove.right != ø
-    next ← nodeToRemove.right
-    while next.left != ø
-      next ← next.left
-    end while
-    if next != nodeToRemove.right
-      remove(next.value)
-      nodeToRemove.value ← next.value
-    else
-      nodeToRemove.value ← next.value
-      nodeToRemove.right ← nodeToRemove.right.right
-    end if
-  else
-    if nodeToRemove.left = ø
-      next ← nodeToRemove.right
-    else
-      next ← nodeToRemove.left
-    end if
-    if root = nodeToRemove
-      root = next
-    else if parent.left = nodeToRemove
-      parent.left = next
-    else if parent.right = nodeToRemove
-      parent.right = next
-    end if
-  end if
-  count ← count - 1
-  return true
-end remove
-</code></pre>
-<h3 id="find-parent-of-node">Find Parent of Node <a class="heading-anchor-permalink" href="#find-parent-of-node">#</a></h3>
-<pre><code class="language-text">findParent(value, root)
-  Pre: value is the value of the node we want to find the parent of
-       root is the root node of the BST and is != ø
-  Post: a reference to the prent node of value if found; otherwise ø
-  if value = root.value
-    return ø
-  end if
-  if value &lt; root.value
-    if root.left = ø
-      return ø
-    else if root.left.value = value
-      return root
-    else
-      return findParent(value, root.left)
-    end if
-  else
-    if root.right = ø
-      return ø
-    else if root.right.value = value
-      return root
-    else
-      return findParent(value, root.right)
-    end if
-  end if
-end findParent
-</code></pre>
-<h3 id="find-node">Find Node <a class="heading-anchor-permalink" href="#find-node">#</a></h3>
-<pre><code class="language-text">findNode(root, value)
-  Pre: value is the value of the node we want to find the parent of
-       root is the root node of the BST
-  Post: a reference to the node of value if found; otherwise ø
-  if root = ø
-    return ø
-  end if
-  if root.value = value
-    return root
-  else if value &lt; root.value
-    return findNode(root.left, value)
-  else
-    return findNode(root.right, value)
-  end if
-end findNode
-</code></pre>
-<h3 id="find-minimum">Find Minimum <a class="heading-anchor-permalink" href="#find-minimum">#</a></h3>
-<pre><code class="language-text">findMin(root)
-  Pre: root is the root node of the BST
-    root = ø
-  Post: the smallest value in the BST is located
-  if root.left = ø
-    return root.value
-  end if
-  findMin(root.left)
-end findMin
-</code></pre>
-<h3 id="find-maximum">Find Maximum <a class="heading-anchor-permalink" href="#find-maximum">#</a></h3>
-<pre><code class="language-text">findMax(root)
-  Pre: root is the root node of the BST
-    root = ø
-  Post: the largest value in the BST is located
-  if root.right = ø
-    return root.value
-  end if
-  findMax(root.right)
-end findMax
-</code></pre>
-<h3 id="traversal">Traversal <a class="heading-anchor-permalink" href="#traversal">#</a></h3>
-<h4 id="inorder-traversal">InOrder Traversal <a class="heading-anchor-permalink" href="#inorder-traversal">#</a></h4>
-<pre><code class="language-text">inorder(root)
-  Pre: root is the root node of the BST
-  Post: the nodes in the BST have been visited in inorder
-  if root = ø
-    inorder(root.left)
-    yield root.value
-    inorder(root.right)
-  end if
-end inorder
-</code></pre>
-<h4 id="preorder-traversal">PreOrder Traversal <a class="heading-anchor-permalink" href="#preorder-traversal">#</a></h4>
-<pre><code class="language-text">preorder(root)
-  Pre: root is the root node of the BST
-  Post: the nodes in the BST have been visited in preorder
-  if root = ø
-    yield root.value
-    preorder(root.left)
-    preorder(root.right)
-  end if
-end preorder
-</code></pre>
-<h4 id="postorder-traversal">PostOrder Traversal <a class="heading-anchor-permalink" href="#postorder-traversal">#</a></h4>
-<pre><code class="language-text">postorder(root)
-  Pre: root is the root node of the BST
-  Post: the nodes in the BST have been visited in postorder
-  if root = ø
-    postorder(root.left)
-    postorder(root.right)
-    yield root.value
-  end if
-end postorder
-</code></pre>
-<h2 id="complexities">Complexities <a class="heading-anchor-permalink" href="#complexities">#</a></h2>
-<h3 id="time-complexity">Time Complexity <a class="heading-anchor-permalink" href="#time-complexity">#</a></h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Access</th>
-<th style="text-align:center">Search</th>
-<th style="text-align:center">Insertion</th>
-<th style="text-align:center">Deletion</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">O(log(n))</td>
-<td style="text-align:center">O(log(n))</td>
-<td style="text-align:center">O(log(n))</td>
-<td style="text-align:center">O(log(n))</td>
-</tr>
-</tbody>
-</table>
-<h3 id="space-complexity">Space Complexity <a class="heading-anchor-permalink" href="#space-complexity">#</a></h3>
-<p>O(n)</p>
-<h2 id="references">References <a class="heading-anchor-permalink" href="#references">#</a></h2>
+        <h1 id="promises-and-asynchronous-functions">Promises and Asynchronous Functions <a class="heading-anchor-permalink" href="#promises-and-asynchronous-functions">#</a></h1>
+<p>…</p>
+<h2 id="promises">Promises <a class="heading-anchor-permalink" href="#promises">#</a></h2>
+<p>The Promise object represents the eventual completion (or failure) of an asynchronous operation and its resulting value.</p>
+<p>A Promise is a proxy for a value not necessarily known when the promise is created. It allows you to associate handlers with an asynchronous action’s eventual success value or failure reason. This lets asynchronous methods return values like synchronous methods: instead of immediately returning the final value, the asynchronous method returns a promise to supply the value at some point in the future.</p>
+<p>A Promise is in one of these states:</p>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Binary_search_tree">Wikipedia</a></li>
-<li><a href="https://www.youtube.com/watch?v=wcIRPqTR3Kc&amp;list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&amp;index=9&amp;t=0s">Inserting to BST on YouTube</a></li>
-<li><a href="https://www.cs.usfca.edu/~galles/visualization/BST.html">BST Interactive Visualisations</a></li>
+<li>pending: initial state, neither fulfilled nor rejected.</li>
+<li>fulfilled: meaning that the operation was completed successfully.</li>
+<li>rejected: meaning that the operation failed.</li>
 </ul>
+<p>A pending promise can either be <em>fulfilled</em> with a value or <em>rejected</em> with a reason (error). When either of these options happens, the associated handlers queued up by a promise’s <code>then</code> method are called. If the promise has already been fulfilled or rejected when a corresponding handler is attached, the handler will be called, so there is no race condition between an asynchronous operation completing and its handlers being attached.</p>
+<p>JavaScript promises and the Mutation Observer API both use the microtask queue to run their callbacks.</p>
+<h3 id="chained-promises">Chained Promises <a class="heading-anchor-permalink" href="#chained-promises">#</a></h3>
+<p>The methods <code>Promise.then()</code>, <code>Promise.catch()</code>, and <code>Promise.finally()</code> are used to associate further action with a promise that becomes settled.</p>
+<p>As the <code>Promise.then()</code> and <code>Promise.catch()</code> methods return promises, they can be chained.</p>
+<p>The <code>.then()</code> method takes up to two arguments; the first argument is a callback function for the resolved case of the promise, and the second argument is a callback function for the rejected case. Each <code>.then()</code> returns a newly generated promise object, which can optionally be used for chaining; for example:</p>
+<pre><code class="language-javascript">const myPromise = new Promise((resolve, reject) =&gt; {
+  setTimeout(() =&gt; {
+    resolve('foo');
+  }, 300);
+});
+
+myPromise
+  .then(handleResolvedA, handleRejectedA)
+  .then(handleResolvedB, handleRejectedB)
+  .then(handleResolvedC, handleRejectedC);
+</code></pre>
+<p>Processing continues to the next link of the chain even when a .then() lacks a callback function that returns a Promise object. Therefore, a chain can safely omit every rejection callback function until the final .catch().</p>
+<p>Handling a rejected promise in each <code>.then()</code> has consequences further down the promise chain. Sometimes there is no choice, because an error must be handled immediately. In such cases we must throw an error of some type to maintain error state down the chain. On the other hand, in the absence of an immediate need, it is simpler to leave out error handling until a final <code>.catch()</code> statement. A <code>.catch()</code> is really just a <code>.then()</code> without a slot for a callback function for the case when the promise is resolved.</p>
+<pre><code class="language-javascript">myPromise
+.then(handleResolvedA)
+.then(handleResolvedB)
+.then(handleResolvedC)
+.catch(handleRejectedAny);
+
+// or 
+
+promise1
+.then(value =&gt; { return value + ' and bar'; })
+.then(value =&gt; { return value + ' and bar again'; })
+.then(value =&gt; { return value + ' and again'; })
+.then(value =&gt; { return value + ' and again'; })
+.then(value =&gt; { console.log(value) })
+.catch(err =&gt; { console.log(err) });
+</code></pre>
+<p>The termination condition of a promise determines the “settled” state of the next promise in the chain. A “resolved” state indicates a successful completion of the promise, while a “rejected” state indicates a lack of success. The return value of each resolved promise in the chain is passed along to the next <code>.then()</code>, while the reason for rejection is passed along to the next rejection-handler function in the chain.</p>
+<p>The promises of a chain are nested like Russian dolls, but get popped like the top of a stack. The first promise in the chain is most deeply nested and is the first to pop.</p>
+<pre><code>(promise D, (promise C, (promise B, (promise A) ) ) )
+</code></pre>
+<p>A promise can participate in more than one nesting. For the following code, the transition of promiseA into a “settled” state will cause both instances of <code>.then()</code> to be invoked.</p>
+<pre><code class="language-javascript">const promiseA = new Promise(myExecutorFunc);
+const promiseB = promiseA.then(handleFulfilled1, handleRejected1);
+const promiseC = promiseA.then(handleFulfilled2, handleRejected2);
+</code></pre>
+<h2 id="asynchronous-functions">Asynchronous Functions <a class="heading-anchor-permalink" href="#asynchronous-functions">#</a></h2>
+<p>An async function is a function declared with the async keyword, and the await keyword is permitted within it. The async and await keywords enable asynchronous, promise-based behavior to be written in a cleaner style, avoiding the need to explicitly configure promise chains.</p>
+<p>Async functions can contain zero or more <code>await</code> expressions. Await expressions make promise-returning functions behave as though they’re synchronous by suspending execution until the returned promise is fulfilled or rejected. The resolved value of the promise is treated as the return value of the await expression. Use of <code>async</code> and <code>await</code> enables the use of ordinary <code>try</code> / <code>catch</code> blocks around asynchronous code.</p>
+<blockquote>
+<p>Note: The <code>await</code> keyword is only valid inside async functions within regular JavaScript code. If you use it outside of an async function’s body, you will get a SyntaxError. <code>await</code> can be used on its own with JavaScript modules.</p>
+</blockquote>
+<pre><code class="language-javascript">function resolveAfter2Seconds() {
+  return new Promise(resolve =&gt; {
+    setTimeout(() =&gt; {
+      resolve('resolved');
+    }, 2000);
+  });
+}
+
+async function asyncCall() {
+  console.log('calling');
+  const result = await resolveAfter2Seconds();
+  console.log(result);
+  // expected output: &quot;resolved&quot;
+}
+
+asyncCall();
+
+////// OR
+
+function resolveAfter2Seconds(x) {
+  return new Promise(resolve =&gt; {
+    setTimeout(() =&gt; {
+      resolve(x);
+    }, 2000);
+  });
+};
+
+const add = async function(x) { // async function expression assigned to a variable
+  let a = await resolveAfter2Seconds(20);
+  let b = await resolveAfter2Seconds(30);
+  return x + a + b;
+};
+
+add(10).then(v =&gt; {
+  console.log(v);  // prints 60 after 4 seconds.
+});
+
+(async function(x) { // async function expression used as an IIFE
+  let p_a = resolveAfter2Seconds(20);
+  let p_b = resolveAfter2Seconds(30);
+  return x + await p_a + await p_b;
+})(10).then(v =&gt; {
+  console.log(v);  // prints 60 after 2 seconds.
+});
+
+////// OR 
+
+const foo = async () =&gt; {
+  // do something
+}
+
+const foo = async evt =&gt; {
+  // do something with evt
+}
+
+const foo = async (evt, callback) =&gt; {
+  // do something with evt
+  // return response with callback
+}
+</code></pre>
+<p>Async functions always return a promise. If the return value of an async function is not explicitly a promise, it will be implicitly wrapped in a promise.</p>
+<p>For example, the following:</p>
+<pre><code class="language-javascript">async function foo() {
+   return 1
+}
+</code></pre>
+<p>…is similar to:</p>
+<pre><code class="language-javascript">function foo() {
+   return Promise.resolve(1)
+}
+</code></pre>
+<blockquote>
+<p>Note: Even though the return value of an async function behaves as if it’s wrapped in a Promise.resolve, they are not equivalent. An async function will return a different reference, whereas Promise.resolve returns the same reference if the given value is a promise.</p>
+</blockquote>
+<p>The body of an async function can be thought of as being split by zero or more await expressions. Top-level code, up to and including the first await expression (if there is one), is run synchronously. In this way, an async function without an await expression will run synchronously. If there is an await expression inside the function body, however, the async function will always complete asynchronously.</p>
+<p>For example:</p>
+<pre><code class="language-javascript">async function foo() {
+   await 1
+}
+</code></pre>
+<p>…is equivalent to:</p>
+<pre><code class="language-javascript">function foo() {
+   return Promise.resolve(1).then(() =&gt; undefined)
+}
+</code></pre>
+<p>Code after each await expression can be thought of as existing in a .then callback. In this way a promise chain is progressively constructed with each reentrant step through the function. The return value forms the final link in the chain.</p>
+<h2 id="references">References <a class="heading-anchor-permalink" href="#references">#</a></h2>
+<p>MDN: Promise – <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise</a></p>
+<p>MDN: Promise guide – <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises</a></p>
+<p>MDN: async function – <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function</a></p>
+<p>Intro to Async Web Dev - Part 1: Callbacks: <a href="https://www.youtube.com/watch?v=ueOG5uk7zo8">https://www.youtube.com/watch?v=ueOG5uk7zo8</a></p>
+<p>Intro to Async Web Dev - Part 2: Promises: <a href="https://www.youtube.com/watch?v=f8IPKdQS1Cs">https://www.youtube.com/watch?v=f8IPKdQS1Cs</a></p>
+<p>JavaScript Promise in 100 Seconds: <a href="https://www.youtube.com/watch?v=RvYYCGs45L4">https://www.youtube.com/watch?v=RvYYCGs45L4</a></p>
+<p><strong>The Async Await Episode I Promised: <a href="https://www.youtube.com/watch?v=vn3tm0quoqE">https://www.youtube.com/watch?v=vn3tm0quoqE</a></strong></p>
 
       </article>
     </div>

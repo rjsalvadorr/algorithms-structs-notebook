@@ -1,4 +1,4 @@
-# Asynchronous Functions
+# Promises and Asynchronous Functions
 
 ...
 
@@ -195,6 +195,10 @@ MDN: Promise guide -- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Gu
 
 MDN: async function -- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
 
+Intro to Async Web Dev - Part 1: Callbacks: https://www.youtube.com/watch?v=ueOG5uk7zo8
+
+Intro to Async Web Dev - Part 2: Promises: https://www.youtube.com/watch?v=f8IPKdQS1Cs
+
 JavaScript Promise in 100 Seconds: https://www.youtube.com/watch?v=RvYYCGs45L4
 
-The Async Await Episode I Promised: https://www.youtube.com/watch?v=vn3tm0quoqE
+**The Async Await Episode I Promised: https://www.youtube.com/watch?v=vn3tm0quoqE**
